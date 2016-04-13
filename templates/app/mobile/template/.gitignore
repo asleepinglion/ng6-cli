@@ -1,0 +1,8 @@
+node_modules
+shared_components
+platforms
+plugins
+resources
+www/lib
+.idea
+.DS_Store
