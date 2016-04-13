@@ -29,7 +29,6 @@
     "angular-ui-router": "0.2.18",
     "bootstrap": "3.3.6",
     "font-awesome": "4.5.0",
-    "oclazyload": "1.0.9",
-    "ultistylekit": "git+ssh://git@devgit:7999/usk/ultistylekit.git#webpack"
+    "oclazyload": "1.0.9"
   }
 }

@@ -5,6 +5,12 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.3.3] - 2016-04-13
+
+### Changed
+- removed unnecessary style dependency
+- add service suffix to services
+
 ## [0.3.2] - 2016-04-13
 
 ### Changed
