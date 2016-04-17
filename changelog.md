@@ -5,6 +5,14 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.3.5] - 2016-04-17
+
+### Changed
+- new modules created for a parent, will not be named using the parent name as a prefix
+- import statements now use distinct names
+
+## [0.3.4] - 2016-04-17
+
 ### Added
 - added better info about what files are being changed when scaffolding
 

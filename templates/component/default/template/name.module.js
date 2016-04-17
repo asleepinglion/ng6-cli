@@ -1,8 +1,8 @@
-import styles from './<%= name %>.scss';
-import component from './<%= name %>.component';
+import <%=name_camel%>Styles from './<%= name %>.scss';
+import <%=name_camel%>Component from './<%= name %>.component';
 
 var module = angular.module('<%= moduleName %>', []);
 
-module.component('<%= name_camel %>', component);
+module.component('<%= name_camel %>', <%=name_camel%>Component);
 
 export default module.name;

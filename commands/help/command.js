@@ -48,8 +48,6 @@ module.exports = Command.extend({
 
     console.log(chalk.white("Usage:"), chalk.cyan(this.cli.bin), chalk.gray("[options]"), chalk.gray('[command]'), chalk.gray('[arg...]'));
     console.log("");
-    console.log(chalk.white("For help with a specific command:"), chalk.cyan(this.cli.bin + " help"), chalk.gray("[command]"));
-    console.log("");
     console.log(chalk.white("Available Commands:"));
 
     console.log("");
@@ -100,6 +98,10 @@ module.exports = Command.extend({
         }
       }
     }));
+
+    console.log("");
+    
+    console.log(chalk.white("For help with a specific command:"), chalk.cyan(this.cli.bin + " help"), chalk.gray("[command]"));
 
   }
 
