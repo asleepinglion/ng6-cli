@@ -5,6 +5,14 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+### Added
+- added better info about what files are being changed when scaffolding
+
+### Changed
+- disabled notifications in browsersync config
+- moved find functions in refactor library to reflect library
+- fixed issue with creating artifacts in a shared module.
+
 ## [0.3.3] - 2016-04-13
 
 ### Changed

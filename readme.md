@@ -13,7 +13,7 @@ The `ng6` cli provides a set of tools to automate and simplify the development o
 
 You can use the npm to install the ng6-cli:
 
-```bash
+```
 npm install -g ng6-cli
 ```
 
@@ -21,13 +21,13 @@ npm install -g ng6-cli
 
 To get a list of available commands, simply run `ng6`:
 
-```bash
+```
 ng6
 ```
 
 To get help with a specific command:
 
-```bash
+```
 ng6 help [command]
 ```
 
@@ -55,40 +55,40 @@ For mobile applications, we take advantage of the same achitecture, but some sma
 
 ##Scaffolding
 
-```bash
+```
 ng6 new [type:template] [component-name]
 ```
 
 To create a new application using the default template and install dependencies:
 > This will create a new folder within the current working directory.
 
-```bash
+```
 ng6 new app [app-name] -i
 ```
 
 To create a new application using the mobile template and install dependencies:
 > This will create a new folder within the current working directory.
 
-```bash
+```
 ng6 new app:mobile [app-name] -i
 ```
 
 To create a new view component (a component which contains a ui-router state):
 > You will probably need to modify the ui-router state's url as it will default to the name of the component.
 
-```bash
+```
 ng6 new component:view [component-name]
 ```
 
 To create a regular component:
 
-```bash
+```
 ng6 new component [component-name]
 ```
 
 To see a list of available templates for generation organized by type:
 
-```bash
+```
 ng6 list templates
 ```
 

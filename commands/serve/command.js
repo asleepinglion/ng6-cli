@@ -64,6 +64,7 @@ module.exports = Command.extend({
       server: 'app',
       open: true,
       logFileChanges: false,
+      notify: false,
       middleware: [
         webpackDevMiddleware(bundler, {
           publicPath: webpackConfig.output.publicPath,
