@@ -62,3 +62,9 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ### Changed
 - Reflect.findParentModule now defaults to app.module.js
+
+
+## [0.3.0] - 2016-04-13
+
+### Changed
+- Refactored to make extendable and published initial work.

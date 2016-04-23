@@ -1,5 +1,7 @@
-# ng6-cli
-#### Development Tools for Large-Scale Angular Apps with ES6, Webpack, & the Component Architecture!
+# ng6-cli 
+###Beta v0.4.2
+
+#### Extensible Development Tools for the Component-Driven Development of Large-Scale Angular Apps built with EcmaScript 6 (ES6).
 
 > These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
 >
@@ -8,6 +10,46 @@
 The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
 **`components`**, **`directives`**, **`services`**, and **`filters`**.
 
+
+##Installing
+
+You can use the npm to install the ng6-cli:
+
+```
+npm install -g ng6-cli
+```
+
+##Getting Started
+
+To get a list of available commands, simply run `ng6`:
+
+```
+ng6
+```
+
+To get help with a specific command:
+
+```
+ng6 help [command]
+```
+
+To create a new application simply run:
+
+```
+ng6 new app my-app
+```
+
+or to create a an app within the current directory:
+
+```
+ng6 new app .
+```
+
+or to create an app using a different application template:
+
+```
+ng6 new app: mobile my-app
+```
 
 ## Highlights
 
@@ -41,29 +83,6 @@ As mentioned, [acorn.js](https://github.com/ternjs/acorn) is used to parse the a
 
 > In the very near future we will also support tools for moving and copying artifacts. Your IDE can certainly help you do a lot of these things, but the tooling has the advantage of understanding the specific architecture at play.
 
-
-##Installing
-
-You can use the npm to install the ng6-cli:
-
-```
-npm install -g ng6-cli
-```
-
-##Getting Started
-
-To get a list of available commands, simply run `ng6`:
-
-```
-ng6
-```
-
-To get help with a specific command:
-
-```
-ng6 help [command]
-```
-
 ##Configuration
 
 > The **`ng6 config`** will be available shortly to make it easier to configure the CLI options for your user or project.
@@ -72,13 +91,17 @@ You can configure **`ng6`** options at the user or project levels. This is done 
 
 > At the moment there are no exposed options, so this feature isn't very helpful. But in the future this will allow you to enable or disable features as well as provide configuration settings for things like, publishing and consuming modules.
 
-The file used for configuration settings can be changed if you are extending the CLI itself. Please see the section on extending the CLI below.
+The file used for configuration settings can be changed if you are extending the CLI itself. Check out the [Custom CLI](docs/custom-cli.md) documentation for more information on extending the CLI.
 
-## Tool Overview
+## Commands
 
 We are actively working to develop and expand on these commands in an effor to further improve the developer experience. If you have any ideas or want to submit a new command, please feel free to contact me or submit a pull request.
 
-> You can also create your own [Custom Commands!](docs/comands.md) 
+To see a list of all commands, those provided, as well as custom commands, simply run the **`ng6-cli`**:
+
+```
+ng6
+```
  
 - **`ng6 serve`** Watch, build, & serve the application in a local environment.
 - **`ng6 build`** Build the project with webpack.
@@ -88,6 +111,19 @@ We are actively working to develop and expand on these commands in an effor to f
 - **`ng6 move`** Move an artifact.
 - **`ng6 help`** Display help infomation.
 
+You can also create your own [Custom Commands](docs/comands.md) for your project, team, or enterprise. 
+
+## Templates
+
+There are a number of templates provided by ng6 for scaffolding new mobile & web applications as well as various angular artifacts such as components, filters, & services. To see a list of all available templates simply run the `list` command:
+
+```
+ng6 list templates
+```
+
+You can also create custom templates when you extend the CLI or within your project. Check out the section on [Custom Templates](docs/templates.md) for more information on creating your own templates.
+
+
 ##Documentation
 
 - [Application Architecture](docs/architecture.md)
@@ -95,10 +131,13 @@ We are actively working to develop and expand on these commands in an effor to f
 - [Application Scaffolding](docs/scaffolding.md)
 - [Local Development](docs/local-development.md)
 - [Mobile Devices & Emulation](docs/mobile-development.md)
+- [Custom CLI](docs/custom-cli.md)
 - [Custom Commands](docs/commands.md)
 - [Custom Templates](docs/templates.md)
 
 ##What's Next?
+
+Please take a look at the [Development Changelog](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning for future versions. 
 
 - Class & Method JSDocs
 - Build Optimizations
@@ -110,7 +149,6 @@ We are actively working to develop and expand on these commands in an effor to f
 - TypeScript Templates
 - Sketch File Conversion
 - Application Designer
-
 
 ##Collaboration
 
