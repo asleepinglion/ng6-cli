@@ -10,7 +10,7 @@ module.exports = {
     entry: path.resolve(__dirname, 'app/app.module.js'),
 
     //group these modules into a vendor bundle
-    vendor: ['angular', 'angular-ui-router', 'angular-animate', 'ocLazyLoad']
+    vendor: ['angular', 'angular-ui-router', 'angular-animate']
 
   },
 
