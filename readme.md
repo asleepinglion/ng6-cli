@@ -1,7 +1,7 @@
 # ng6-cli
 #### Development Tools for Large-Scale Angular Apps with ES6, Webpack, & the Component Architecture!
 
-> These tools and this documentation is currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
+> These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
 >
 > **All submissions (issues, feature requests, pull requests, or othewrise) are welcome and very much appreciated!**
 
