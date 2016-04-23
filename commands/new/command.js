@@ -19,36 +19,66 @@ module.exports = Command.extend({
 
     this.description = "Scaffold a new app, component, service, command, or template.";
     this.options = '[type] [name]';
-    this.order = 2;
+    this.order = 4;
 
   },
 
-  run: function(type, name) {
+  run: function(type, name, destination) {
+
+    var self = this;
 
     //todo: use inquirer to ask questions if type/name are not passed via arguments.
     if( !type || !name ) {
       return this.cli.commands.run('help', ['new']);
     } else {
 
-      var template = 'default';
+      //select type & template based on command line args & options
+      var template = this.cli.reflect.getTemplate(type);
+      type = this.cli.reflect.getType(type);
 
-      if( type.split(":").length > 1) {
-        template = type.split(":")[1];
-        type = type.split(":")[0];
-      }
+      //todo: generation shouldn't happen if something already exists
 
-      if( this.cli.request.options.t ) {
-        template = this.cli.request.options.t;
-      } else if( this.cli.request.options.template ) {
-        template = this.cli.request.options.template;
-      }
-
+      //determine which generation method to execute based on the type
       if( type === 'app' ) {
-        this.cli.generate.app(template, name);
-      } else {
-        this.cli.generate.artifact(type, template, name);
-      }
 
+        destination = this.cli.reflect.getNewAppPath(name);
+
+        this.cli.generate.createApp(template, name, destination);
+
+      } else if( type === 'module' ) {
+
+        destination = this.cli.reflect.getNewModulePath(name, destination);
+        this.cli.generate.createModule(name, destination);
+
+      } else if( type === 'template' ) {
+
+        this.cli.generate.createTemplate(name);
+
+      } else if( type === 'command' ) {
+
+        this.cli.generate.createCommand(name);
+
+      } else {
+
+        destination = this.cli.reflect.getNewArtifactPath(type, template, name, destination);
+
+        //if this is the first artifact of this type at the destination path
+        //then create a new module and link the module to it's parent.
+        //otherwise just create the artifact.
+        if( !fs.existsSync(path.resolve(destination + '/../')) ) {
+
+          //the submodule name is based on the parent module's name
+          var moduleName = this.cli.reflect.getSubModuleName(type, destination);
+
+          this.cli.generate.createModule(moduleName, path.resolve(destination + '/../'), function() {
+            self.cli.generate.createArtifact(type, template, name, destination);
+          });
+
+        } else {
+          this.cli.generate.createArtifact(type, template, name, destination);
+        }
+
+      }
     }
 
   }
