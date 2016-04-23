@@ -1,5 +1,5 @@
 import template from './app.component.html';
-import './app.scss';
+import './app.component.scss';
 
 export default {
   template
