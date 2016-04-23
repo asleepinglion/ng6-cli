@@ -21,34 +21,34 @@ npm install -g ng6-cli
 
 ##Getting Started
 
-To get a list of available commands, simply run `ng6`:
+**To get a list of available commands, simply run `ng6`:**
 
 ```
 ng6
 ```
 
-To get help with a specific command:
+**To get help with a specific command:**
 
 ```
 ng6 help [command]
 ```
 
-To create a new application simply run:
+**To create a new application simply run:**
 
 ```
 ng6 new app my-app
 ```
 
-or to create a an app within the current directory:
+**or to create a an app within the current directory:**
 
 ```
 ng6 new app .
 ```
 
-or to create an app using a different application template:
+**or to create an app using a different application template:**
 
 ```
-ng6 new app: mobile my-app
+ng6 new app:mobile my-app
 ```
 
 ## Highlights
@@ -130,7 +130,7 @@ You can also create custom templates when you extend the CLI or within your proj
 - [CLI Architecture](docs/cli-architecture.md)
 - [Application Scaffolding](docs/scaffolding.md)
 - [Local Development](docs/local-development.md)
-- [Mobile Devices & Emulation](docs/mobile-development.md)
+- [Mobile Development](docs/mobile-development.md)
 - [Custom CLI](docs/custom-cli.md)
 - [Custom Commands](docs/commands.md)
 - [Custom Templates](docs/templates.md)
