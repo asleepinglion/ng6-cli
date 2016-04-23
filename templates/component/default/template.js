@@ -7,7 +7,7 @@ module.exports = Template.extend({
 
   init: function() {
     this._super.apply(this, arguments);
-    this.description = 'An Angular component using ES6 Modules.'
+    this.description = 'An angular.component following industry best practices.'
   }
 
 });
