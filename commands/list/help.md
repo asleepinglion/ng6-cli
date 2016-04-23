@@ -1,6 +1,6 @@
 List available artifacts...
 
-Usage: **usk list** *[type>]* *[options]*
+Usage: **ng6 list** *[type>]* *[options]*
 
 Available types:
   **templates**       *....* Templates for scaffolding using the new command.

@@ -7,6 +7,8 @@ var columnify = require('columnify');
 var Command = require('../../lib/command');
 var _ = require('lodash');
 
+//todo: use dynamic bin name in help information -- support lodash/handlebar templates?
+
 module.exports = Command.extend({
 
   init: function(cli) {

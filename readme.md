@@ -2,12 +2,15 @@
 
 > These tools are currently under active development and will continue to be improved and refined. Please let me know if you are interested in collaboration! All submissions (issues, feature requests, pull requests, or othewrise) are welcome and very much appreciated!
 
-The `ng6` cli provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (including mobile via [Ionic]()) and all the angular artifacts such as `modules`, 
-`components`, `directives`, `services`, and `filters`.
+The **`ng6`** cli provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
+**`components`**, **`directives`**, **`services`**, and **`filters`**.
 
-`ng6` doesn't just create files, it will also intelligently help you refactor existing code. When scaffolding new files it will automatically create the appropriate structure, necessary module files, and appropriate linking (i.e. import statements, angular definitions, and dependencies). 
+**`ng6`** doesn't just create files, it will also intelligently help you refactor existing code. For example, when scaffolding new artifacts it will automatically create the appropriate structure, necessary, including module files and the appropriate linking (i.e. import statements, angular definitions, and dependencies). 
 
-`ng6` is also easy to extend. You can extend the entire CLI to create your own custom version, or simply create new commands and template to supplement or replace existing commands and templates.
+This is achieved by combining a consistent & predictable achitecture with the power of [acorn.js](https://github.com/ternjs/acorn), a fast static analysis library for parsing the Abstract Syntax Tree of the Javascript codebase.  
+
+**`ng6`** is also easy to extend. You can extend the entire CLI to create your own custom version, or simply create new commands and template to supplement or replace the provides ones.
+
 
 ##Installing
 
@@ -33,73 +36,46 @@ ng6 help [command]
 
 ##Configuration
 
-##Component Architecture
+> The **`ng6 config`** will be available shortly to make it easier to configure the CLI options for your user or project.
 
-In its simplest form `ng6` is the combination of the new [angular.component](https://docs.angularjs.org/guide/component) method and ES6 Modules. 
+You can configure **`ng6`** options at the user or project levels. This is done by creating a `.ng6-cli` file in either your home directory or the project directory. User level options will override project level settings. 
 
-The `ng6` cli is loosely based off the [NG6 Starter project](https://github.com/AngularClass/NG6-starter), with a number of small changes that follow the conventions of the architecture more closely. 
+> At the moment there are no ng6exposed options, so this feature isn't very helpful. But in the future this will allow you to enable or disable features as well as provide configuration settings for publishing and consuming modules.
 
-Components have been entirely isolated from the host application and the build system. In the current templates, we use [Webpack]() to build the application. ES6 is made available via Babel.
+The file used for configuration settings can be changed if you are extending the CLI itself. Please see the section on extending the CLI below.
 
->It would be relatively easy to use [browserify]() or [rollup]() instead -- the only requirement is that modules should be processed using a build system that supports CommonJS modules.
+## Commands
 
-For mobile applications, we take advantage of the same achitecture, but some small changes to support [Ionic]().
+We are actively working to develop and expand on these commands in an effor to further improve the developer experience. If you have any ideas or want to submit a new command, please feel free to contact me or submit a pull request.
 
-### More Information...
+> You can also create your own [Custom Commands!](docs/comands.md) 
+ 
+- **`ng6 serve`** Watch, build, & serve the application in a local environment.
+- **`ng6 build`** Build the project with webpack.
+- **`ng6 list`** List available artifacts, such as templates & components.
+- **`ng6 new`** Scaffold a artifact such as a component or a service.
+- **`ng6 copy`** Copy an artifact to a new location.
+- **`ng6 move`** Move an artifact.
+- **`ng6 help`** Display help infomation.
 
-- [Angular ES6 Style Guide](https://github.com/rwwagner90/angular-styleguide-es6#modularity)
-- [Exploring the Angular 1.5 .component() method](https://toddmotto.com/exploring-the-angular-1-5-component-method/)
-- [Component Pattern](https://github.com/tomastrajan/component-pattern-for-angular-js-1-x)
-- [How to design large AngularJS applications that scale – Sebastian Fröstl and Gernot Höflechner](https://www.youtube.com/watch?v=eel3mV0alEc)
-- [How Instagram.com Works - Pete Hunt](https://www.youtube.com/watch?v=VkTCL6Nqm6Y)
+##Table of Contents
 
-##Scaffolding
-
-```
-ng6 new [type:template] [component-name]
-```
-
-To create a new application using the default template and install dependencies:
-> This will create a new folder within the current working directory.
-
-```
-ng6 new app [app-name] -i
-```
-
-To create a new application using the mobile template and install dependencies:
-> This will create a new folder within the current working directory.
-
-```
-ng6 new app:mobile [app-name] -i
-```
-
-To create a new view component (a component which contains a ui-router state):
-> You will probably need to modify the ui-router state's url as it will default to the name of the component.
-
-```
-ng6 new component:view [component-name]
-```
-
-To create a regular component:
-
-```
-ng6 new component [component-name]
-```
-
-To see a list of available templates for generation organized by type:
-
-```
-ng6 list templates
-```
-
-
-##Templates
-Because NPM publish will not include `.gitignore` files, if you want a `.gitignore` as part of your template, you must name it `gitignore`
-
-##Commands
-
-##Customize!
+- [Application Architecture](docs/architecture.md)
+- [CLI Architecture](docs/cli-architecture.md)
+- [Application Scaffolding](docs/scaffolding.md)
+- [Serving via BrowserSync](docs/local-development.md)
+- [Testing on Mobile Devices](docs/mobile-development.md)
+- [Custom Commands](docs/commands.md)
+- [Custom Templates](docs/templates.md)
 
 ##Future Plans
 
+- Installed Commands & Templates
+- SystemJS Templates
+- TypeScript Templates
+- Application Designer
+- Sketch File Conversion
+
 ##Collaboration
+
+All questions, ideas, feedback, and/or pull requests are also greatly appreciated! 

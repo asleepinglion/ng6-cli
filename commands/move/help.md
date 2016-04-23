@@ -1,3 +1,3 @@
 *move*
 
-Usage: **usk move** *[options]*
+Usage: **ng6 move** *[options]*

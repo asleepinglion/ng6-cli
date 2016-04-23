@@ -1,3 +1,3 @@
 *migrate*
 
-Usage: **usk migrate** *[options]*
+Usage: **ng6 migrate** *[options]*

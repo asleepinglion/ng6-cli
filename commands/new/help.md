@@ -1,7 +1,7 @@
 Scaffolding lets us glue together the pieces of our applications quickly
 and consistently.
 
-Usage: **usk new** *[type:template]* *[name]* *[options]*
+Usage: **ng6 new** *[type:template]* *[name]* *[options]*
 
 Options:
 

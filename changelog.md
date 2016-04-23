@@ -5,6 +5,24 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.0] - 2016-04-23
+
+### Added
+- added support for loading project level & CWD templates & commands.
+- added new templates for directives and creating other templates.
+
+### Changed
+- removed reference to ocLazyLoad in the default webpack configurations.
+- revised template desciptions.
+- revised command order.
+- refactored generate & reflect libraries and improved the new command.
+- further effort to improve the documentation -- still WIP.
+
+## [0.3.6] - 2016-04-19
+
+### Added
+- added the ability to create new apps inside the current directory
+
 ## [0.3.5] - 2016-04-17
 
 ### Changed

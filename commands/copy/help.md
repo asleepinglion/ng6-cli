@@ -1,3 +1,3 @@
 *copy*
 
-Usage: **usk copy** *[options]*
+Usage: **ng6 copy** *[options]*
