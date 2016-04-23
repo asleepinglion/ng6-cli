@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.2] - 2016-04-23
+
+### Changed
+- documentation edits...
+
 ## [0.4.1] - 2016-04-23
 
 ### Changed
