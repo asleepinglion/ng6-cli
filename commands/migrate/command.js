@@ -9,9 +9,9 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "The migrate description has not yet been defined.";
+    this.description = "Migrate to new versions of app & artifact templates.";
     this.options = '';
-    this.order = 10;
+    this.order = 14;
 
   },
 

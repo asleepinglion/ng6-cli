@@ -15,7 +15,7 @@ module.exports = Command.extend({
     
     this.description = 'Display this list of help, or help for a specific command.';
     this.options = '[command]';
-    this.order = '400';
+    this.order = '500';
 
     //setup options for the marked-terminal renderer
     marked.setOptions({
@@ -100,7 +100,7 @@ module.exports = Command.extend({
     }));
 
     console.log("");
-    
+
     console.log(chalk.white("For help with a specific command:"), chalk.cyan(this.cli.bin + " help"), chalk.gray("[command]"));
 
   }

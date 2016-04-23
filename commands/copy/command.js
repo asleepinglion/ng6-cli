@@ -9,9 +9,9 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "The copy description has not yet been defined.";
+    this.description = "Copy an artifact to a new location.";
     this.options = '';
-    this.order = 10;
+    this.order = 12;
 
   },
 

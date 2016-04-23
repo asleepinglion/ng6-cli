@@ -9,9 +9,9 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "The move description has not yet been defined.";
+    this.description = "Move or rename a module.";
     this.options = '';
-    this.order = 10;
+    this.order = 13;
 
   },
 
