@@ -11,6 +11,10 @@
 The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
 **`components`**, **`directives`**, **`services`**, and **`filters`**.
 
+
+![Getting Started](docs/getting-started.gif?raw=true "Getting Started...")
+
+
 **Disclaimer:** It's important to make sure you initialize your project with **`git`** and vet all changes made by the **`ng6-cli`** before you commit. Its critical that you understand all changes you are making to the codebase of the project you are working on. 
 
 
