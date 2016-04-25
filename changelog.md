@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.4] - 2016-04-25
+
+### Changed
+- Fixed issue with camel casing being overwritten by title case.
+
 ## [0.4.3] - 2016-04-25
 
 ### Added
