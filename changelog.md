@@ -5,6 +5,17 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.3] - 2016-04-25
+
+### Added
+- added proper path for new application when using . option
+- added title casing option to name for artifact generation
+
+### Changed
+- updated build command to show proper stats at the end
+- documentation edits...
+- removed unnecessary package dependencies from default template template
+
 ## [0.4.2] - 2016-04-23
 
 ### Changed

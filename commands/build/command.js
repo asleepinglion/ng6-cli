@@ -25,9 +25,8 @@ module.exports = Command.extend({
     console.log("");
 
     bundler.run(function(err, stats) {
-      //console.log(stats);
-      console.log('Successfully built to ' + stats.compilation.outputOptions.path);
       console.log("");
+      console.log(stats.toString({colors: true}));
     });
 
   }

@@ -1,7 +1,4 @@
-var path = require('path');
-var chalk = require('chalk');
 var Template = require('ng6-cli').Template;
-var Case = require('case');
 
 module.exports = Template.extend({
 

@@ -1,7 +1,8 @@
 # ng6-cli 
-###Beta v0.4.2
+####Beta v0.4.2
 
 #### Extensible Development Tools for the Component-Driven Development of Large-Scale Angular Apps built with EcmaScript 6 (ES6).
+
 
 > These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
 >
@@ -9,6 +10,8 @@
 
 The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
 **`components`**, **`directives`**, **`services`**, and **`filters`**.
+
+**Disclaimer:** It's important to make sure you initialize your project with **`git`** and vet all changes made by the **`ng6-cli`** before you commit. Its critical that you understand all changes you are making to the codebase of the project you are working on. 
 
 
 ##Installing
@@ -111,7 +114,7 @@ ng6
 - **`ng6 move`** Move an artifact.
 - **`ng6 help`** Display help infomation.
 
-You can also create your own [Custom Commands](docs/comands.md) for your project, team, or enterprise. 
+You can also create your own [Custom Commands](docs/commands.md) for your project, team, or enterprise. 
 
 ## Templates
 
@@ -137,16 +140,15 @@ You can also create custom templates when you extend the CLI or within your proj
 
 ##What's Next?
 
-Please take a look at the [Development Changelog](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning for future versions. 
+Please take a look at the [Development Changelog](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future. 
 
-- Class & Method JSDocs
-- Build Optimizations
-- Linting Tools & Tests
 - Improved Documentation
+- Class & Method JSDocs
+- Linting Tools & Tests
+- Build Optimizations
 - Installed Commands & Templates
 - Publishing & Consuming Modules
-- SystemJS Templates
-- TypeScript Templates
+- SystemJS & TypeScript Templates
 - Sketch File Conversion
 - Application Designer
 
