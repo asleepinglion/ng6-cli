@@ -6,7 +6,7 @@
 
 > These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
 >
-> **All submissions (issues, feature requests, pull requests, or othewrise) are welcome and very much appreciated!**
+> **All submissions (issues, feature requests, pull requests, or otherwise) are welcome and very much appreciated!**
 
 The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
 **`components`**, **`directives`**, **`services`**, and **`filters`**.
@@ -64,7 +64,7 @@ ng6 new app:mobile my-app
 
 The **`ng6-cli`** doesn't just create files, it will also intelligently help you refactor existing code. For example, when scaffolding new artifacts it will automatically create the appropriate structure, module files, and necessary linking (i.e. import statements, angular definitions, and dependencies). This allows you to move quickly and maintain your focus where it should be, developing amazing user experiences! 
 
-This is achieved by combining a consistent & predictable achitecture with the power of a fast static analysis library for parsing the Abstract Syntax Tree of the Javascript codebase ([acorn.js](https://github.com/ternjs/acorn)). Several declarative libaries have also been created to assist in template geneartion, code reflection, and refactorization. 
+This is achieved by combining a consistent & predictable architecture with the power of a fast static analysis library for parsing the Abstract Syntax Tree of the JavaScript codebase ([acorn.js](https://github.com/ternjs/acorn)). Several declarative libraries have also been created to assist in template generation, code reflection, and refactorization. 
 
 ####Scalable Architecture
 
@@ -84,9 +84,9 @@ All of this is primarily achieved by using a simple inheritance model. "Classes"
 
 #### Code Analysis & Refactorizations
 
-By combinging the same techniques used by modern linting tools like ESLint and JSCS with the knowledge of this particular architecture, we are able to improve the developer experience and make tools that can continue to provide use beyond initial project creation.
+By combining the same techniques used by modern linting tools like ESLint and JSCS with the knowledge of this particular architecture, we are able to improve the developer experience and make tools that can continue to provide use beyond initial project creation.
 
-As mentioned, [acorn.js](https://github.com/ternjs/acorn) is used to parse the abstract syntax tree. Instead of modifying the AST and using escodegen to convert it back to JS (which causes all sorts of side effects to the code, lost formatting, etc), the **`ng6-cli`** simply uses the region information to know where to insert text. The convetions of the architecture inform the naming and location of files. This empowers the creation of a powerful set of tools to develop rapidly & focus on the actual app, not the glue the binds it all together.
+As mentioned, [acorn.js](https://github.com/ternjs/acorn) is used to parse the abstract syntax tree. Instead of modifying the AST and using escodegen to convert it back to JS (which causes all sorts of side effects to the code, lost formatting, etc), the **`ng6-cli`** simply uses the region information to know where to insert text. The conventions of the architecture inform the naming and location of files. This empowers the creation of a powerful set of tools to develop rapidly & focus on the actual app, not the glue the binds it all together.
 
 > In the very near future we will also support tools for moving and copying artifacts. Your IDE can certainly help you do a lot of these things, but the tooling has the advantage of understanding the specific architecture at play.
 
@@ -102,7 +102,7 @@ The file used for configuration settings can be changed if you are extending the
 
 ## Commands
 
-We are actively working to develop and expand on these commands in an effor to further improve the developer experience. If you have any ideas or want to submit a new command, please feel free to contact me or submit a pull request.
+We are actively working to develop and expand on these commands in an effort to further improve the developer experience. If you have any ideas or want to submit a new command, please feel free to contact me or submit a pull request.
 
 To see a list of all commands, those provided, as well as custom commands, simply run the **`ng6-cli`**:
 
@@ -116,7 +116,7 @@ ng6
 - **`ng6 new`** Scaffold a artifact such as a component or a service.
 - **`ng6 copy`** Copy an artifact to a new location.
 - **`ng6 move`** Move an artifact.
-- **`ng6 help`** Display help infomation.
+- **`ng6 help`** Display help information.
 
 You can also create your own [Custom Commands](docs/commands.md) for your project, team, or enterprise. 
 
@@ -144,7 +144,7 @@ You can also create custom templates when you extend the CLI or within your proj
 
 ##What's Next?
 
-Please take a look at the [Development Changelog](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future. 
+Please take a look at the [Development Change log](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future. 
 
 - Improved Documentation
 - Class & Method JSDocs
