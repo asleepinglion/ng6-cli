@@ -3,6 +3,7 @@ console.log('application loading...');
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import animate from 'angular-animate';
+import AppStyles from '../styles/app.scss';
 import AppComponent from './app.component';
 
 //create our app module and setup core dependencies

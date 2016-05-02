@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
 
@@ -14,7 +15,23 @@ module.exports = {
 
   },
 
-  //setup the output path 
+  /*
+   IMPORTANT: If you have sourcemaps enabled with npm linked repositories
+   the build will break with the current version of ng-annotate-loader.
+
+   I have submitted a pull request for them to upgrade their dependency on
+   the source-map package to the latest version which fixes the problem.
+   You can use my version for now by replacing the version of ng-annotate-loader
+   in your package.json with:
+
+   git+ssh://git@github.com:asleepinglion/ng-annotate-loader.git
+
+   You could also also use shrinkwrapping to make ng-annotate-loader use the
+   latest version of source-maps if you prefer.
+   */
+  devtool: 'eval-source-map',
+
+  //setup the output path
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'app.bundle.js'
@@ -30,38 +47,44 @@ module.exports = {
    and finally through he style loader.
 
    Since we will often install modules via npm we do not want to exclude all
-   node modules. In the loaders below we are explicitly excluding all node
-   modules that do not start with the prefixes 'nu-' or 'usk-'.
+   node modules.
+
    */
   module: {
     loaders: [
       {
-        test: /\.less/,
-        loader: 'style!css!less'
-      },
-      {
         test: /\.js$/,
-        loader: 'ng-annotate!babel?presets='+require.resolve('babel-preset-es2015')
+        loader: 'ng-annotate!babel?compact=true&presets='+require.resolve('babel-preset-es2015')
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        //loader: 'style!css'
+        loader: ExtractTextPlugin.extract('style', 'css', { publicPath: '../'})
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        //loader: 'style!css!sass'
+        loader: ExtractTextPlugin.extract('style', 'css!sass!sass-resources', { publicPath: '../'})
       },
       {
-        test: /\.(png|jpg)$/,
-        loader: 'url'
+        test: /\.(jpg|jpeg|gif|png)$/,
+        loader:'url?limit=1024&name=images/[name].[ext]'
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&minetype=application/font-woff"
+        test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=1024&mimetype=application/font-woff&name=fonts/[name].[ext]"
       },
       {
-        test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=1024&mimetype=application/octet-stream&name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file?name=fonts/[name].[ext]"
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]"
       },
       {
         test: /\.html$/,
@@ -70,6 +93,11 @@ module.exports = {
     ]
   },
 
+  /*
+   Sass resources are loaded before each required scss file.
+   Do not include anything that actually renders CSS otherwise it will be injected into every file.
+   */
+  sassResources: [ './styles/_variables.scss' ],
 
   /*
    The following resolve blocks setup the fallback paths to search use
@@ -77,7 +105,6 @@ module.exports = {
    are installed via npm link.
    */
   resolve: {
-    extensions: [ '', '.js' ],
     fallback: path.join(__dirname, "node_modules")
   },
 
@@ -86,6 +113,9 @@ module.exports = {
   },
 
   plugins: [
+
+    //extract all the compiled scss into a single css file.
+    new ExtractTextPlugin('css/app.css', { allChunks: true }),
 
     // Injects bundles in your index.html instead of wiring all manually.
     // It also adds hash to all injected assets so we don't have problems
@@ -99,10 +129,16 @@ module.exports = {
     // Removes duplicate modules from the build
     new webpack.optimize.DedupePlugin(),
 
-    // Brings together common modules into the same chunk.
+    // Store vendor libraries together into the vendor bundle.
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       filename: 'vendor.bundle.js'
+    }),
+
+    // Store all remaining chunks not part of the app into the common bundle.
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.bundle.js'
     })
   ]
 };
