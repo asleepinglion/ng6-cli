@@ -144,7 +144,7 @@ You can also create custom templates when you extend the CLI or within your proj
 
 ##What's Next?
 
-Please take a look at the [Development Change log](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future. 
+Please take a look at the [Development Changelog](changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future.
 
 - Improved Documentation
 - Class & Method JSDocs
