@@ -5,7 +5,7 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
-## [0.4.6] - 2016-05-01
+## [0.4.7] - 2016-05-01
 ### Changed
 - Fixed import path issue with windows, must use unix style paths for import statements.
 
