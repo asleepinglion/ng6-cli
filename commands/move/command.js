@@ -18,6 +18,11 @@ module.exports = Command.extend({
 
   run: function(source, dest) {
 
+    console.log("This command will be available shortly.");
+    console.log("");
+
+    /*
+
     if( source && dest ) {
 
       inquirer.prompt([
@@ -93,6 +98,8 @@ module.exports = Command.extend({
 
       });
     }
+
+    */
 
   }
 });
