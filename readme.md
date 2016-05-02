@@ -1,5 +1,5 @@
 # ng6-cli 
-####Beta v0.4.2
+####Beta v0.4.5
 
 #### Extensible Development Tools for the Component-Driven Development of Large-Scale Angular Apps built with EcmaScript 6 (ES6).
 

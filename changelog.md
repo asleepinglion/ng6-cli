@@ -5,6 +5,18 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.5] - 2016-05-01
+
+### Added
+- It's now possible to extend templates instead of just replacing them. This can be done by setting the extend option the template class.
+
+### Changed
+- Compiled styles are now extracted into an app.css instead of being written to multiple style tags in the final html.
+- Othere assets are now broken out into appropriate folders like fonts & images.
+- There is now a vendor chunk as well as a common chunk; but more modules need to be called out in the vendor chunk.
+- The Sass Resource Loader is now used to make sass variables available to all required sass files without the need to manually import them each time.
+- Replaced ng-annoate-loader with a patched version to fix an issue that occurs when npm linking modules.
+
 ## [0.4.4] - 2016-04-25
 
 ### Changed
