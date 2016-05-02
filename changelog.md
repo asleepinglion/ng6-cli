@@ -5,6 +5,13 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.6] - 2016-05-01
+### Changed
+- Fixed import path issue with windows, must use unix style paths for import statements.
+
+### Added
+- It's now possible to extend templates instead of just replacing them. This can be done by setting the extend option the template class.
+
 ## [0.4.5] - 2016-05-01
 
 ### Added

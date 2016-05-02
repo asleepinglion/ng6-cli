@@ -1,3 +1,3 @@
 *<%= name %>*
 
-Usage: **usk <%= name %>** *[options]*
+Usage: **ng6 <%= name %>** *[options]*

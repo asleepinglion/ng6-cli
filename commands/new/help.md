@@ -8,4 +8,4 @@ Options:
   *-t,--template*   *....* Specify which template to use.
 
 To see a list of available templates you can execute the
-following command: **usk list templates**
+following command: **ng6 list templates**
