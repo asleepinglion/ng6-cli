@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.8] - 2016-05-01
+### Changed
+- The `new` command will now fail early if the template does not exist.
+- The `new` command will now fail early if the destination already exists.
+
 ## [0.4.7] - 2016-05-01
 ### Changed
 - Fixed import path issue with windows, must use unix style paths for import statements.

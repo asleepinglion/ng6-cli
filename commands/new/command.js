@@ -23,6 +23,16 @@ module.exports = Command.extend({
 
   },
 
+  checkExists: function(type, destination) {
+    if( fs.existsSync(destination) && !this.cli.request.isEnabled('force')) {
+      console.log("");
+      console.log(chalk.white('A ' + chalk.cyan(type) + ' already exists at this path.'));
+      console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
+      console.log("");
+      process.exit(1);
+    }
+  },
+
   run: function(type, name, destination) {
 
     var self = this;
@@ -36,31 +46,42 @@ module.exports = Command.extend({
       var template = this.cli.reflect.getTemplate(type);
       type = this.cli.reflect.getType(type);
 
-      //todo: generation shouldn't happen if something already exists
+      if( !this.cli.templates.get(type, template) ) {
+        console.log("");
+        console.log(chalk.white('The ' + chalk.cyan(type + ':' + template) + ' template is not currently available.'));
+        console.log(chalk.white('To see a list of available templates type:'), chalk.cyan(this.cli.bin+' list templates'));
+        console.log("");
+        process.exit(1);
+      }
 
       //determine which generation method to execute based on the type
       if( type === 'app' ) {
 
         destination = this.cli.reflect.getNewAppPath(name);
-
+        this.checkExists(type, destination);
         this.cli.generate.createApp(template, name, destination);
 
       } else if( type === 'module' ) {
 
         destination = this.cli.reflect.getNewModulePath(name, destination);
+        this.checkExists(type, destination);
         this.cli.generate.createModule(name, destination);
 
       } else if( type === 'template' ) {
 
+        //todo: generation shouldn't happen if template already exists
         this.cli.generate.createTemplate(name);
 
       } else if( type === 'command' ) {
 
+        //todo: generation shouldn't happen if command already exists
         this.cli.generate.createCommand(name);
 
       } else {
 
         destination = this.cli.reflect.getNewArtifactPath(type, template, name, destination);
+
+        this.checkExists(type, destination);
 
         //if this is the first artifact of this type at the destination path
         //then create a new module and link the module to it's parent.
