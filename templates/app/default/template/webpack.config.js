@@ -87,6 +87,10 @@ module.exports = {
         loader: "url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]"
       },
       {
+        test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: "file?name=fonts/[name].[ext]"
+      },
+      {
         test: /\.html$/,
         loader: 'raw'
       }

@@ -5,6 +5,10 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.10] - 2016-05-01
+### Changed
+- Fixed missing font type in default app template.
+
 ## [0.4.9] - 2016-05-01
 ### Added
 - Added simple provider template.
