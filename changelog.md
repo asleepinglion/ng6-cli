@@ -5,6 +5,10 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.9] - 2016-05-01
+### Added
+- Added simple provider template.
+
 ## [0.4.8] - 2016-05-01
 ### Changed
 - The `new` command will now fail early if the template does not exist.
