@@ -5,6 +5,15 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.12] - 2016-05-07
+
+### Added
+- added missing repository information to the package.json
+
+### Changed
+- updated readme to use absolute urls for docs and links.
+- changed dependency in default app to bootstrap-sass instead of boostrap.
+
 ## [0.4.11] - 2016-05-07
 
 ### Changed
