@@ -69,9 +69,9 @@ Once commands & templates have been loaded the `run` method is exected where the
 
 Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder. Templates have a slightly more complicated structure, with an additional folder which groups templates by type. 
 
-Commands are composed of a `command.js` class file which either extends the base Command class or another command. Each command also has a `help.md` file which is a markdown template that is rendered into the console when the user uses the specific help method: `ng6 help [command]`. 
+Commands are composed of a `command.js` class file which either extends the base Command class (`lib/command.js`) or another command's class. Each command also has a `help.md` file which is a markdown template that is rendered into the console when the user uses the specific help method: `ng6 help [command]`. For more information, check out the documentation on [Custom Commands]().
 
-Templates contain a template folder which contains all the files that will be created and a template.js file which either extends the base Template class or another template.
+Templates contain a template.js file which either extends the base Template class (`(lib/template.js`) or another template class, and a template folder which contains all the files that will be created. Files that are prefixed with `name` will have the word automatically replaced with the name provided by the user. For more information, check out the documentation on [Custom Templates]().
 
 Both commands and templates set descriptions and other options as variables within their class's `init` method. The descriptions are used by the `help` command and the options are used for things like the Template's `extend` option. When the `extend` option is set to true on a Template, the files within the template are layered on top of any template of the same name from a lower level (i.e. augmenting a ng6-cli template at the project level).
 
@@ -90,6 +90,8 @@ When the `new` command is executed, it determines the template type, name & dest
 - `createArtifact` is used for most Angular artifacts including `components`, `directives`, `services`, `filters`, & `providers`. It expects a artifact `type`, template `name`, `destination`, and an optional `callback`.
 
 - `createTemplate` and `createCommand` are used to create new CLI commands and templates. They both only require a `name` as new commands and templates will always be stored in either a `commands` or `templates` folder at the project root.
+
+> **Todo:** Show example and explain how to use the generate library, with specific description of `generate.template`, `generate.source`, `generate.context`, `generate.options`, and `generate.destination`.
 
 #### Reflection
 
