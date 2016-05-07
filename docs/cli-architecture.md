@@ -7,7 +7,7 @@ It was important during the development of the CLI to make sure it was not only 
 To make things easy, dynamic, and extendable, the CLI uses the [Simple Inheritance Model](#simple_inheritance_model) for 
 ES5. To make the code easy to maintain and refactor, several declarative libaries were created to generate new files, reflect information about the code, and refactor the code using the Abstract Syntax Tree (AST).
 
-**Why ES5?**
+#### Why ES5?
 
 We chose ES5 because we wanted to maximize our support Node engines (as many are still using Node 4) and even more so because we wanted to maximize our ability to load commands & templates at run-time. Using the latest Node engine or requiring Babel to transpile felt a bit too limiting and complex. It also just keeps things relatively simple during development when your using a number of symlinks between many connected projects. 
 
@@ -65,9 +65,49 @@ After instantiating the libraries the CLI class proceeds to load any found templ
  
 Once commands & templates have been loaded the `run` method is exected where the CLI checks whether the request command exists and either executes the command or defaults to the help command.
 
+### Commands & Templates
+
+Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder. Templates have a slightly more complicated structure, with an additional folder which groups templates by type. 
+
+Commands are composed of a `command.js` class file which either extends the base Command class or another command. Each command also has a `help.md` file which is a markdown template that is rendered into the console when the user uses the specific help method: `ng6 help [command]`. 
+
+Templates contain a template folder which contains all the files that will be created and a template.js file which either extends the base Template class or another template.
+
+Both commands and templates set descriptions and other options as variables within their class's `init` method. The descriptions are used by the `help` command and the options are used for things like the Template's `extend` option. When the `extend` option is set to true on a Template, the files within the template are layered on top of any template of the same name from a lower level (i.e. augmenting a ng6-cli template at the project level).
+
 ### Generation, Reflection, & Refactorization:
 
-Documentation in progress...
+Likely the most useful features of the CLI are contained within these three declarative libraries. Using these libraries its extremely easy to generate new files and modify existing code to wire up import statements and angular dependencies. The same libraries also enable the ability to assist in other simple refactorization operations that typically take several steps in traditional IDEs.
+
+#### Generation
+
+When the `new` command is executed, it determines the template type, name & destination and calls the appropriate create method on the generation class (`lib/generate.js`). There are currently five creation methods: `createApp`, `createModule`, `createArtifact`, `createTemplate`, `createCommand`. 
+
+- `createApp` is specifically used for creating new applications, it expects a `template` name, application `name`, and a `destination.
+
+- `createModule` is specifically used for creating new modules it expects a `name`, `destination`, and an optional `callback`. The callback is used by other artifact which may call `createModule` if a module file doesn't exist for the type of artifact they creating. 
+
+- `createArtifact` is used for most Angular artifacts including `components`, `directives`, `services`, `filters`, & `providers`. It expects a artifact `type`, template `name`, `destination`, and an optional `callback`.
+
+- `createTemplate` and `createCommand` are used to create new CLI commands and templates. They both only require a `name` as new commands and templates will always be stored in either a `commands` or `templates` folder at the project root.
+
+#### Reflection
+
+When creating new modules and artifacts the `createModule` and `createArtifact` methods which use the reflection library (`lib/reflect.js`) to determine information about the current project. 
+
+Using static analysis (using the same library that powers ESLint and JSCS) we are able to parse the Abstract Syntax Tree of the code and do things like, find the final character position of the last import statement. Using this information, combined with information known about the expected architecture of the application, the system is able to tell the refactorization library what and where to modifications. 
+
+There are number of methods that make for a really declarative interface for template generation and refactoriztion, for example: `getNewArtifactPath` which determines the path for a new artifact based on the type, template name, and desired artifact name. Or `findParentModule` which will find the parent module file for a given file within the project.
+
+#### Refactorization
+
+The refactorization library completes the process by using the information returned from the reflection library to modify existing files for things like module import statements and angular dependencies. 
+
+- `addAngularDefinition` adds a new angular definition (i.e. angular.service, angular.component, etc) to an existing module file. It expects an `options` object expression as its only argument, with the following required options `name`, `type`, and `module`.
+
+- `addAngularDependency` adds a dependency to an existing module file's angular.module definition. It expects an `options` object expression as its only argument, with the following required options `identifier`, and `module`.
+
+- `addModuleImport` adds an import statement to an existing module. It expects an `options` object expression as its only argument, with the following required options `identifier`, `parent`, and `child`.
 
 
 ## Simple Inheritance Model
