@@ -15,34 +15,34 @@ We chose ES5 because we wanted to maximize our support Node engines (as many are
 
 The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a resusable, declarative form. 
 
-```js
+```bash
 bin/
-../ng6-cli.js //the bin script (instantiates cli.js)
-commands/ //commands provided with the ng6-cli
-../build //a command
-../../command.js //class for this command
-../../help.md //command specific help template 
+../ng6-cli.js #the bin script (instantiates cli.js)
+commands/ #commands provided with the ng6-cli
+../build #a command
+../../command.js #class for this command
+../../help.md #command specific help template 
 ../...
-docs/ //you are here
-lib/ //library of classes to support the ng6-cli
-../cli.js //the base class for CLIs
-../command.js //base class for commands
-../commands.js //class which loads commands
-../config.js //class to manage configuration options
-../generate.js //class to generate new apps & artifacts
-../ng6-cli.js //ng6 extension of the base CLI class
-../refactor.js //class to modify existing code 
-../reflect.js //class to reflect on the code & project
-../request.js //class to process the request (argv parser)
-../template.js //base class for templates
-../templates.js //class which loads templates
-templates/ //templates provided with the ng6-cli
-../app/ //template type
-../../default //name of template
-../../../template //folder to contain template files
-../../../template.js //class for this template
+docs/ #you are here
+lib/ #library of classes to support the ng6-cli
+../cli.js #the base class for CLIs
+../command.js #base class for commands
+../commands.js #class which loads commands
+../config.js #class to manage configuration options
+../generate.js #class to generate new apps & artifacts
+../ng6-cli.js #ng6 extension of the base CLI class
+../refactor.js #class to modify existing code 
+../reflect.js #class to reflect on the code & project
+../request.js #class to process the request (argv parser)
+../template.js #base class for templates
+../templates.js #class which loads templates
+templates/ #templates provided with the ng6-cli
+../app/ #template type
+../../default #name of template
+../../../template #folder to contain template files
+../../../template.js #class for this template
 ../... 
-index.js //exposes classes for easy extension
+index.js #exposes classes for easy extension
 ```
 
 ## How It Works
