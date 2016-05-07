@@ -9,6 +9,7 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ### Changed
 - Fixed issue on windows where the script file name was being shown instead of the actual bin command.
+- Fixed import path issue on windows, now using hard-code regex as path.sep wasn't returning the the right platform slash via git bash on windows.
 
 ## [0.4.10] - 2016-05-01
 ### Changed
