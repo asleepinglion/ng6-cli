@@ -59,9 +59,9 @@ When the base CLI class is instantiated it in turn instantiates and stores refer
 
 > The CLI can be customized and extended simply by extending `lib/cli.js` and instantiating the sub class in a new bin script. For more information on creating your own custom CLI checkout the [Custom CLI](https://github.com/asleepinglion/ng6-cli/blob/master/docs/custom-cli.md) documentation.
 
-After instantiating the libraries the CLI class proceeds to load any found templates or commands it can find within the current directory, the project root if it can find one, and finally within the ng6-cli package itself. CLIs that extend this override the `load` method to tell the system to search other paths as well.
+> **Helpful Tip:** To see a list of all the folders and files loaded during the boot process you can use `--debug` option when executing any command.
 
-> **Helpful Tip:** To see a list of all the folders and files loaded you can use `--debug` option when executing any command.
+After instantiating the necessary libraries, the CLI class proceeds to load any templates or commands it can find within the current directory, the project root, and finally within the ng6-cli package itself. Extended CLIs can override the `load` method to tell the system to search other paths in addition, but the current directory and project root will always be checked first. Subsequent commands or templates with the same name as a template or command already loaded will be ignored. Extension is possible by having your new command `extend` the original command or template.
  
 Once commands & templates have been loaded the `run` method is exected where the CLI checks whether the request command exists and either executes the command or defaults to the help command.
 
