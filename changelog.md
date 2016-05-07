@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.11] - 2016-05-07
+
+### Changed
+- Fixed issue on windows where the script file name was being shown instead of the actual bin command.
+
 ## [0.4.10] - 2016-05-01
 ### Changed
 - Fixed missing font type in default app template.
