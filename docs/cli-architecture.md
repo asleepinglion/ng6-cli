@@ -116,7 +116,7 @@ The base `Class` ([Ouro Base](https://github.com/asleepinglion/ouro-base) ) prov
 
 **The syntax is pretty straight forward, take a look:**
 
-```javascript
+```js
 var Class = require('ouro-base');
 
 var Person = Class.extend({

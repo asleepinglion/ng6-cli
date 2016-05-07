@@ -1,8 +1,6 @@
-#Component Architecture
+# Component Architecture
 
 In its simplest form **`ng6`** is the combination of the new [angular.component](https://docs.angularjs.org/guide/component) method and ES6 Modules.
-
-The `ng6` cli is loosely based off the [NG6 Starter project](https://github.com/AngularClass/NG6-starter), with a couple small changes to improve the consistency & portability of modules & components.
 
 Components have been entirely isolated from the host application and the build system. This allows one application to consume another's components. This also allows us to make migrations to future versions easier. It also enables consumers of the architecture to modify the host application or build system independent of the components. 
 
@@ -12,11 +10,11 @@ In the current templates, we use [Webpack](https://webpack.github.io/) to build 
 
 **For mobile applications,** we take advantage of the same achitecture, however we also import the [Ionic](http://ionicframework.com/) bundle into the main `app.module.js` entry point. 
 
-##Application Structure
+## Application Structure
 
 This project contains an `app` folder which houses the host application separately from the components. The main `webpack` configuraiton is located at the project root and describes how the application is built. The `app/app.module.js` is the main entry for the application, the one`webpack` uses to start the build.
 
-```
+```js
 app
 ../package.json //npm package definition
 ../webpack.config.js //webpack configuration
