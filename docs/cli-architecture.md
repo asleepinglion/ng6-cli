@@ -5,13 +5,13 @@
 It was important during the development of the CLI to make sure it was not only easy to maintain & refactor the code by using SOLID principles, but also that commands, templates, and even the CLI itself is easy to extend and customize. 
 
 To make things easy, dynamic, and extendable, the CLI uses the [Simple Inheritance Model](#simple_inheritance_model) for 
-ES5. To make the code easy to maintain and refactor, several declarative libaries were created to generate new files, reflect information about the code, and refactor the code using the Abstract Syntax Tree (AST).
+ES5. To make the code easy to maintain and refactor, several declarative libraries were created to generate new files, reflect information about the code, and refactor the code using the Abstract Syntax Tree (AST).
 
 #### Why ES5?
 
 We chose ES5 because we wanted to maximize our support Node engines (as many are still using Node 4) and even more so because we wanted to maximize our ability to load commands & templates at run-time. Using the latest Node engine or requiring Babel to transpile felt a bit too limiting and complex. It also just keeps things relatively simple during development when your using a number of symlinks between many connected projects. 
 
-## Applciation Structure
+## Application Structure
 
 The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a resusable, declarative form. 
 
@@ -67,7 +67,7 @@ Once commands & templates have been loaded the `run` method is exected where the
 
 ### Commands & Templates
 
-Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder. Templates have a slightly more complicated structure, with an additional folder which groups templates by type. 
+Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder. 
 
 Commands are composed of a `command.js` class file which either extends the base Command class (`lib/command.js`) or another command's class. Each command also has a `help.md` file which is a markdown template that is rendered into the console when the user uses the specific help method: `ng6 help [command]`. For more information, check out the documentation on [Custom Commands]().
 
@@ -114,7 +114,7 @@ The refactorization library completes the process by using the information retur
 
 ## Simple Inheritance Model
 
-The base `Class` ([Ouro Base](https://github.com/asleepinglion/ouro-base) ) provides an `extend` method to allow one class to pass its behavior on to another using prototypical inheritance. Mixins are supported by passing in previously created Classes as prefixed aguments. You can even call parent methods from within child classes via the `_super` method. 
+The base `Class` ([Ouro Base](https://github.com/asleepinglion/ouro-base) ) provides an `extend` method to allow one class to pass its behavior on to another using prototypical inheritance. Mixins are supported by passing in previously created Classes as prefixed arguments. You can even call parent methods from within child classes via the `_super` method. 
 
 **The syntax is pretty straight forward, take a look:**
 
