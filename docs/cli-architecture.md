@@ -2,14 +2,9 @@
 
 ### Developed to be easy to maintain, refactor, & extend.
 
-It was important during the development of the CLI to make sure it was not only easy to maintain & refactor the code by using SOLID principles, but also that commands, templates, and even the CLI itself is easy to extend and customize. 
+In order to make the code easy to maintain, refactor, and extend we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize. 
 
-To make things easy, dynamic, and extendable, the CLI uses the [Simple Inheritance Model](#simple_inheritance_model) for 
-ES5. To make the code easy to maintain and refactor, several declarative libraries were created to generate new files, reflect information about the code, and refactor the code using the Abstract Syntax Tree (AST).
-
-#### Why ES5?
-
-We chose ES5 because we wanted to maximize our support Node engines (as many are still using Node 4) and even more so because we wanted to maximize our ability to load commands & templates at run-time. Using the latest Node engine or requiring Babel to transpile felt a bit too limiting and complex. It also just keeps things relatively simple during development when your using a number of symlinks between many connected projects. 
+To keep things simple & dynamic the CLI uses the [Simple Inheritance Model](#simple_inheritance_model) for ES5. We chose ES5 because we wanted to maximize our support for different versions of Node and (more importantly) because we wanted to maximize our ability to load commands & templates at run-time.
 
 ## Application Structure
 
@@ -153,4 +148,4 @@ var Ninja = Female.extend({
 
 You simply pass in an object containing your methods and variables as the last argument of the `extend` method. 
 
-Mixins are passed in as the first arguments of the `extend` method and they're methods and properties will be mixed in sequentially using prototypical inheritance, from the first argument to the last, your custom definition. For more information, check out the [Ouro Base](https://github.com/asleepinglion/ouro-base) project on GitHub.
+Mixins are passed in as the first argument(s) of the `extend` method. Their methods and properties will be merged in sequentially using prototypical inheritance, from the first argument to the last, your custom definition. For more information, check out the [Ouro Base](https://github.com/asleepinglion/ouro-base) project on GitHub.
