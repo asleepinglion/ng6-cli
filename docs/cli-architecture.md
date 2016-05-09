@@ -4,7 +4,7 @@
 
 In order to make the code easy to maintain, refactor, and extend we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize. 
 
-To keep things simple & dynamic the CLI uses the [Simple Inheritance Model](#simple_inheritance_model) for ES5. We chose ES5 because we wanted to maximize our support for different versions of Node and (more importantly) because we wanted to maximize our ability to load commands & templates at run-time.
+The CLI uses the [Simple Inheritance Model](#simple-inheritance-model) for ES5. We chose ES5 because we wanted to maximize our support for different versions of Node and (more importantly) because we wanted to maximize our ability to load commands & templates at run-time.
 
 ## Application Structure
 
