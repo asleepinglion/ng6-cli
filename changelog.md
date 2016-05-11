@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.13] - 2016-05-11
+
+### Changed
+- Fixed legacy code in server command for specifying port.
+
 ## [0.4.12] - 2016-05-07
 
 ### Added
