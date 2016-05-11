@@ -79,9 +79,9 @@ module.exports = Command.extend({
     };
 
     if( this.cli.isEnabled('port') ) {
-      browserSyncConfig.port = this.cli.config.get('port');
+      browserSyncConfig.port = this.cli.request.getOption('port');
     } else if( this.cli.isEnabled('p') ) {
-      browserSyncConfig.port = this.cli.config.get('p');
+      browserSyncConfig.port = this.cli.request.getOption('p');
     }
 
     /**
