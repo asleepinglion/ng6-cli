@@ -19,6 +19,8 @@ The **`ng6-cli`** provides a set of tools to automate and simplify the developme
 
 ## Installing
 
+**We highly recommend using the [Node Version Manager](https://github.com/creationix/nvm) to install Node 4+. This will not only give you the ability to switch node versions easily, but will help make sure that globally installed packages do not require using `sudo` to install.**
+
 You can use the npm to install the ng6-cli:
 
 ```
