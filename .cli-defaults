@@ -1,0 +1,8 @@
+{
+  "commands": {
+    "config": false,
+    "migrate": false,
+    "move": false,
+    "copy": false
+  }
+}
