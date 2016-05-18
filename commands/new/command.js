@@ -1,12 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
-
-var gulp = require('gulp');
-var rename = require('gulp-rename');
-var template = require('gulp-template');
-var columnify = require('columnify');
-
 var Command = require('../../lib/command');
 
 module.exports = Command.extend({
