@@ -5,6 +5,17 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.15] - 2016-05-17
+
+### Added
+- Added support for replacing specific strings in templates using a replace option and refactored the rename option to be more versatile.
+- Added Copy command which can be enabled via user or project level config.
+- Added .cli-defaults to hide certain commands behind "feature flags".
+
+### Changed
+- Refactored the config system to simplify and enable default configuration settings that come with the CLI.
+- Commands can now be enabled or disabled using user or project level configurations.
+
 ## [0.4.14] - 2016-05-11
 
 ### Changed
