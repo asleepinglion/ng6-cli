@@ -4,6 +4,8 @@ var chalk = require('chalk');
 var Command = require('../../lib/command');
 
 //todo: resolve issue with executing serve from somewhere other than project root.
+//todo: support custom server
+
 module.exports = Command.extend({
 
   init: function() {
