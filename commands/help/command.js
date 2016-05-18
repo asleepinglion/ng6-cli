@@ -48,7 +48,7 @@ module.exports = Command.extend({
 
     var self = this;
 
-    console.log(chalk.white("Usage:"), chalk.cyan(this.cli.bin), chalk.gray("[options]"), chalk.gray('[command]'), chalk.gray('[arg...]'));
+    console.log(chalk.white("Usage:"), chalk.cyan(this.cli.bin), chalk.gray("[options]"), chalk.gray('[command]'), chalk.gray('[args...]'));
     console.log("");
     console.log(chalk.white("Available Commands:"));
 
