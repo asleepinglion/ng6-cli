@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.16] - 2016-05-21
+
+### Fixed
+- Fixed missing dependency for gulp-batch-replace.
+
 ## [0.4.15] - 2016-05-17
 
 ### Added
