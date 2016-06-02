@@ -19,11 +19,21 @@ module.exports = Command.extend({
 
   checkExists: function(type, destination) {
     if( fs.existsSync(destination) && !this.cli.request.isEnabled('force')) {
-      console.log("");
-      console.log(chalk.white('A ' + chalk.cyan(type) + ' already exists at this path.'));
-      console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
-      console.log("");
-      process.exit(1);
+      if( type === 'app' ) {
+        if( fs.readdirSync(destination).length > 0 ) {
+          console.log("");
+          console.log(chalk.white('An ' + chalk.cyan(type) + ' can only be created in an empty directory.'));
+          console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
+          console.log("");
+          process.exit(1);
+        }
+      } else {
+        console.log("");
+        console.log(chalk.white('A ' + chalk.cyan(type) + ' already exists at this path.'));
+        console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
+        console.log("");
+        process.exit(1);
+      }
     }
   },
 

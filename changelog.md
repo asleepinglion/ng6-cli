@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.17] - 2016-06-01
+
+### Fixed
+- Fixed bug (#10) with creating a new app in current directory.
+
 ## [0.4.16] - 2016-05-21
 
 ### Fixed
