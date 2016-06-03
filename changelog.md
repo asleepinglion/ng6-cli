@@ -5,6 +5,12 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.19] - 2016-06-03
+
+### Added
+
+- Updated build & serve commands to support dev/prod configurations. If a dev/prod configuration exists it will be deep-merged on top of the root webpack configuration when running the serve or build commands.
+
 ## [0.4.18] - 2016-06-03
 
 ### Added

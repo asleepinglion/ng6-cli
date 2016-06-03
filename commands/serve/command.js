@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
+var merge = require('deepmerge');
 var Command = require('../../lib/command');
 
 //todo: resolve issue with executing serve from somewhere other than project root.
@@ -23,46 +24,53 @@ module.exports = Command.extend({
     var projectRoot = this.cli.reflect.projectRoot();
 
     if( !projectRoot || projectRoot != process.cwd() ) {
+      console.log("");
       console.log(chalk.white("You must be in the project root in order to execute serve!"));
       console.log("");
       process.exit(1);
     }
 
-    /**
-     * Require Browsersync along with webpack and middleware for it
-     */
-    var browserSync          = require('browser-sync').create();
-    var webpack              = require('webpack');
+    var webpackConfig = false;
+
+    var webpackRoot = path.resolve(projectRoot + '/webpack.config.js');
+    var webpackDev = path.resolve(projectRoot + '/webpack.dev.config.js');
+
+    if( fs.existsSync(webpackRoot) ) {
+      webpackConfig = require(webpackRoot);
+    }
+
+    if( fs.existsSync(webpackDev) ) {
+
+      if( !webpackConfig ) {
+        webpackConfig = {};
+      }
+
+      webpackConfig = merge(webpackConfig, require(webpackDev));
+    }
+
+    if( !webpackConfig ) {
+      console.log("");
+      console.log(chalk.white("Could not find a webpack configuration in the current directory!"));
+      console.log("");
+      process.exit(1);
+    }
+
+    //require browser sync along with webpack and middleware for it
+    var browserSync = require('browser-sync').create();
+    var webpack = require('webpack');
     var webpackDevMiddleware = require('webpack-dev-middleware');
 
+    //create bundler from webpack config
+    var bundler = webpack(webpackConfig);
 
-
-    /**
-     * Require ./webpack.config.js and make a bundler from it
-     */
-    var webpackConfig = require(path.resolve(projectRoot + '/webpack.config'));
-    var bundler       = webpack(webpackConfig);
-
-    /**
-     * Reload all devices when bundle is complete
-     * or send a fullscreen error message to the browser instead
-     */
+    //reload on all devices when build complete
     bundler.plugin('done', function (stats) {
-
-      /*
-      if (stats.hasErrors() || stats.hasWarnings()) {
-        return browserSync.sockets.emit('fullscreen:message', {
-          title: "Webpack Error:",
-          body:  stripAnsi(stats.toString()),
-          timeout: 100000
-        });
-      }
-      */
-
       browserSync.reload();
     });
 
+    //setup browser sync configuration
     var browserSyncConfig = {
+
       server: 'app',
       open: true,
       logFileChanges: false,
@@ -70,25 +78,27 @@ module.exports = Command.extend({
       middleware: [
         webpackDevMiddleware(bundler, {
           publicPath: webpackConfig.output.publicPath,
-          stats: {colors: true}
+          stats: {
+            colors: true
+          }
         })
       ],
-      //plugins: ['bs-fullscreen-message'],
+
       files: [
         'app/css/*.css',
         'app/*.html'
       ]
+
     };
 
+    //enable port customization
     if( this.cli.isEnabled('port') ) {
       browserSyncConfig.port = this.cli.request.getOption('port');
     } else if( this.cli.isEnabled('p') ) {
       browserSyncConfig.port = this.cli.request.getOption('p');
     }
 
-    /**
-     * Run Browsersync and use middleware for Hot Module Replacement
-     */
+    //initialize browser sync
     browserSync.init(browserSyncConfig);
 
 
