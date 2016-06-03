@@ -49,11 +49,13 @@ module.exports = Template.extend({
 
             if( code === 0 ) {
               console.log("");
+              console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
               console.log(chalk.white('Simply run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
               console.log("");
             } else {
 
               console.log("");
+              console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
               console.log(chalk.white('Make sure to run ' + chalk.cyan('ionic state restore') + ' to install dependencies!'));
               console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
               console.log("");

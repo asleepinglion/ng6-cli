@@ -8,7 +8,7 @@ module.exports = Template.extend({
 
   init: function() {    
     this._super.apply(this, arguments);    
-    this.description = 'An Angular application based on Angular 1.5, ES6, and Webpack.'
+    this.description = 'An Angular app based on Angular 1.5, ES6, and Webpack.'
   },
   
   done: function(name, destination) {
@@ -37,6 +37,7 @@ module.exports = Template.extend({
         console.log(output);
 
         console.log("");
+        console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
         console.log(chalk.white('Simply run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally!'));
         console.log("");
 

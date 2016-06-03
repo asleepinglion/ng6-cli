@@ -15,20 +15,6 @@ module.exports = {
 
   },
 
-  /*
-   IMPORTANT: If you have sourcemaps enabled with npm linked repositories
-   the build will break with the current version of ng-annotate-loader.
-
-   I have submitted a pull request for them to upgrade their dependency on
-   the source-map package to the latest version which fixes the problem.
-   You can use my version for now by replacing the version of ng-annotate-loader
-   in your package.json with:
-
-   git+ssh://git@github.com:asleepinglion/ng-annotate-loader.git
-
-   You could also also use shrinkwrapping to make ng-annotate-loader use the
-   latest version of source-maps if you prefer.
-   */
   devtool: 'eval-source-map',
 
   //setup the output path
@@ -63,8 +49,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        //loader: 'style!css!sass'
-        loader: ExtractTextPlugin.extract('style', 'css!sass!sass-resources', { publicPath: '../'})
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass!sass-resources', { publicPath: '../'})
       },
       {
         test: /\.(jpg|jpeg|gif|png)$/,

@@ -13,8 +13,6 @@
     "file-loader": "0.8.5",
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.9.0",
-    "less": "2.6.1",
-    "less-loader": "2.2.2",
     "ng-annotate-loader": "0.1.0",
     "node-sass": "3.4.2",
     "raw-loader": "0.5.1",
@@ -29,8 +27,6 @@
     "angular": "1.5.0",
     "angular-animate": "1.5.0",
     "angular-ui-router": "0.2.18",
-    "bootstrap-sass": "3.3.6",
-    "font-awesome": "4.5.0",
     "oclazyload": "1.0.9"
   }
 }

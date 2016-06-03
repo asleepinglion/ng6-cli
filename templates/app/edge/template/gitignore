@@ -1,0 +1,4 @@
+node_modules
+shared_modules
+.idea
+.DS_Store

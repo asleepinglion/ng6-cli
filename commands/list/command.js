@@ -52,14 +52,19 @@ module.exports = Command.extend({
 
       console.log(chalk.bold.white(type));
 
-      Object.keys(self.cli.templates.byType(type)).map(function(template) {
+      Object.keys(self.cli.templates.byType(type)).map(function(templateName) {
 
-        var template = self.cli.templates.get(type, template);
+        var template = self.cli.templates.get(type, templateName);
+        var templateDesc = chalk.gray(template.description);
+
+        if( templateName !== template.name ) {
+          templateDesc = chalk.gray("An alias for the ") + chalk.cyan(template.name) + chalk.gray(" template.");
+        }
 
         templates.push({
           spacer: "",
-          template: ":" + chalk.cyan(template.name),
-          description: chalk.gray(template.description)
+          template: ":" + chalk.cyan(templateName),
+          description: templateDesc
         });
         
       });

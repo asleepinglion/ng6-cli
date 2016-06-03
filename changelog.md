@@ -5,6 +5,16 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.18] - 2016-06-03
+
+### Added
+- Added support for template versions and template aliases. This makes it easy to change the default templates used for a type. It also allows us to slowly roll out new versions and test with users before making them official -- or to support old and alternate versions.
+
+### Changed
+- The default/mobile templates are now aliases to codenamed templates.
+- The .cli-defaults file specifies default template aliases/versions.
+- The edge template is the current default with CSS Modules enabled.
+
 ## [0.4.17] - 2016-06-01
 
 ### Fixed

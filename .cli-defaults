@@ -4,5 +4,16 @@
     "migrate": false,
     "move": false,
     "copy": false
+  },
+
+  "templates": {
+    "app": {
+      "default": {
+        "template": "edge"
+      },
+      "mobile": {
+        "template": "ionic"
+      }
+    }
   }
 }
