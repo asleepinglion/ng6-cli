@@ -5,6 +5,12 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.20] - 2016-06-06
+
+### Fixed
+
+- Fixed name given to new project when created within the current directory.
+
 ## [0.4.19] - 2016-06-03
 
 ### Added

@@ -37,7 +37,9 @@ module.exports = Template.extend({
         console.log(output);
 
         console.log("");
-        console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
+        if( destination !== process.cwd() ) {
+          console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
+        }
         console.log(chalk.white('Simply run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally!'));
         console.log("");
 
@@ -46,7 +48,9 @@ module.exports = Template.extend({
     } else {
 
       console.log("");
-      console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
+      if( destination !== process.cwd() ) {
+        console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
+      }
       console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install') + ' to install dependencies!'));
       console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
       console.log("");

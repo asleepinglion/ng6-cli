@@ -62,6 +62,11 @@ module.exports = Command.extend({
       if( type === 'app' ) {
 
         destination = this.cli.reflect.getNewAppPath(name);
+
+        if( name === '.' ) {
+          name = path.basename(destination);
+        }
+
         this.checkExists(type, destination);
         this.cli.generate.createApp(template, name, destination);
 
