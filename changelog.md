@@ -5,6 +5,13 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.21] - 2016-06-15
+
+### Fixed
+
+- Fixed issues caused by merging prod/dev webpack configurations onto root configuration. Now dev/prod import and modify the root config themselves.
+- Path names are now forced to be kebab-case as intended.
+
 ## [0.4.20] - 2016-06-06
 
 ### Fixed
