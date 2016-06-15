@@ -2,7 +2,6 @@ var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
 var webpack = require('webpack');
-var merge = require('deepmerge');
 var Command = require('../../lib/command');
 
 module.exports = Command.extend({
@@ -32,16 +31,10 @@ module.exports = Command.extend({
     var webpackRoot = path.resolve(projectRoot + '/webpack.config.js');
     var webpackProd = path.resolve(projectRoot + '/webpack.prod.config.js');
 
-    if( fs.existsSync(webpackRoot) ) {
-      webpackConfig = require(webpackRoot);
-    }
-
     if( fs.existsSync(webpackProd) ) {
-      if( !webpackConfig ) {
-        webpackConfig = {};
-      }
-      
-      webpackConfig = merge(webpackConfig, require(webpackProd));
+      webpackConfig = require(webpackProd);
+    } else if( fs.existsSync(webpackRoot) ) {
+      webpackConfig = require(webpackRoot);
     }
 
     if( !webpackConfig ) {

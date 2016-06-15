@@ -1,6 +1,6 @@
 {
   "name": "ng6-cli",
-  "version": "0.4.20",
+  "version": "0.4.21",
   "description": "Tooling to build applications with Angular 1.5, ES6, and Webpack.",
   "main": "index.js",
   "bin": {
@@ -46,7 +46,6 @@
     "lodash": "4.8.2",
     "marked": "0.3.5",
     "marked-terminal": "1.6.1",
-    "merge": "1.2.0",
     "ouro-base": "0.9.0",
     "shelljs": "0.6.0",
     "strip-ansi": "3.0.1",

@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
-var merge = require('deepmerge');
 var Command = require('../../lib/command');
 
 //todo: resolve issue with executing serve from somewhere other than project root.
@@ -35,17 +34,10 @@ module.exports = Command.extend({
     var webpackRoot = path.resolve(projectRoot + '/webpack.config.js');
     var webpackDev = path.resolve(projectRoot + '/webpack.dev.config.js');
 
-    if( fs.existsSync(webpackRoot) ) {
-      webpackConfig = require(webpackRoot);
-    }
-
     if( fs.existsSync(webpackDev) ) {
-
-      if( !webpackConfig ) {
-        webpackConfig = {};
-      }
-
-      webpackConfig = merge(webpackConfig, require(webpackDev));
+      webpackConfig = require(webpackDev);
+    } else if( fs.existsSync(webpackRoot) ) {
+      webpackConfig = require(webpackRoot);
     }
 
     if( !webpackConfig ) {
@@ -100,8 +92,7 @@ module.exports = Command.extend({
 
     //initialize browser sync
     browserSync.init(browserSyncConfig);
-
-
+    
   }
   
 });
