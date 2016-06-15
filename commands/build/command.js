@@ -3,6 +3,8 @@ var path = require('path');
 var chalk = require('chalk');
 var webpack = require('webpack');
 var Command = require('../../lib/command');
+var WebpackValidator = require('../../lib/webpack-validator');
+var webpackValidator = new WebpackValidator();
 
 module.exports = Command.extend({
 
@@ -37,9 +39,9 @@ module.exports = Command.extend({
       webpackConfig = require(webpackRoot);
     }
 
-    if( !webpackConfig ) {
+    if( !webpackValidator.check(webpackConfig) ) {
       console.log("");
-      console.log(chalk.white("Could not find a webpack configuration in the current directory!"));
+      console.log(chalk.white("The webpack configuration does not appear to be valid!"));
       console.log("");
       process.exit(1);
     }
@@ -53,8 +55,6 @@ module.exports = Command.extend({
       console.log("");
       console.log(stats.toString({colors: true}));
     });
-
-
 
   }
 });

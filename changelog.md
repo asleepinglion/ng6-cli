@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.22] - 2016-06-15
+
+### Changed
+- Added webpack validator library to do basic validation of the webpack configuration before build & serve.
+
 ## [0.4.21] - 2016-06-15
 
 ### Fixed

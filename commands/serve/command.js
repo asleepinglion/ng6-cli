@@ -2,6 +2,8 @@ var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
 var Command = require('../../lib/command');
+var WebpackValidator = require('../../lib/webpack-validator');
+var webpackValidator = new WebpackValidator();
 
 //todo: resolve issue with executing serve from somewhere other than project root.
 //todo: support custom server
@@ -40,9 +42,9 @@ module.exports = Command.extend({
       webpackConfig = require(webpackRoot);
     }
 
-    if( !webpackConfig ) {
+    if( !webpackValidator.check(webpackConfig) ) {
       console.log("");
-      console.log(chalk.white("Could not find a webpack configuration in the current directory!"));
+      console.log(chalk.white("The webpack configuration does not appear to be valid!"));
       console.log("");
       process.exit(1);
     }
@@ -92,7 +94,7 @@ module.exports = Command.extend({
 
     //initialize browser sync
     browserSync.init(browserSyncConfig);
-    
+
   }
   
 });
