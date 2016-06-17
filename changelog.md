@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.23] - 2016-06-16
+
+### Changed
+- Updated edge templates to use specific suffix (.module.scss) for enabling css modules on sass files. This means you can have both global and local css in your application, and you can migrate to encapsulated css approach one component at a time.
+
 ## [0.4.22] - 2016-06-15
 
 ### Changed

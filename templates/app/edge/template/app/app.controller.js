@@ -1,4 +1,4 @@
-import styles from './<%= name %>.module.scss';
+import styles from './app.module.scss';
 
 export default class {
 
