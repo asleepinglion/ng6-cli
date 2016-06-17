@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.24] - 2016-06-17
+
+### Fixed
+- Fixed bug with use of camelCase names for files in templates, should be kebab case.
+
 ## [0.4.23] - 2016-06-16
 
 ### Changed
