@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.4.25] - 2016-07-01
+
+### Changed
+- The ng6-cli is now an official project of Ultimate Software's open source initiatives using the Apache 2 license.
+
 ## [0.4.24] - 2016-06-17
 
 ### Fixed
