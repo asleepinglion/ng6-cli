@@ -29,7 +29,7 @@ module.exports = {
 
   //setup the output path
   output: {
-    path: path.resolve(__dirname, 'www'),
+    path: path.resolve(__dirname, 'build'),
     filename: 'app.bundle.js'
   },
 

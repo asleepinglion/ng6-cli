@@ -1,0 +1,2 @@
+<% if( cli.config.options.cssModules ) { %>.default<% } else { %>.<%= name %><% } %> {
+}

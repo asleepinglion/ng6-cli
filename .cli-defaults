@@ -6,14 +6,19 @@
     "copy": false
   },
 
+  "options": {
+    "cssModules": true
+  },
+
   "templates": {
     "app": {
       "default": {
-        "template": "edge"
+        "template": "web"
       },
       "mobile": {
         "template": "ionic"
       }
     }
   }
+
 }

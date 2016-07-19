@@ -6,9 +6,28 @@ var Spinner = require('cli-spinner').Spinner;
 
 module.exports = Template.extend({
 
-  init: function() {
+  init: function() {    
     this._super.apply(this, arguments);
-    this.description = 'An Ionic application based on Angular 1.5, ES6, and Webpack.'
+    this.description = 'An Ionic application based on Angular 1.5, ES6, and Webpack.';
+  },
+  
+  config: function() {
+
+    var config = {
+      rename: {
+        '.': {
+          'gitignore': '.gitignore'
+        },
+        'app': {}
+      }
+    };
+
+    if( !this.cli.config.get('options').cssModules ) {
+      config.rename.app['app.module.scss'] = { basename: 'app.component' };
+    }
+
+    return config;
+    
   },
 
   done: function(name, destination) {
