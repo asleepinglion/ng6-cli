@@ -8,7 +8,7 @@ module.exports = Template.extend({
 
   init: function() {    
     this._super.apply(this, arguments);    
-    this.description = 'The basic template Plus latest features & architectural patterns.';
+    this.description = 'An Angular application based on Angular 1.5, ES6, and Webpack.';
   },
   
   config: function() {
