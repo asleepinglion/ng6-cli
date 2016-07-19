@@ -5,6 +5,15 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.1] - 2016-07-18
+
+### Added
+- Added support for template options, paving the way to converge the multiple named templates.
+- Added additional checks on serve to make sure npm install has been run already.
+
+### Changed
+- Converged multiple named templates into single templates with options, e.g. a simple directive option instead of a complete copy of the component template.
+
 ## [0.4.25] - 2016-07-01
 
 ### Changed
