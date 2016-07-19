@@ -16,12 +16,8 @@ angular.module('app', [
 
 ])
 
-.config(function($urlRouterProvider, $locationProvider) {
+.config(function($urlRouterProvider) {
   'ngInject';
-
-  // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
-  // #how-to-configure-your-server-to-work-with-html5mode
-  //$locationProvider.html5Mode(true);
 
   //setup default route
   $urlRouterProvider.otherwise('/');
