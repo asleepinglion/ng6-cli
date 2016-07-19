@@ -5,7 +5,7 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
-## [0.5.1] - 2016-07-18
+## [0.5.1] - 2016-07-19
 
 ### Added
 - Added support for template options, paving the way to converge the multiple named templates.
@@ -13,6 +13,7 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ### Changed
 - Converged multiple named templates into single templates with options, e.g. a simple directive option instead of a complete copy of the component template.
+- Updated dependency versions in template package.jsons.
 
 ## [0.4.25] - 2016-07-01
 
