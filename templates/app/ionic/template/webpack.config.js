@@ -94,6 +94,10 @@ module.exports = {
       {
         test: /\.html$/,
         loader: 'raw'
+      },
+      {
+        test: /\.json$/,
+        loader: 'raw'
       }
     ]
   },
@@ -110,6 +114,8 @@ module.exports = {
    are installed via npm link.
    */
   resolve: {
+    root: [path.resolve('.'), path.resolve(__dirname, 'node_modules')],
+    extensions: ['', '.js'],
     fallback: path.join(__dirname, "node_modules")
   },
 
