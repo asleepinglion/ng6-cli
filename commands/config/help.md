@@ -1,3 +1,3 @@
 *config*
 
-Usage: **ng6 config** *[options]*
+Usage: **<%= cli.bin %> config** *[options]*

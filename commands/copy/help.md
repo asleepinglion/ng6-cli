@@ -1,3 +1,3 @@
 *copy*
 
-Usage: **ng6 copy** *[options]*
+Usage: **<%= cli.bin %> copy** *[options]*

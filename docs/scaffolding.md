@@ -8,7 +8,7 @@ A new project will be created with the basic application configuration. This inc
 ##General Usage:
 
 ```
-ng6 new [type:template] [component-name]
+ng6 new [type:template] [component-name] [options]
 ```
 
 ##Creating New Applications:
@@ -34,7 +34,7 @@ To create a new view component (a component which contains a ui-router state):
 > You will probably need to modify the ui-router state's url as it will default to the name of the component.
 
 ```
-ng6 new component:view [component-name]
+ng6 new component [component-name] -v
 ```
 
 To create a regular component:
@@ -46,7 +46,7 @@ ng6 new component [component-name]
 To create a component with more fine grained control, you can use the directive type:
 
 ```
-ng6 new component:directive [component-name]
+ng6 new component [component-name] -d
 ```
 
 To see a list of available templates for generation organized by type:

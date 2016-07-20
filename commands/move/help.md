@@ -1,3 +1,3 @@
 *move*
 
-Usage: **ng6 move** *[options]*
+Usage: **<%= cli.bin %> move** *[options]*

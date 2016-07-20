@@ -6,8 +6,7 @@ var TerminalRenderer = require('marked-terminal');
 var columnify = require('columnify');
 var Command = require('../../lib/command');
 var _ = require('lodash');
-
-//todo: use dynamic bin name in help information -- support lodash/handlebar templates?
+var ejs = require('ejs');
 
 module.exports = Command.extend({
 
@@ -37,7 +36,16 @@ module.exports = Command.extend({
 
     //display specific command help if option specified
     if( name && this.cli.commands.exists(name) && fs.existsSync(this.cli.commands.get(name).cmdPath + '/help.md') ) {
-      console.log(marked(fs.readFileSync(this.cli.commands.get(name).cmdPath  + '/help.md').toString()));
+
+      var template = ejs.compile(fs.readFileSync(this.cli.commands.get(name).cmdPath  + '/help.md').toString());
+      var context = {
+        cli: {
+          bin: this.cli.bin,
+          config: this.cli.config.config,
+          request: this.cli.request.request
+        }
+      };
+      console.log(marked(template(context)));
     } else {
       this.displayHelp();
     }
