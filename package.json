@@ -31,6 +31,7 @@
     "columnify": "1.5.4",
     "deepmerge": "0.2.10",
     "del": "2.2.0",
+    "ejs": "2.4.2",
     "gulp": "3.9.1",
     "gulp-add-src": "0.2.0",
     "gulp-batch-replace": "0.0.0",
