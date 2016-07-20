@@ -1,6 +1,6 @@
 {
   "name": "ng6-cli",
-  "version": "0.4.25",
+  "version": "0.5.1",
   "description": "Tooling to build applications with Angular 1.5, ES6, and Webpack.",
   "main": "index.js",
   "bin": {
@@ -31,9 +31,11 @@
     "columnify": "1.5.4",
     "deepmerge": "0.2.10",
     "del": "2.2.0",
+    "ejs": "2.4.2",
     "gulp": "3.9.1",
     "gulp-add-src": "0.2.0",
     "gulp-batch-replace": "0.0.0",
+    "gulp-ejs": "2.1.2",
     "gulp-if": "2.0.0",
     "gulp-ignore": "2.0.1",
     "gulp-install": "0.6.0",

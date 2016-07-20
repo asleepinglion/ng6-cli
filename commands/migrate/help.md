@@ -1,3 +1,3 @@
 *migrate*
 
-Usage: **ng6 migrate** *[options]*
+Usage: **<%= cli.bin %> migrate** *[options]*

@@ -1,0 +1,6 @@
+<% if( cli.config.options.cssModules ) { %>
+<div ng-class="[$ctrl.styles.default]">
+<% } else { %>
+<div class="<%= name %>">
+<% } %>
+</div>

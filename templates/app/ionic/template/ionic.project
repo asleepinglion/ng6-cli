@@ -1,4 +1,4 @@
 {
-  "name": "<%= appName %>",
+  "name": "<%= name %>",
   "app_id": ""
 }

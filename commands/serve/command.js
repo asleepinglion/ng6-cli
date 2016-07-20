@@ -6,7 +6,7 @@ var WebpackValidator = require('../../lib/webpack-validator');
 var webpackValidator = new WebpackValidator();
 
 //todo: resolve issue with executing serve from somewhere other than project root.
-//todo: support custom server
+//todo: support custom server?
 
 module.exports = Command.extend({
 
@@ -19,7 +19,7 @@ module.exports = Command.extend({
     this.order = 1;
   },
 
-  run: function() {
+  checkProject: function() {
 
     //resolve project root
     var projectRoot = this.cli.reflect.projectRoot();
@@ -30,6 +30,33 @@ module.exports = Command.extend({
       console.log("");
       process.exit(1);
     }
+
+    var pkg = require(path.resolve('package.json'));
+    var nodeModules = fs.readdirSync(path.resolve('node_modules'));
+    var webpackInstalled = fs.existsSync(path.resolve('node_modules/webpack'));
+    var bsInstalled = fs.existsSync(path.resolve('node_modules/browser-sync'));
+
+    if( nodeModules.length > 0 && nodeModules.length < pkg.dependencies.length ) {
+      console.log("");
+      console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
+      console.log("");
+      process.exit(1);
+    }
+
+    if( !webpackInstalled ) {
+      console.log("");
+      console.log(chalk.white('Webpack does not appear to be installed. Have you run ' + chalk.cyan('npm install') + '?'));
+      console.log("");
+      process.exit(1);
+    }
+    
+  },
+
+  run: function() {
+
+    this.checkProject();
+
+    var projectRoot = this.cli.reflect.projectRoot();
 
     var webpackConfig = false;
 
