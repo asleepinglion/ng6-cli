@@ -10,6 +10,7 @@ the following changelog guidelines: http://keepachangelog.com/
 ### Added
 - Added support for template options, paving the way to converge the multiple named templates.
 - Added additional checks on serve to make sure npm install has been run already.
+- Added support for EJS templates to command help -- with configuration & request information as the context.
 
 ### Changed
 - Converged multiple named templates into single templates with options, e.g. a simple directive option instead of a complete copy of the component template.
