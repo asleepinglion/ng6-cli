@@ -19,14 +19,11 @@ module.exports = Template.extend({
       }
     };
 
-    var configOptions = this.cli.config.get('options');
-    var requestOptions = this.cli.request.request.options;
-
-    if( !configOptions.cssModules ) {
+    if( !this.cli.getOption('cssModules') ) {
       config.rename['.']['name.module.scss'] = { basename: 'name' };
     }
 
-    if( requestOptions.directive || requestOptions.d ) {
+    if( this.cli.getOption('directive') || this.cli.getOption('d') ) {
       config.rename['.']['name.component.js'] = { basename: 'name.directive' };
     }
 

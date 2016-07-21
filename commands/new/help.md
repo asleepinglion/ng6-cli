@@ -10,8 +10,8 @@ Options:
 Component Options:
 
   *-v,--view*           *....* Create a view component (a screen routed by the url).
-  *-d,--directive*      *....* Directive based component (only works with components).
-  *-c, --cssModules*    *....* Enable or disable css modules (enabled by default).
+  *-d,--directive*      *....* Directive based component instead of angular.component.
+  *--cssModules*        *....* Enable or disable css modules (<% if( cli.config.options.cssModules ) { %>enabled<% } else { %>disabled<% } %> by default).
 
 To see a list of available templates you can execute the
 following command: **<%= cli.bin %> list templates**

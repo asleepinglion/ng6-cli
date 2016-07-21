@@ -22,7 +22,7 @@ module.exports = Template.extend({
       }
     };
 
-    if( !this.cli.config.get('options').cssModules ) {
+    if( !this.cli.getOption('cssModules') ) {
       config.rename.app['app.module.scss'] = { basename: 'app.component' };
     }
 

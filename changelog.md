@@ -5,6 +5,12 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.2] - 2016-07-19
+
+### Changed
+- cssModules can now be enabled when creating new components, regardless of project or cli default.
+- Request options defaults can be set at project or cli via .ng6-cli (or custom) file.
+
 ## [0.5.1] - 2016-07-19
 
 ### Added

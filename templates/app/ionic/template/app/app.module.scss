@@ -1,2 +1,2 @@
-<% if( cli.config.options.cssModules ) { %>.default<% } else { %>.app<% } %> {
+<% if( cli.options.cssModules ) { %>.default<% } else { %>.app<% } %> {
 }
