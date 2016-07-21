@@ -5,7 +5,14 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
-## [0.5.2] - 2016-07-19
+## [0.5.3] - 2016-07-20
+
+### Fixed
+- Killed debug console log message on generation.
+
+### Changed
+
+## [0.5.2] - 2016-07-20
 
 ### Changed
 - cssModules can now be enabled when creating new components, regardless of project or cli default.
