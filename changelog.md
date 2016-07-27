@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.4] - 2016-07-27
+
+### Fixed
+- Fixed bug in reflect.getSubModuleName affecting sub component module file names.
+
 ## [0.5.3] - 2016-07-20
 
 ### Fixed
