@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.5] - 2016-07-27
+
+### Fixed
+- Temporarily fixed a bug with config options which was affecting cssModule setting on new component creation.
+
 ## [0.5.4] - 2016-07-27
 
 ### Fixed
