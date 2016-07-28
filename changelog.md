@@ -5,6 +5,11 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.6] - 2016-07-28
+
+### Fixed
+- Added missing conditional around a component.module's import for either component or directive with --directive option.
+
 ## [0.5.5] - 2016-07-27
 
 ### Fixed

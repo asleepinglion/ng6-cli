@@ -1,4 +1,4 @@
-import <%=name_camel%>Component from './<%= name %>.component';
+import <%=name_camel%>Component from './<%= name %>.<% if( cli.request.options.directive || cli.request.options.d ) { %>directive<% } else { %>component<% } %>';
 
 var module = angular.module('<%= moduleName %>', []);
 
