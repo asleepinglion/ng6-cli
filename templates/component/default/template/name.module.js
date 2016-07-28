@@ -2,7 +2,7 @@ import <%=name_camel%>Component from './<%= name %>.<% if( cli.request.options.d
 
 var module = angular.module('<%= moduleName %>', []);
 
-module.component('<%= name_camel %>', <%=name_camel%>Component);
+module.<% if( cli.request.options.directive || cli.request.options.d ) { %>directive<% } else { %>component<% } %>('<%= name_camel %>', <%=name_camel%>Component);
 
 <% if( cli.request.options.view || cli.request.options.v ) { %>
 //configure component states
