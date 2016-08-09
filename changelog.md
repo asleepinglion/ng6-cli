@@ -5,6 +5,9 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.8] - 2016-08-09
+- Updated the mobile app template to reference the latest 1.x verison of ionic, 1.3.1. `ionic-sdk` npm package was abandoned and all new versions are now u nder the `ionic-angular` npm package. See: https://github.com/driftyco/ionic/issues/6578
+
 ## [0.5.7] - 2016-07-28
 - Added another missing conditional in the template for the --directive option.
 
