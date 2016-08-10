@@ -3,7 +3,7 @@ console.log('application loading...');
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import animate from 'angular-animate';
-import 'ionic-sdk/release/js/ionic.bundle';
+import 'ionic-angular/release/js/ionic.bundle';
 import AppStyles from '../styles/app.scss';
 import AppComponent from './app.component';
 
