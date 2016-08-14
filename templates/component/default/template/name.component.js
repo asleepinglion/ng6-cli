@@ -1,6 +1,5 @@
 import template from './<%= name %>.html';
 import controller from './<%= name %>.controller';
-
 <% if( cli.request.options.directive || cli.request.options.d ) { %>
 export default function() {
   return {

@@ -1,6 +1,4 @@
-<% if( cli.options.cssModules ) { %>
-<div ng-class="[$ctrl.styles.default]">
-<% } else { %>
+<% if( cli.options.cssModules ) { %><div ng-class="[$ctrl.styles.default]"><% } else { %>
 <div class="app"><% } %>
   <!-- Place all UI elements intended to be present across all routes in this file. -->
   <div ui-view></div>
