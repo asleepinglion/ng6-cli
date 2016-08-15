@@ -5,6 +5,9 @@ the following changelog guidelines: http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [0.5.10] - 2016-08-14
+- Added missing ngInject annotation to the provider template's constructor.
+
 ## [0.5.9] - 2016-08-14
 - Removed extra spaces & line breaks in the templates created from switching to EJS.
 - Temporarily repaired the template template so that it's not broken.
