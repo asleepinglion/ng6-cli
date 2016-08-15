@@ -1,6 +1,2 @@
-<% if( cli.options.cssModules ) { %>
-<div ng-class="[$ctrl.styles.default]">
-<% } else { %>
-<div class="<%= name %>">
-<% } %>
+<% if( cli.options.cssModules ) { %><div ng-class="[$ctrl.styles.default]"><% } else { %><div class="<%= name %>"><% } %>
 </div>
