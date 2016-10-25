@@ -1,7 +1,4 @@
-var fs = require('fs');
-var path = require('path');
 var Command = require('../../lib/command');
-var chalk = require('chalk');
 var inquirer = require('inquirer');
 
 module.exports = Command.extend({
@@ -17,7 +14,7 @@ module.exports = Command.extend({
     //todo: read current config
 
     this.loadQuestions();
-    
+
   },
 
   loadQuestions: function() {
