@@ -1,3 +1,3 @@
-var module = angular.module('<%= moduleName %>', []);
+const module = angular.module('<%= moduleName %>', []);
 
 export default module.name;

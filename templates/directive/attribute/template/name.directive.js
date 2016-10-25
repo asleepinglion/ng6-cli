@@ -5,4 +5,4 @@ export default function() {
     controller,
     restrict: 'A'
   };
-};
+}
