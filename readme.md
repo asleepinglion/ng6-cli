@@ -3,23 +3,23 @@
 #### Extensible Development Tools for the Component-Driven Development of Large-Scale Angular Apps built with ES6.
 
 
-> These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us! 
+> These tools and this documentation are currently under active development and will continue to be improved and refined. Please let me know if you're interested in collaborating with us!
 >
 > **All submissions (issues, feature requests, pull requests, or otherwise) are welcome and very much appreciated!**
 
-The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**, 
+The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**,
 **`components`**, **`directives`**, **`services`**, **`filters`**, and **`providers`**.
 
 
 ![Getting Started](https://github.com/asleepinglion/ng6-cli/blob/master/docs/getting-started.gif?raw=true "Getting Started...")
 
 
-**Disclaimer:** It's important to make sure you initialize your project with **`git`** and vet all changes made by the **`ng6-cli`** before you commit. Its critical that you understand all changes you are making to the codebase of the project you are working on. 
+**Disclaimer:** It's important to make sure you initialize your project with **`git`** and vet all changes made by the **`ng6-cli`** before you commit. Its critical that you understand all changes you are making to the codebase of the project you are working on.
 
 
 ## Installing
 
-**We highly recommend using the [Node Version Manager](https://github.com/creationix/nvm) to install Node 4+. This will not only give you the ability to switch node versions easily, but will help make sure that globally installed packages do not require using `sudo` to install.**
+**We highly recommend using the [Node Version Manager](https://github.com/creationix/nvm) to install Node 6+. This will not only give you the ability to switch node versions easily, but will help make sure that globally installed packages do not require using `sudo` to install.**
 
 You can use the npm to install the ng6-cli:
 
@@ -63,9 +63,9 @@ ng6 new app:mobile my-app
 
 #### Focus On The Experience!
 
-The **`ng6-cli`** doesn't just create files, it will also intelligently help you refactor existing code. For example, when scaffolding new artifacts it will automatically create the appropriate structure, module files, and necessary linking (i.e. import statements, angular definitions, and dependencies). This allows you to move quickly and maintain your focus where it should be, developing amazing user experiences! 
+The **`ng6-cli`** doesn't just create files, it will also intelligently help you refactor existing code. For example, when scaffolding new artifacts it will automatically create the appropriate structure, module files, and necessary linking (i.e. import statements, angular definitions, and dependencies). This allows you to move quickly and maintain your focus where it should be, developing amazing user experiences!
 
-This is achieved by combining a consistent & predictable architecture with the power of a fast static analysis library for parsing the Abstract Syntax Tree of the JavaScript codebase ([acorn.js](https://github.com/ternjs/acorn)). Several declarative libraries have also been created to assist in template generation, code reflection, and refactorization. 
+This is achieved by combining a consistent & predictable architecture with the power of a fast static analysis library for parsing the Abstract Syntax Tree of the JavaScript codebase ([acorn.js](https://github.com/ternjs/acorn)). Several declarative libraries have also been created to assist in template generation, code reflection, and refactorization.
 
 #### Scalable Architecture
 
@@ -75,7 +75,7 @@ By isolating application components from the host application and build system, 
 
 #### Make It Your Own!
 
-Even more, the **`ng6-cli`** is easy to extend. You can extend the entire CLI to create your own command line interface customized for your project, team, or enterprise. 
+Even more, the **`ng6-cli`** is easy to extend. You can extend the entire CLI to create your own command line interface customized for your project, team, or enterprise.
 
 > **Hint:** Use it to power your next style guide!
 
@@ -95,7 +95,7 @@ As mentioned, [acorn.js](https://github.com/ternjs/acorn) is used to parse the a
 
 > The **`ng6 config`** will be available shortly to make it easier to configure the CLI options for your user or project.
 
-You can configure **`ng6`** options at the user or project levels. This is done by creating a `.ng6-cli` file in either your home directory or the project directory. User level options will override project level settings. 
+You can configure **`ng6`** options at the user or project levels. This is done by creating a `.ng6-cli` file in either your home directory or the project directory. User level options will override project level settings.
 
 > At the moment there are no exposed options, so this feature isn't very helpful. But in the future this will allow you to enable or disable features as well as provide configuration settings for things like, publishing and consuming modules.
 
@@ -110,7 +110,7 @@ To see a list of all commands, those provided, as well as custom commands, simpl
 ```
 ng6
 ```
- 
+
 - **`ng6 serve`** Watch, build, & serve the application in a local environment.
 - **`ng6 build`** Build the project with webpack.
 - **`ng6 list`** List available artifacts, such as templates & components.
@@ -119,7 +119,7 @@ ng6
 - **`ng6 move`** Move an artifact.
 - **`ng6 help`** Display help information.
 
-You can also create your own [Custom Commands](https://github.com/asleepinglion/ng6-cli/blob/master/docs/commands.md) for your project, team, or enterprise. 
+You can also create your own [Custom Commands](https://github.com/asleepinglion/ng6-cli/blob/master/docs/commands.md) for your project, team, or enterprise.
 
 ## Templates
 
@@ -159,4 +159,4 @@ Please take a look at the [Development Changelog](https://github.com/asleepingli
 
 ## Collaboration
 
-All questions, ideas, feedback, and/or pull requests are also greatly appreciated! 
+All questions, ideas, feedback, and/or pull requests are also greatly appreciated!

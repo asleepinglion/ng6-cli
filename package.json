@@ -6,7 +6,10 @@
   "bin": {
     "ng6": "./bin/ng6-cli.js"
   },
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "keywords": [
     "Angular",
     "ES6",
@@ -19,7 +22,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/asleepinglion/ng6-cli"
+    "url": "https://github.com/UltimateSoftware/ng6-cli"
   },
   "dependencies": {
     "acorn": "3.0.4",
@@ -55,5 +58,9 @@
     "webpack-dev-middleware": "1.6.1",
     "webpack-hot-middleware": "2.10.0",
     "yargs": "4.4.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-plugin-import": "^2.0.1"
   }
 }
