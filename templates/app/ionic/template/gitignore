@@ -3,7 +3,7 @@ shared_modules
 platforms
 plugins
 resources
-www/lib
+www
 .idea
 .DS_Store
 npm-debug.log

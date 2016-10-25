@@ -11,3 +11,8 @@ please check the following links:
 - [Component Pattern](https://github.com/tomastrajan/component-pattern-for-angular-js-1-x)
 - [How to design large AngularJS applications that scale – Sebastian Fröstl and Gernot Höflechner](https://www.youtube.com/watch?v=eel3mV0alEc)
 - [How Instagram.com Works - Pete Hunt](https://www.youtube.com/watch?v=VkTCL6Nqm6Y)
+
+## `www` Directory
+
+This is the project build directory, as cordova expects the www directory.
+You should not need to edit files within this directory.

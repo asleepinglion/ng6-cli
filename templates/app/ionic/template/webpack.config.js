@@ -1,36 +1,42 @@
 var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+var DashboardPlugin = require('webpack-dashboard/plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var WriteFilePlugin = require('write-file-webpack-plugin');
+
+var paths = {
+  output: path.resolve(__dirname, 'www'),
+  entry: path.resolve(__dirname, 'app/app.module.js'),
+}
+
+var devServer = {
+  outputPath: paths.output,
+  inline: true,
+  colors: true,
+  historyApiFallback: true,
+  port: 3100,
+  stats: 'minimal',
+};
 
 module.exports = {
 
-  entry: {
+  devServer: devServer,
 
-    //setup our main entry point for processing
-    entry: path.resolve(__dirname, 'app/app.module.js'),
-
-    //group these modules into a vendor bundle
-    vendor: ['angular', 'angular-ui-router', 'angular-animate']
-
-  },
-
-  /*
-   IMPORTANT: If you have sourcemaps enabled with npm linked repositories
-   the build will break with the current version of ng-annotate-loader on npm.
-
-   You should use the latest version from github directly:
-   git+https://github.com/huston007/ng-annotate-loader.git
-
-   You could also also use shrinkwrapping to make ng-annotate-loader use the
-   latest version of source-maps if you prefer.
-   */
   devtool: 'eval-source-map',
+
+  entry: {
+    // Setup our main entry point for processing
+    entry: paths.entry,
+
+    // group these modules into a vendor bundle
+    //vendor: ['angular', 'angular-ui-router', 'angular-animate', 'ionic', 'ocLazyLoad'],
+  },
 
   //setup the output path
   output: {
-    path: path.resolve(__dirname, 'www'),
-    filename: 'app.bundle.js'
+    path: paths.output,
+    filename: 'app.bundle.js',
   },
 
   /*
@@ -50,7 +56,8 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'ng-annotate!babel?compact=true&presets='+require.resolve('babel-preset-es2015')
+        exclude: /(node_modules|hooks)/,
+        loader: 'ng-annotate!babel?cacheDirectory'
       },
       {
         test: /\.css$/,
@@ -68,8 +75,12 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style', 'css?modules&camelCase&importLoaders=3&localIdentName=[name]__[local]___[hash:base64:5]!sass!sass-resources', { publicPath: '../'})
       },
       {
-        test: /\.(jpg|jpeg|gif|png)$/,
-        loader:'url?limit=1024&name=images/[name].[ext]'
+        test: /\.(gif|png|jpg|jpeg)$/,
+        loader: 'url?limit=1024&name=images/[name].[ext]'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]'
       },
       {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
@@ -88,18 +99,14 @@ module.exports = {
         loader: 'file?name=fonts/[name].[ext]'
       },
       {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]'
-      },
-      {
         test: /\.html$/,
         loader: 'raw'
       },
       {
         test: /\.json$/,
-        loader: 'raw'
-      }
-    ]
+        loader: 'json'
+      },
+    ],
   },
 
   /*
@@ -114,17 +121,16 @@ module.exports = {
    are installed via npm link.
    */
   resolve: {
-    root: [path.resolve('.'), path.resolve(__dirname, 'node_modules')],
+    root: [path.resolve(__dirname, 'node_modules')],
     extensions: ['', '.js'],
-    fallback: path.join(__dirname, 'node_modules')
+    fallback: path.join(__dirname, 'node_modules'),
   },
 
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules')
+    root: path.join(__dirname, 'node_modules'),
   },
 
   plugins: [
-
     //extract all the compiled scss into a single css file.
     new ExtractTextPlugin('css/app.css', { allChunks: true }),
 
@@ -134,26 +140,32 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.html',
       inject: 'body',
-      hash: true
+      hash: true,
     }),
 
-    // Some users have reported that using the OldWatchingPlugin fixes issues with
-    // watching files on Windows OS.
-    //new webpack.OldWatchingPlugin(),
+    new BrowserSyncPlugin(
+      // BrowserSync options
+      {
+        host: 'localhost',
+        port: 3000,
+        // proxy the Webpack Dev Server endpoint
+        // (which should be serving on http://localhost:3100/)
+        // through BrowserSync
+        proxy: 'http://localhost:3100/',
+      },
+      // plugin options
+      {
+        // prevent BrowserSync from reloading the page
+        // and let Webpack Dev Server take care of this
+        reload: false,
+      }
+    ),
 
-    // Removes duplicate modules from the build
-    new webpack.optimize.DedupePlugin(),
+    // see https://github.com/FormidableLabs/webpack-dashboard
+    new DashboardPlugin(),
 
-    // Store vendor libraries together into the vendor bundle.
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: 'vendor.bundle.js'
-    }),
+    // Plugin which emits build on change, may be needed for ionic dev.
+    new WriteFilePlugin(),
 
-    // Store all remaining chunks into the common bundle.
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common',
-      filename: 'common.bundle.js'
-    })
   ]
 };

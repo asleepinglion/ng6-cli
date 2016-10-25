@@ -56,7 +56,7 @@ ng6 new app .
 **or to create an app using a different application template:**
 
 ```
-ng6 new app:mobile my-app
+ng6 new app:ionic my-app
 ```
 
 ## Highlights
