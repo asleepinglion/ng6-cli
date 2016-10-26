@@ -6,14 +6,13 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 
 var paths = {
-  output: path.resolve(__dirname, 'www'),
+  output: path.join(__dirname, 'www/'),
   entry: path.resolve(__dirname, 'app/app.module.js'),
 }
 
 var devServer = {
   outputPath: paths.output,
   inline: true,
-  colors: true,
   historyApiFallback: true,
   port: 3100,
   stats: 'minimal',
