@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 var webpack = require('webpack');
 var Command = require('../../lib/command');
@@ -46,15 +47,10 @@ module.exports = Command.extend({
       process.exit(1);
     }
 
-    var bundler = webpack(webpackConfig);
-
-    console.log(chalk.white('Building project with webpack...'));
+    console.log(chalk.white('Building project with webpack by running `npm run build`'));
     console.log('');
 
-    bundler.run(function (err, stats) {
-      console.log('');
-      console.log(stats.toString({colors: true}));
-    });
+    const serveProcess = spawn('npm', ['run', 'build'], { stdio: 'inherit' });
 
   }
 });

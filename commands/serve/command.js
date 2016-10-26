@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 var Command = require('../../lib/command');
 var WebpackValidator = require('../../lib/webpack-validator');
@@ -34,7 +35,6 @@ module.exports = Command.extend({
     var pkg = require(path.resolve('package.json'));
     var nodeModules = fs.readdirSync(path.resolve('node_modules'));
     var webpackInstalled = fs.existsSync(path.resolve('node_modules/webpack'));
-    // var bsInstalled = fs.existsSync(path.resolve('node_modules/browser-sync'));
 
     if( nodeModules.length > 0 && nodeModules.length < pkg.dependencies.length ) {
       console.log('');
@@ -76,52 +76,8 @@ module.exports = Command.extend({
       process.exit(1);
     }
 
-    //require browser sync along with webpack and middleware for it
-    var browserSync = require('browser-sync').create();
-    var webpack = require('webpack');
-    var webpackDevMiddleware = require('webpack-dev-middleware');
-
-    //create bundler from webpack config
-    var bundler = webpack(webpackConfig);
-
-    //reload on all devices when build complete
-    bundler.plugin('done', function () {
-      browserSync.reload();
-    });
-
-    //setup browser sync configuration
-    var browserSyncConfig = {
-
-      server: 'app',
-      open: true,
-      logFileChanges: false,
-      notify: false,
-      middleware: [
-        webpackDevMiddleware(bundler, {
-          publicPath: webpackConfig.output.publicPath,
-          stats: {
-            colors: true
-          }
-        })
-      ],
-
-      files: [
-        'app/css/*.css',
-        'app/*.html'
-      ]
-
-    };
-
-    //enable port customization
-    if( this.cli.isEnabled('port') ) {
-      browserSyncConfig.port = this.cli.request.getOption('port');
-    } else if( this.cli.isEnabled('p') ) {
-      browserSyncConfig.port = this.cli.request.getOption('p');
-    }
-
-    //initialize browser sync
-    browserSync.init(browserSyncConfig);
-
+    const serveProcess = spawn('npm', ['run', 'serve'], { stdio: 'inherit' });
+    
   }
 
 });
