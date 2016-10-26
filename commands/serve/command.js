@@ -14,7 +14,7 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "Watch, build, & serve the application in a local environment.";
+    this.description = 'Watch, build, & serve the application in a local environment.';
     this.options = '';
     this.order = 1;
   },
@@ -25,31 +25,31 @@ module.exports = Command.extend({
     var projectRoot = this.cli.reflect.projectRoot();
 
     if( !projectRoot || projectRoot != process.cwd() ) {
-      console.log("");
-      console.log(chalk.white("You must be in the project root in order to execute serve!"));
-      console.log("");
+      console.log('');
+      console.log(chalk.white('You must be in the project root in order to execute serve!'));
+      console.log('');
       process.exit(1);
     }
 
     var pkg = require(path.resolve('package.json'));
     var nodeModules = fs.readdirSync(path.resolve('node_modules'));
     var webpackInstalled = fs.existsSync(path.resolve('node_modules/webpack'));
-    var bsInstalled = fs.existsSync(path.resolve('node_modules/browser-sync'));
+    // var bsInstalled = fs.existsSync(path.resolve('node_modules/browser-sync'));
 
     if( nodeModules.length > 0 && nodeModules.length < pkg.dependencies.length ) {
-      console.log("");
+      console.log('');
       console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
-      console.log("");
+      console.log('');
       process.exit(1);
     }
 
     if( !webpackInstalled ) {
-      console.log("");
+      console.log('');
       console.log(chalk.white('Webpack does not appear to be installed. Have you run ' + chalk.cyan('npm install') + '?'));
-      console.log("");
+      console.log('');
       process.exit(1);
     }
-    
+
   },
 
   run: function() {
@@ -70,9 +70,9 @@ module.exports = Command.extend({
     }
 
     if( !webpackValidator.check(webpackConfig) ) {
-      console.log("");
-      console.log(chalk.white("The webpack configuration does not appear to be valid!"));
-      console.log("");
+      console.log('');
+      console.log(chalk.white('The webpack configuration does not appear to be valid!'));
+      console.log('');
       process.exit(1);
     }
 
@@ -85,7 +85,7 @@ module.exports = Command.extend({
     var bundler = webpack(webpackConfig);
 
     //reload on all devices when build complete
-    bundler.plugin('done', function (stats) {
+    bundler.plugin('done', function () {
       browserSync.reload();
     });
 
@@ -123,5 +123,5 @@ module.exports = Command.extend({
     browserSync.init(browserSyncConfig);
 
   }
-  
+
 });

@@ -9,7 +9,7 @@ module.exports = Command.extend({
   init: function() {
 
     this._super.apply(this, arguments);
-    this.description = "Copy an artifact to a new location.";
+    this.description = 'Copy an artifact to a new location.';
     this.options = '';
     this.order = 12;
 
@@ -35,17 +35,17 @@ module.exports = Command.extend({
     if( fs.existsSync(source) ) {
 
       if (path.extname(source).length > 0 ) {
-        console.log(chalk.white("\nThe source should be a folder and must not have an extension.\n"));
+        console.log(chalk.white('\nThe source should be a folder and must not have an extension.\n'));
         process.exit(1);
       }
 
       if( !fs.existsSync(this.moduleFilePath(source)) ) {
-        console.log(chalk.white("\nThe source does not contain a module file.\n"));
+        console.log(chalk.white('\nThe source does not contain a module file.\n'));
         process.exit(1);
       }
 
     } else {
-      console.log(chalk.white("\nThe source does not exist.\n"));
+      console.log(chalk.white('\nThe source does not exist.\n'));
       process.exit(1);
     }
 
@@ -53,12 +53,12 @@ module.exports = Command.extend({
 
   validateDest: function(dest) {
     if( fs.existsSync(dest) && !this.cli.isEnabled('force') ) {
-      console.log(chalk.white("\nThe destination already exists, use the " + chalk.cyan('--force') + " option to overwrite.\n"));
+      console.log(chalk.white('\nThe destination already exists, use the ' + chalk.cyan('--force') + ' option to overwrite.\n'));
       process.exit(1);
     } else {
 
       if (path.extname(dest).length > 0 ) {
-        console.log(chalk.white("\nThe destination should be a folder and must not have an extension.\n"));
+        console.log(chalk.white('\nThe destination should be a folder and must not have an extension.\n'));
         process.exit(1);
       }
     }
@@ -70,7 +70,7 @@ module.exports = Command.extend({
 
     //make sure we're passing in both the source and destination
     if( !source || !dest ) {
-      console.log(chalk.white("\nYou must provide both a source and destination to copy a module.\n"));
+      console.log(chalk.white('\nYou must provide both a source and destination to copy a module.\n'));
       process.exit(1);
     }
 
@@ -122,7 +122,7 @@ module.exports = Command.extend({
           module: parentModulePath
         });
 
-        console.log(chalk.yellow("\nPlease carefully examine all changes before you commit!\n"));
+        console.log(chalk.yellow('\nPlease carefully examine all changes before you commit!\n'));
         
       });
 

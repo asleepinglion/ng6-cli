@@ -12,19 +12,19 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "Build the project with webpack.";
+    this.description = 'Build the project with webpack.';
     this.options = '';
     this.order = 2;
   },
 
   run: function() {
 
-  	var projectRoot = this.cli.reflect.projectRoot();
+    var projectRoot = this.cli.reflect.projectRoot();
 
     if( !projectRoot || projectRoot != process.cwd() ) {
-      console.log("");
-      console.log(chalk.white("You must be in the project root in order to execute build!"));
-      console.log("");
+      console.log('');
+      console.log(chalk.white('You must be in the project root in order to execute build!'));
+      console.log('');
       process.exit(1);
     }
 
@@ -40,19 +40,19 @@ module.exports = Command.extend({
     }
 
     if( !webpackValidator.check(webpackConfig) ) {
-      console.log("");
-      console.log(chalk.white("The webpack configuration does not appear to be valid!"));
-      console.log("");
+      console.log('');
+      console.log(chalk.white('The webpack configuration does not appear to be valid!'));
+      console.log('');
       process.exit(1);
     }
 
     var bundler = webpack(webpackConfig);
 
-    console.log(chalk.white("Building project with webpack..."));
-    console.log("");
+    console.log(chalk.white('Building project with webpack...'));
+    console.log('');
 
     bundler.run(function (err, stats) {
-      console.log("");
+      console.log('');
       console.log(stats.toString({colors: true}));
     });
 

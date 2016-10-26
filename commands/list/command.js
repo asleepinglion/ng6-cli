@@ -1,9 +1,6 @@
-var fs = require('fs');
-var path = require('path');
 var chalk = require('chalk');
 var columnify = require('columnify');
 var Command = require('../../lib/command');
-var Reflect = require('../../lib/reflect');
 
 module.exports = Command.extend({
 
@@ -11,7 +8,7 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.description = "List available artifacts, such as templates.";
+    this.description = 'List available artifacts, such as templates.';
     this.options = '[type]';
     this.order = 3;
 
@@ -25,17 +22,17 @@ module.exports = Command.extend({
 
       if( type === 'templates' ) {
 
-        console.log(chalk.white("The following is list of available templates:"));
-        console.log("");
+        console.log(chalk.white('The following is list of available templates:'));
+        console.log('');
 
         this.listTemplates();
 
-        console.log("");
+        console.log('');
 
       } else {
 
-        console.log(chalk.white("The " + type + " type is not currently supported."));
-        console.log("");
+        console.log(chalk.white('The ' + type + ' type is not currently supported.'));
+        console.log('');
 
       }
     }
@@ -43,7 +40,7 @@ module.exports = Command.extend({
   },
 
   listTemplates: function() {
-    
+
     var self = this;
 
     self.cli.templates.types().map(function(type) {
@@ -58,15 +55,15 @@ module.exports = Command.extend({
         var templateDesc = chalk.gray(template.description);
 
         if( templateName !== template.name ) {
-          templateDesc = chalk.gray("An alias for the ") + chalk.cyan(template.name) + chalk.gray(" template.");
+          templateDesc = chalk.gray('An alias for the ') + chalk.cyan(template.name) + chalk.gray(' template.');
         }
 
         templates.push({
-          spacer: "",
-          template: ":" + chalk.cyan(templateName),
+          spacer: '',
+          template: ':' + chalk.cyan(templateName),
           description: templateDesc
         });
-        
+
       });
 
       if( templates.length  > 0 ) {

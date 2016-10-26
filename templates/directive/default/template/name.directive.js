@@ -7,4 +7,4 @@ export default function() {
     template,
     restrict: 'E'
   };
-};
+}

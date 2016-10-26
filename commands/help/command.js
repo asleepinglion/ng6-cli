@@ -1,5 +1,4 @@
 var fs = require('fs');
-var path = require('path');
 var chalk = require('chalk');
 var marked = require('marked');
 var TerminalRenderer = require('marked-terminal');
@@ -10,10 +9,10 @@ var ejs = require('ejs');
 
 module.exports = Command.extend({
 
-  init: function(cli) {
+  init: function() {
 
     this._super.apply(this, arguments);
-    
+
     this.description = 'Display this list of help, or help for a specific command.';
     this.options = '[command]';
     this.order = '500';
@@ -56,11 +55,11 @@ module.exports = Command.extend({
 
     var self = this;
 
-    console.log(chalk.white("Usage:"), chalk.cyan(this.cli.bin), chalk.gray("[options]"), chalk.gray('[command]'), chalk.gray('[args...]'));
-    console.log("");
-    console.log(chalk.white("Available Commands:"));
+    console.log(chalk.white('Usage:'), chalk.cyan(this.cli.bin), chalk.gray('[options]'), chalk.gray('[command]'), chalk.gray('[args...]'));
+    console.log('');
+    console.log(chalk.white('Available Commands:'));
 
-    console.log("");
+    console.log('');
 
     var commandList = [];
 
@@ -74,20 +73,20 @@ module.exports = Command.extend({
 
     commandList.map(function(command) {
 
-      var options =  "";
+      var options =  '';
 
       if(typeof command.options === 'object') {
         options = Object.keys(command.options).map(function(option){
           return '[' + option + ']';
         });
-        options = options.join(" ");
+        options = options.join(' ');
       } else {
         options = command.options;
       }
 
       availableCommands.push({
-        spacer: "",
-        command: chalk.bold.cyan(command.name) + " " + chalk.gray(options),
+        spacer: '',
+        command: chalk.bold.cyan(command.name) + ' ' + chalk.gray(options),
         description: chalk.white(command.description)
       });
 
@@ -109,9 +108,9 @@ module.exports = Command.extend({
       }
     }));
 
-    console.log("");
+    console.log('');
 
-    console.log(chalk.white("For help with a specific command:"), chalk.cyan(this.cli.bin + " help"), chalk.gray("[command]"));
+    console.log(chalk.white('For help with a specific command:'), chalk.cyan(this.cli.bin + ' help'), chalk.gray('[command]'));
 
   }
 

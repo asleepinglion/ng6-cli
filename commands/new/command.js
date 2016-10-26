@@ -8,10 +8,10 @@ module.exports = Command.extend({
   init: function() {
 
     this._super.apply(this, arguments);
-    
+
     this.templates = this.cli.templates;
 
-    this.description = "Scaffold a new app, component, service, command, or template.";
+    this.description = 'Scaffold a new app, component, service, command, or template.';
     this.options = '[type] [name]';
     this.order = 4;
 
@@ -21,17 +21,17 @@ module.exports = Command.extend({
     if( fs.existsSync(destination) && !this.cli.request.isEnabled('force')) {
       if( type === 'app' ) {
         if( fs.readdirSync(destination).length > 0 ) {
-          console.log("");
+          console.log('');
           console.log(chalk.white('An ' + chalk.cyan(type) + ' can only be created in an empty directory.'));
           console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
-          console.log("");
+          console.log('');
           process.exit(1);
         }
       } else {
-        console.log("");
+        console.log('');
         console.log(chalk.white('A ' + chalk.cyan(type) + ' already exists at this path.'));
         console.log(chalk.white('Use the ') + chalk.cyan('--force') + chalk.white(' option to overwrite.'));
-        console.log("");
+        console.log('');
         process.exit(1);
       }
     }
@@ -51,10 +51,10 @@ module.exports = Command.extend({
       type = this.cli.reflect.getType(type);
 
       if( !this.cli.templates.get(type, template) ) {
-        console.log("");
+        console.log('');
         console.log(chalk.white('The ' + chalk.cyan(type + ':' + template) + ' template is not currently available.'));
         console.log(chalk.white('To see a list of available templates type:'), chalk.cyan(this.cli.bin+' list templates'));
-        console.log("");
+        console.log('');
         process.exit(1);
       }
 
@@ -72,7 +72,7 @@ module.exports = Command.extend({
 
       } else if( type === 'module' ) {
 
-        destination = this.cli.reflect.getNewModulePath(name, destination);
+        destination = this.cli.reflect.getNewModulePath(type, name, destination);
         this.checkExists(type, destination);
         this.cli.generate.createModule(name, destination);
 

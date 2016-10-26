@@ -73,23 +73,23 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=1024&mimetype=application/font-woff&name=fonts/[name].[ext]"
+        loader: 'url?limit=1024&mimetype=application/font-woff&name=fonts/[name].[ext]'
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=1024&mimetype=application/octet-stream&name=fonts/[name].[ext]"
+        loader: 'url?limit=1024&mimetype=application/octet-stream&name=fonts/[name].[ext]'
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file?name=fonts/[name].[ext]"
+        loader: 'file?name=fonts/[name].[ext]'
       },
       {
         test: /\.otf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "file?name=fonts/[name].[ext]"
+        loader: 'file?name=fonts/[name].[ext]'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]"
+        loader: 'url?limit=1024&mimetype=image/svg+xml&name=images/[name].[ext]'
       },
       {
         test: /\.html$/,
@@ -116,11 +116,11 @@ module.exports = {
   resolve: {
     root: [path.resolve('.'), path.resolve(__dirname, 'node_modules')],
     extensions: ['', '.js'],
-    fallback: path.join(__dirname, "node_modules")
+    fallback: path.join(__dirname, 'node_modules')
   },
 
   resolveLoader: {
-    root: path.join(__dirname, "node_modules")
+    root: path.join(__dirname, 'node_modules')
   },
 
   plugins: [
