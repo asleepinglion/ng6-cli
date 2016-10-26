@@ -46,7 +46,7 @@
     "ouro-base": "0.9.0",
     "shelljs": "0.6.0",
     "webpack": "1.12.15",
-    "webpack-dev-middleware": "1.6.1",
+    "webpack-validator": "^2.2.9",
     "yargs": "4.4.0"
   },
   "devDependencies": {

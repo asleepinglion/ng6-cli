@@ -3,8 +3,7 @@ var path = require('path');
 var chalk = require('chalk');
 var webpack = require('webpack');
 var Command = require('../../lib/command');
-var WebpackValidator = require('../../lib/webpack-validator');
-var webpackValidator = new WebpackValidator();
+var validateWebpack = require('../../lib/webpack-validator');
 
 module.exports = Command.extend({
 
@@ -39,12 +38,7 @@ module.exports = Command.extend({
       webpackConfig = require(webpackRoot);
     }
 
-    if( !webpackValidator.check(webpackConfig) ) {
-      console.log('');
-      console.log(chalk.white('The webpack configuration does not appear to be valid!'));
-      console.log('');
-      process.exit(1);
-    }
+    validateWebpack(webpackConfig);
 
     var bundler = webpack(webpackConfig);
 
