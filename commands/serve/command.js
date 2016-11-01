@@ -68,10 +68,12 @@ module.exports = Command.extend({
       webpackConfig = require(webpackRoot);
     }
 
-    webpackValidate(webpackConfig)
+    if( !this.cli.isEnabled('skip-validate') ){
+      webpackValidate(webpackConfig);
+    }
 
     const serveProcess = spawn('npm', ['run', 'serve'], { stdio: 'inherit' });
-    
+
   }
 
 });
