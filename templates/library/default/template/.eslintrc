@@ -1,0 +1,34 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "angular": true,
+    "ionic": true,
+    "hockeyapp" : true
+  },
+  "rules": {
+    "max-len": ["warn", 120, 2, {
+      "ignoreUrls": true,
+      "ignoreComments": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true
+    }],
+    "quote-props": ["warn", "consistent-as-needed"],
+    "no-cond-assign": ["error", "except-parens"],
+    "radix": "off",
+    "space-infix-ops": "off",
+    "no-unused-vars": ["warn", {"vars": "local", "args": "none"}],
+    "default-case": "off",
+    "no-else-return": "off",
+    "no-param-reassign": "off",
+    "quotes": "off",
+    "no-underscore-dangle": "off",
+    "arrow-body-style": "warn",
+    "comma-dangle": ["warn", "never"],
+    "class-methods-use-this": "off",
+    "lines-around-directive": "off"
+  }
+}

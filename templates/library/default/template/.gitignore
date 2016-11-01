@@ -1,0 +1,11 @@
+node_modules
+shared_modules
+platforms
+plugins
+resources
+.idea
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+npm-debug.log
+dist
