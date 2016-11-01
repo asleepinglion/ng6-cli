@@ -11,9 +11,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint --format './node_modules/eslint-teamcity/index.js' .",
-    "test": "mocha ./app/**/*.spec.js --opts mocha.opts",
-    "test:ci": "mocha ./app/**/*.spec.js --opts mocha.opts --reporter mocha-teamcity-reporter",
-    "test:watch": "mocha ./app/**/*.spec.js --opts mocha.opts -w"
+    "test": "mocha ./{app,components,directives,filters,providers,services}/**/*.test.js --opts mocha.opts",
+    "test:ci": "npm run test -- --reporter mocha-teamcity-reporter",
+    "test:watch": "npm run test -- -w"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",
@@ -45,9 +45,6 @@
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.0",
     "sass-resources-loader": "^1.0.2",
-    "sinon": "^1.17.6",
-    "sinon-as-promised": "^4.0.2",
-    "sinon-chai": "^2.8.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
