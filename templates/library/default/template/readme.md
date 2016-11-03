@@ -1,9 +1,6 @@
 # <%= name %> component library
 
 
-
-
-
 ##Getting Started
 
 The easiest way to get started is by using the [ng6-cli](https://github.com/UltimateSoftware/ng6-cli) to develop, test, and build Angular applications with the **ng6** components.  

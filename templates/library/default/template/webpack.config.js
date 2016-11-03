@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 
-var entry = path.resolve(__dirname, 'components/components.module.js');
+var entry = path.resolve(__dirname, 'library.module.js');
 var output = path.resolve(__dirname, 'dist');
 var outputName = 'bundle.js';
 
@@ -101,8 +101,6 @@ module.exports = {
    Do not include anything that actually renders CSS otherwise it will be injected into every file.
    */
    sassResources: [
-     './node_modules/ionic-angular/scss/_variables.scss',
-     './node_modules/ionic-angular/scss/_mixins.scss',
      './styles/_variables.scss',
    ],
 
