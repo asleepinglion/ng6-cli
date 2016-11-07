@@ -2,13 +2,13 @@
 
 ### Developed to be easy to maintain, refactor, & extend.
 
-In order to make the code easy to maintain, refactor, and extend we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize. 
+In order to make the code easy to maintain, refactor, and extend we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize.
 
 The CLI uses the [Simple Inheritance Model](#simple-inheritance-model) for ES5. We chose ES5 because we wanted to maximize our support for different versions of Node and (more importantly) because we wanted to maximize our ability to load commands & templates at run-time.
 
 ## Application Structure
 
-The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a resusable, declarative form. 
+The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a resusable, declarative form.
 
 ```bash
 bin/
@@ -16,7 +16,7 @@ bin/
 commands/ #commands provided with the ng6-cli
 ../build #a command
 ../../command.js #class for this command
-../../help.md #command specific help template 
+../../help.md #command specific help template
 ../...
 docs/ #you are here
 lib/ #library of classes to support the ng6-cli
@@ -26,7 +26,7 @@ lib/ #library of classes to support the ng6-cli
 ../config.js #class to manage configuration options
 ../generate.js #class to generate new apps & artifacts
 ../ng6-cli.js #ng6 extension of the base CLI class
-../refactor.js #class to modify existing code 
+../refactor.js #class to modify existing code
 ../reflect.js #class to reflect on the code & project
 ../request.js #class to process the request (argv parser)
 ../template.js #base class for templates
@@ -36,7 +36,7 @@ templates/ #templates provided with the ng6-cli
 ../../default #name of template
 ../../../template #folder to contain template files
 ../../../template.js #class for this template
-../... 
+../...
 index.js #exposes classes for easy extension
 ```
 
@@ -46,7 +46,7 @@ index.js #exposes classes for easy extension
 
 During installation the bin script file is associated with the system and becomes the main entry point of the application when the command is executed. The bin script, however, is really just a shell as it simply instantiates an instance the of the ng6-cli class (`lib/ng6-cli.js`), which is found among the other classes in the `lib/` folder.  
 
-The ng6-cli class is an extension of the the base CLI class (`lib/ng6-cli.js`) which is the basis for all functionality provided by the CLI. 
+The ng6-cli class is an extension of the the base CLI class (`lib/ng6-cli.js`) which is the basis for all functionality provided by the CLI.
 
 ### Boot Process:
 
@@ -57,12 +57,12 @@ When the base CLI class is instantiated it in turn instantiates and stores refer
 > **Helpful Tip:** To see a list of all the folders and files loaded during the boot process you can use `--debug` option when executing any command.
 
 After instantiating the necessary libraries, the CLI class proceeds to load any templates or commands it can find within the current directory, the project root, and finally within the ng6-cli package itself. Extended CLIs can override the `load` method to tell the system to search additional paths, but the current directory and project root will always be checked first. Subsequent commands or templates with the same name as a template or command already loaded will be ignored. Extension is possible by having your new command or template `extend` the original command or template.
- 
+
 Once commands & templates have been loaded the `run` method is exected where the CLI checks whether the request command exists and either executes the command or defaults to the help command.
 
 ### Commands & Templates
 
-Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder. 
+Any commands or templates that are found in the search paths will be automatically loaded and available to use within the system. Each command and template is stored in own folder.
 
 Commands are composed of a `command.js` class file which either extends the base Command class (`lib/command.js`) or another command's class. Each command also has a `help.md` file which is a markdown template that is rendered into the console when the user uses the specific help method: `ng6 help [command]`. For more information, check out the documentation on [Custom Commands]().
 
@@ -76,11 +76,13 @@ Likely the most useful features of the CLI are contained within these three decl
 
 #### Generation
 
-When the `new` command is executed, it determines the template type, name & destination and calls the appropriate create method on the generation class (`lib/generate.js`). There are currently five creation methods: `createApp`, `createModule`, `createArtifact`, `createTemplate`, `createCommand`. 
+When the `new` command is executed, it determines the template type, name & destination and calls the appropriate create method on the generation class (`lib/generate.js`). There are currently five creation methods: `createApp`, `createModule`, `createArtifact`, `createTemplate`, `createCommand`.
 
 - `createApp` is specifically used for creating new applications, it expects a `template` name, application `name`, and a `destination.
 
-- `createModule` is specifically used for creating new modules it expects a `name`, `destination`, and an optional `callback`. The callback is used by other artifact which may call `createModule` if a module file doesn't exist for the type of artifact they creating. 
+- `createLibrary` is specifically used for creating new libraries, it expects a `template` name, application `name`, and a `destination.
+
+- `createModule` is specifically used for creating new modules it expects a `name`, `destination`, and an optional `callback`. The callback is used by other artifact which may call `createModule` if a module file doesn't exist for the type of artifact they creating.
 
 - `createArtifact` is used for most Angular artifacts including `components`, `directives`, `services`, `filters`, & `providers`. It expects a artifact `type`, template `name`, `destination`, and an optional `callback`.
 
@@ -90,15 +92,15 @@ When the `new` command is executed, it determines the template type, name & dest
 
 #### Reflection
 
-When creating new modules and artifacts the `createModule` and `createArtifact` methods which use the reflection library (`lib/reflect.js`) to determine information about the current project. 
+When creating new modules and artifacts the `createModule` and `createArtifact` methods which use the reflection library (`lib/reflect.js`) to determine information about the current project.
 
-Using static analysis (using the same library that powers ESLint and JSCS) we are able to parse the Abstract Syntax Tree of the code and do things like, find the final character position of the last import statement. Using this information, combined with information known about the expected architecture of the application, the system is able to tell the refactorization library what and where to modifications. 
+Using static analysis (using the same library that powers ESLint and JSCS) we are able to parse the Abstract Syntax Tree of the code and do things like, find the final character position of the last import statement. Using this information, combined with information known about the expected architecture of the application, the system is able to tell the refactorization library what and where to modifications.
 
 There are number of methods that make for a really declarative interface for template generation and refactoriztion, for example: `getNewArtifactPath` which determines the path for a new artifact based on the type, template name, and desired artifact name. Or `findParentModule` which will find the parent module file for a given file within the project.
 
 #### Refactorization
 
-The refactorization library completes the process by using the information returned from the reflection library to modify existing files for things like module import statements and angular dependencies. 
+The refactorization library completes the process by using the information returned from the reflection library to modify existing files for things like module import statements and angular dependencies.
 
 - `addAngularDefinition` adds a new angular definition (i.e. angular.service, angular.component, etc) to an existing module file. It expects an `options` object expression as its only argument, with the following required options `name`, `type`, and `module`.
 
@@ -109,7 +111,7 @@ The refactorization library completes the process by using the information retur
 
 ## Simple Inheritance Model
 
-The base `Class` ([Ouro Base](https://github.com/asleepinglion/ouro-base) ) provides an `extend` method to allow one class to pass its behavior on to another using prototypical inheritance. Mixins are supported by passing in previously created Classes as prefixed arguments. You can even call parent methods from within child classes via the `_super` method. 
+The base `Class` ([Ouro Base](https://github.com/asleepinglion/ouro-base) ) provides an `extend` method to allow one class to pass its behavior on to another using prototypical inheritance. Mixins are supported by passing in previously created Classes as prefixed arguments. You can even call parent methods from within child classes via the `_super` method.
 
 **The syntax is pretty straight forward, take a look:**
 
@@ -146,6 +148,6 @@ var Ninja = Female.extend({
 
 ```
 
-You simply pass in an object containing your methods and variables as the last argument of the `extend` method. 
+You simply pass in an object containing your methods and variables as the last argument of the `extend` method.
 
 Mixins are passed in as the first argument(s) of the `extend` method. Their methods and properties will be merged in sequentially using prototypical inheritance, from the first argument to the last, your custom definition. For more information, check out the [Ouro Base](https://github.com/asleepinglion/ouro-base) project on GitHub.

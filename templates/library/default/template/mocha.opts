@@ -1,0 +1,6 @@
+--recursive
+--inline-diffs
+--growl
+--compilers js:babel-register
+--require babel-polyfill
+--require ignore-styles

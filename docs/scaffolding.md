@@ -27,6 +27,14 @@ To create a new application using the mobile template and install dependencies:
 ng6 new app:mobile [app-name] -i
 ```
 
+##Creating New Libraries:
+
+To create a new library using the default template and install dependencies:
+> This will create a new folder within the current working directory.
+
+```
+ng6 new library [library-name]
+```
 
 ##Creating New Components:
 
@@ -57,13 +65,11 @@ ng6 list templates
 
 ##Create A New Module:
 
-
 ```
 ng6 new module [component-name]
 ```
 
 ##Create A New Service:
-
 
 ```
 ng6 new service [component-name]
@@ -71,13 +77,11 @@ ng6 new service [component-name]
 
 ##Create A New Filter:
 
-
 ```
 ng6 new filter [component-name]
 ```
 
 ##Create A New Directive:
-
 
 ```
 ng6 new directive [component-name]
