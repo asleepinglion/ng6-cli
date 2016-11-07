@@ -70,6 +70,17 @@ module.exports = Command.extend({
         this.checkExists(type, destination);
         this.cli.generate.createApp(template, name, destination);
 
+      } else if( type === 'library' ) {
+
+        destination = this.cli.reflect.getNewAppPath(name);
+
+        if( name === '.' ) {
+          name = path.basename(destination);
+        }
+
+        this.checkExists(type, destination);
+        this.cli.generate.createLibrary(template, name, destination);
+
       } else if( type === 'module' ) {
 
         destination = this.cli.reflect.getNewModulePath(type, name, destination);
