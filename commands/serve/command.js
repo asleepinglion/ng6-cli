@@ -73,8 +73,8 @@ module.exports = Command.extend({
     }
 
     let serveProcess;
-    if( this.cli.isEnabled('skip-dashboard') ){
-      serveProcess = spawn('npm', ['run', 'skip-dash'], { stdio: 'inherit' });
+    if( this.cli.isEnabled('dashboard') ){
+      serveProcess = spawn('npm', ['run', 'dashboard'], { stdio: 'inherit' });
     } else {
       serveProcess = spawn('npm', ['run', 'serve'], { stdio: 'inherit' });
     }
