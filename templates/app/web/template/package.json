@@ -10,9 +10,7 @@
     "serve": "webpack-dashboard -- webpack-dev-server",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:ci": "eslint --format './node_modules/eslint-teamcity/index.js' .",
     "test": "mocha ./{app,components,directives,filters,providers,services}/**/*.test.js --opts mocha.opts",
-    "test:ci": "npm run test -- --reporter mocha-teamcity-reporter",
     "test:watch": "npm run test -- -w"
   },
   "devDependencies": {
