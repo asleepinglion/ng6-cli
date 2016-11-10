@@ -72,7 +72,14 @@ module.exports = Command.extend({
       webpackValidate(webpackConfig);
     }
 
-    const serveProcess = spawn('npm', ['run', 'serve'], { stdio: 'inherit' });
+    let serveProcess;
+    if( this.cli.isEnabled('dashboard') ){
+      serveProcess = spawn('npm', ['run', 'dashboard'], { stdio: 'inherit' });
+    } else {
+      serveProcess = spawn('npm', ['run', 'serve'], { stdio: 'inherit' });
+    }
+
+
 
   }
 
