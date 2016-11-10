@@ -7,7 +7,8 @@
   "scripts": {
     "prebuild": "rimraf build",
     "build": "cross-env NODE_ENV=production webpack --bail -p --config webpack.prod.config.js",
-    "serve": "webpack-dashboard -- webpack-dev-server",
+    "dashboard": "webpack-dashboard -- npm run serve",
+    "serve": "webpack-dev-server",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "mocha ./{app,components,directives,filters,providers,services}/**/*.test.js --opts mocha.opts",
