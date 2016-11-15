@@ -1,6 +1,5 @@
 var path = require('path');
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var WriteFilePlugin = require('write-file-webpack-plugin');
@@ -8,13 +7,16 @@ var WriteFilePlugin = require('write-file-webpack-plugin');
 var paths = {
   output: path.join(__dirname, 'www/'),
   entry: path.resolve(__dirname, 'app/app.module.js'),
-}
+  nodeModules: path.resolve(__dirname, 'node_modules'),
+};
+
+var devServerPort = parseInt(process.env.PORT, 10) || 3000;
 
 var devServer = {
   outputPath: paths.output,
   inline: true,
   historyApiFallback: true,
-  port: 3100,
+  port: devServerPort,
   stats: 'minimal',
 };
 
@@ -26,7 +28,7 @@ module.exports = {
 
   entry: {
     // Setup our main entry point for processing
-    entry: paths.entry,
+    entry: [paths.entry],
 
     // group these modules into a vendor bundle
     //vendor: ['angular', 'angular-ui-router', 'angular-animate', 'ionic', 'ocLazyLoad'],
@@ -120,13 +122,13 @@ module.exports = {
    are installed via npm link.
    */
   resolve: {
-    root: [path.resolve(__dirname, 'node_modules')],
+    root: [paths.nodeModules],
     extensions: ['', '.js'],
-    fallback: path.join(__dirname, 'node_modules'),
+    fallback: paths.nodeModules,
   },
 
   resolveLoader: {
-    root: path.join(__dirname, 'node_modules'),
+    root: paths.nodeModules,
   },
 
   plugins: [
@@ -146,11 +148,9 @@ module.exports = {
       // BrowserSync options
       {
         host: 'localhost',
-        port: 3000,
-        // proxy the Webpack Dev Server endpoint
-        // (which should be serving on http://localhost:3100/)
-        // through BrowserSync
-        proxy: 'http://localhost:3100/',
+        port: devServerPort + 1,
+        // proxy the Webpack Dev Server endpoint through BrowserSync
+        proxy: 'http://localhost:' + devServerPort + '/',
       },
       // plugin options
       {
@@ -159,9 +159,6 @@ module.exports = {
         reload: false,
       }
     ),
-
-    // see https://github.com/FormidableLabs/webpack-dashboard
-    new DashboardPlugin(),
 
     // Plugin which emits build on change, may be needed for ionic dev.
     new WriteFilePlugin(),
