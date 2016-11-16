@@ -118,7 +118,7 @@ module.exports = {
    Sass resources are loaded before each required scss file.
    Do not include anything that actually renders CSS otherwise it will be injected into every file.
    */
-  sassResources: [ './styles/_variables.scss' ],
+  sassResources: [ './styles/settings/_variables.scss' ],
 
   /*
    The following resolve blocks setup the fallback paths to search use

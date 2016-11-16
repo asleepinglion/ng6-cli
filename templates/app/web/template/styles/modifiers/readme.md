@@ -1,0 +1,1 @@
+This folder should be used for global modifiers, like `.is-hidden`.

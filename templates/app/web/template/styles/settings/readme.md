@@ -1,0 +1,1 @@
+This folder should be used for global settings and variables, like color palette's and theme variables. 
