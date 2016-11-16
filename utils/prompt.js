@@ -1,3 +1,5 @@
+//todo: Aaron: inquirer is actually pretty solid and has some more features we could use.
+
 var rl = require('readline');
 
 // Convention: "no" should be the conservative choice.
@@ -7,7 +9,7 @@ function prompt(question, isYesDefault) {
   if (typeof isYesDefault !== 'boolean') {
     throw new Error('Provide explicit boolean isYesDefault as second argument.');
   }
-  return new Promise(resolve => {
+  return new Promise(function(resolve) {
     var rlInterface = rl.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -20,6 +22,7 @@ function prompt(question, isYesDefault) {
       rlInterface.close();
 
       var useDefault = answer.trim().length === 0;
+
       if (useDefault) {
         return resolve(isYesDefault);
       }
