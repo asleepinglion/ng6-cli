@@ -1,6 +1,4 @@
-//todo: Aaron: inquirer is actually pretty solid and has some more features we could use.
-
-var rl = require('readline');
+var inquirer = require('inquirer');
 
 // Convention: "no" should be the conservative choice.
 // If you mistype the answer, we'll always take it as a "no".
@@ -9,28 +7,34 @@ function prompt(question, isYesDefault) {
   if (typeof isYesDefault !== 'boolean') {
     throw new Error('Provide explicit boolean isYesDefault as second argument.');
   }
-  return new Promise(function(resolve) {
-    var rlInterface = rl.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-    });
 
-    var hint = isYesDefault === true ? '[Y/n]' : '[y/N]';
-    var message = question + ' ' + hint + '\n';
+  var hint = isYesDefault === true ? '[Y/n]' : '[y/N]';
+  var message = question + ' ' + hint;
 
-    rlInterface.question(message, function(answer) {
-      rlInterface.close();
 
-      var useDefault = answer.trim().length === 0;
+  var questions = [
+    {
+      type: 'input',
+      name: 'isYes',
+      message: message,
+      default: function() {
+        if(isYesDefault) {
+          return 'Y'
+        }
 
-      if (useDefault) {
-        return resolve(isYesDefault);
+        return null;
       }
+    }
+  ];
 
-      var isYes = answer.match(/^(yes|y)$/i);
-      return resolve(isYes);
-    });
-  });
+  return inquirer.prompt(questions).then(function(answers) {
+    console.log(answers.isYes);
+
+    return answers.isYes.match(/^(yes|y)$/i);
+  }).catch(function(err) {
+    console.log(err);
+  })
+
 };
 
 module.exports = prompt;
