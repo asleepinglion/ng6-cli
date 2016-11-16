@@ -9,7 +9,6 @@ var detect = require('detect-port');
 var Command = require('../../lib/command');
 var webpackValidate = require('../../lib/webpack-validator');
 var clearConsole = require('../../utils/clearConsole');
-var prompt = require('../../utils/prompt');
 var formatWebpackMessages = require('../../utils/formatWebpackMessages');
 
 process.env.NODE_ENV = 'development';
@@ -71,6 +70,8 @@ module.exports = Command.extend({
 
   setupCompiler: function(webpackConfig, host, port) {
 
+    console.log('port in setup:', port);
+
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
     this.compiler = webpack(webpackConfig);
@@ -96,16 +97,8 @@ module.exports = Command.extend({
       if (!messages.errors.length && !messages.warnings.length) {
         console.log(chalk.green('Compiled successfully!'));
         console.log();
-        console.log('The app is running at:');
-        console.log();
-        console.log('  ' + chalk.cyan('://' + host + ':' + port + '/'));
-        console.log();
-        console.log('BrowserSync should be running at:');
-        console.log();
-        console.log('  ' + chalk.cyan('://' + host + ':' + (port + 1) + '/'));
-        console.log();
         console.log('Note that the development build is not optimized.');
-        console.log('To create a production build, use ' + chalk.cyan('ng6 build') + '.');
+        console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
         console.log();
       }
 
@@ -204,6 +197,7 @@ module.exports = Command.extend({
     // We attempt to use the default port but if it is busy, we offer the user to
     // run on a different port. `detect()` Promise resolves to the next free port.
     detect(DEFAULT_PORT).then(function(port) {
+
       process.env.PORT = port;
 
       // need to require the webpack file after setting process.env.PORT
@@ -213,21 +207,8 @@ module.exports = Command.extend({
         webpackValidate(webpackConfig);
       }
 
-      if (port === DEFAULT_PORT) {
-        self.start(webpackConfig, port);
-        return;
-      }
+      self.start(webpackConfig, port);
 
-      clearConsole();
-      var question =
-        chalk.yellow('Something is already running on port ' + DEFAULT_PORT + '.') +
-        '\n\nWould you like to run the app on another port instead?';
-
-      prompt(question, true).then(function(shouldChangePort) {
-        if (shouldChangePort) {
-          self.start(webpackConfig, port);
-        }
-      });
     }).catch(function(err) {
       console.log(err);
     });
