@@ -28,7 +28,11 @@ module.exports = {
 
   entry: {
     // Setup our main entry point for processing
-    entry: [paths.entry],
+    // webpack-dev-server is included first for inline-reloading
+    entry: [
+      'webpack-dev-server/client?http://localhost:' + devServerPort + '/',
+      paths.entry
+    ],
 
     // group these modules into a vendor bundle
     //vendor: ['angular', 'angular-ui-router', 'angular-animate', 'ionic', 'ocLazyLoad'],
