@@ -70,8 +70,6 @@ module.exports = Command.extend({
 
   setupCompiler: function(webpackConfig, host, port) {
 
-    console.log('port in setup:', port);
-
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
     this.compiler = webpack(webpackConfig);
@@ -89,6 +87,8 @@ module.exports = Command.extend({
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
       clearConsole();
+
+      //todo: perhaps show the chunks compiled, at least on the first run.
 
       // We have switched off the default Webpack output in WebpackDevServer
       // options so we are going to "massage" the warnings and errors and present
@@ -121,6 +121,7 @@ module.exports = Command.extend({
           console.log(message);
           console.log();
         });
+
         // Teach some ESLint tricks.
         console.log('You may use special comments to disable some warnings.');
         console.log('Use ' + chalk.yellow('// eslint-disable-next-line') + ' to ignore the next line.');
