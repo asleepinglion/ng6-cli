@@ -61,7 +61,8 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|hooks)/,
+        //todo: This can be made simpler if we refactor stuff to live in the app folder which makes some sense ;) - Aaron
+        include: /(app|components|directives|filters|providers|services)/,
         loader: 'ng-annotate!babel?cacheDirectory'
       },
       {
@@ -118,7 +119,10 @@ module.exports = {
    Sass resources are loaded before each required scss file.
    Do not include anything that actually renders CSS otherwise it will be injected into every file.
    */
-  sassResources: [ './styles/_variables.scss' ],
+  sassResources: [
+    './styles/tools/_mixins.scss',
+    './styles/settings/_variables.scss'
+  ],
 
   /*
    The following resolve blocks setup the fallback paths to search use
