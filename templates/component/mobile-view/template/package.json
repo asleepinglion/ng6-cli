@@ -1,0 +1,7 @@
+{
+  "name": "<%= name %>",
+  "private": true,
+  "view": true,
+  "version": "0.1.0",
+  "description": ""
+}
