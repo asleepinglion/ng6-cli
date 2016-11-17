@@ -29,7 +29,25 @@ module.exports = Template.extend({
 
   },
 
+  onSuccess: function(installed) {
+    console.log('');
+    console.log(chalk.white('First ' + chalk.cyan('cd ' + this.name) + ' to enter the project root.'));
+
+    if( !installed ) {
+      console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install') + ' to install dependencies!'));
+    }
+
+    console.log(chalk.white('Then run ' + chalk.cyan(this.cli.bin + ' serve') + ' to view the project locally.'));
+    console.log('');
+    console.log('To add cordova platforms use: ' + chalk.cyan('cordova platform add ' + chalk.gray('[platform]')));
+    console.log('To add cordova plugins use: ' + chalk.cyan('cordova plugin add ' + chalk.gray('[plugin]')));
+    console.log('');
+  },
+
   done: function(name, destination) {
+
+    this.name = name;
+    this.destination = destination;
 
     var self = this;
 
@@ -44,6 +62,7 @@ module.exports = Template.extend({
 
       console.log(chalk.cyan(':: installing dependencies'), chalk.gray(' (this make take a few minutes)'));
       console.log();
+
       var spinner = new Spinner(chalk.cyan('%s'));
       spinner.start();
 
@@ -54,54 +73,13 @@ module.exports = Template.extend({
         spinner.stop();
         console.log(output);
 
-        if( code === 0 ) {
-
-          if( !shell.which('ionic') ) {
-            console.log('');
-            console.log(chalk.white('The application was created, dependencies installed, but could not find ' + chalk.cyan('ionic') + ' to restore state!'));
-            console.log('');
-            return;
-          }
-
-          shell.exec('ionic state restore', function(code) {
-
-            if( code === 0 ) {
-              console.log('');
-              console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-              console.log(chalk.white('Simply run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
-              console.log('');
-            } else {
-
-              console.log('');
-              console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-              console.log(chalk.white('Make sure to run ' + chalk.cyan('ionic state restore') + ' to install dependencies!'));
-              console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
-              console.log('');
-
-            }
-
-          });
-
-        } else {
-
-          console.log('');
-          console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-          console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install && ionic state restore') + ' to install dependencies!'));
-          console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
-          console.log('');
-
-        }
-
+        self.onSuccess(true);
 
       });
 
     } else {
 
-      console.log('');
-      console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-      console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install && ionic state restore') + ' to install dependencies!'));
-      console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
-      console.log('');
+      self.onSuccess();
 
     }
 

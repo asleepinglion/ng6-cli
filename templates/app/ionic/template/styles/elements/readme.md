@@ -1,0 +1,1 @@
+This folder should be used for styling standard html tags, such as `html`, `body`, or `h1-h6`.
