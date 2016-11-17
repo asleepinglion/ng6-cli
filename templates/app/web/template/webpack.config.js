@@ -61,7 +61,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|hooks)/,
+        include: /(app|components|directives|filters|providers|services)/,
         loader: 'ng-annotate!babel?cacheDirectory'
       },
       {
