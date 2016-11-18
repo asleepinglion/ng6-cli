@@ -5,6 +5,7 @@ var chalk = require('chalk');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var detect = require('detect-port');
+var Ora = require('ora');
 
 var Command = require('../../lib/command');
 var webpackValidate = require('../../lib/webpack-validator');
@@ -15,14 +16,13 @@ process.env.NODE_ENV = 'development';
 
 var DEFAULT_PORT = process.env.PORT || 3000;
 
-//todo: resolve issue with executing serve from somewhere other than project root.
-//todo: support custom server?
-
 module.exports = Command.extend({
 
   init: function() {
 
     this._super.apply(this, arguments);
+
+    this.ora = Ora();
 
     this.description = 'Watch, build, & serve the application in a local environment.';
     this.options = '';
@@ -70,6 +70,8 @@ module.exports = Command.extend({
 
   setupCompiler: function(webpackConfig, host, port) {
 
+    var self = this;
+
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
     this.compiler = webpack(webpackConfig);
@@ -80,12 +82,15 @@ module.exports = Command.extend({
     // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
     this.compiler.plugin('invalid', function() {
       clearConsole();
-      console.log('Compiling...');
+      self.spinner.stop();
+      self.spinner.start();
+      self.spinner.text = chalk.cyan('Compiling...');
     });
 
     // "done" event fires when Webpack has finished recompiling the bundle.
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
+      self.spinner.stop();
       clearConsole();
 
       //todo: perhaps show the chunks compiled, at least on the first run.
@@ -133,6 +138,9 @@ module.exports = Command.extend({
   },
 
   runDevServer: function(webpackConfig, host, port) {
+
+    var self = this;
+
     var devServer = new WebpackDevServer(this.compiler, {
       // Enable gzip compression of generated files.
       compress: true,
@@ -162,14 +170,20 @@ module.exports = Command.extend({
       }
 
       clearConsole();
-      console.log(chalk.cyan('Starting the development server...'));
+
       console.log();
+      self.spinner.start();
+      self.spinner.text = chalk.cyan('Starting the development server...');
+
     });
   },
 
   run: function() {
 
     var self = this;
+
+    this.spinner = this.ora.start();
+    this.spinner.stop();
 
     this.checkProject();
 
