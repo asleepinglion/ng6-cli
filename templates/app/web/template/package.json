@@ -10,7 +10,7 @@
     "serve": "webpack-dev-server",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "mocha ./{app,components,directives,filters,providers,services}/**/*.test.js --opts mocha.opts",
+    "test": "mocha ./{app,components,directives,filters,providers,services}/**/*.spec.js --opts mocha.opts",
     "test:watch": "npm run test -- -w"
   },
   "devDependencies": {
