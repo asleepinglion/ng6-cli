@@ -40,7 +40,7 @@ my-component
 
 ../my-component.module.js // component module file
 ../my-component.component.js // component definition
-../my-component.component.test.js // component test file
+../my-component.component.spec.js // component test file
 ../my-component.component.html // component template
 ../my-component.scss // component styles
 
