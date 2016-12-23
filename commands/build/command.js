@@ -46,7 +46,7 @@ module.exports = Command.extend({
     console.log(chalk.white('Building project with webpack by running `npm run build`'));
     console.log('');
 
-    const serveProcess = spawn('npm', ['run', 'build'], { stdio: 'inherit' });
+    const serveProcess = spawn('npm', ['run', 'build'], { stdio: 'inherit', shell: true });
 
   }
 });
