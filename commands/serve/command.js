@@ -1,14 +1,11 @@
 var fs = require('fs');
 var path = require('path');
-var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var detect = require('detect-port');
 var Ora = require('ora');
-
 var Command = require('../../lib/command');
-var webpackValidate = require('../../lib/webpack-validator');
 var clearConsole = require('../../utils/clearConsole');
 var formatWebpackMessages = require('../../utils/formatWebpackMessages');
 
@@ -64,11 +61,11 @@ module.exports = Command.extend({
 
   start: function(webpackConfig, port) {
     var host = process.env.HOST || 'localhost';
-    this.setupCompiler(webpackConfig, host, port);
+    this.setupCompiler(webpackConfig);
     this.runDevServer(webpackConfig, host, port);
   },
 
-  setupCompiler: function(webpackConfig, host, port) {
+  setupCompiler: function(webpackConfig) {
 
     var self = this;
 
@@ -164,7 +161,7 @@ module.exports = Command.extend({
 
 
     // Launch WebpackDevServer.
-    devServer.listen(port, function(err, result) {
+    devServer.listen(port, function(err) {
       if (err) {
         return console.log(err);
       }
@@ -217,10 +214,6 @@ module.exports = Command.extend({
 
       // need to require the webpack file after setting process.env.PORT
       var webpackConfig = require(webpackConfigPath);
-
-      if( !self.cli.isEnabled('skip-validate') ){
-        webpackValidate(webpackConfig);
-      }
 
       self.start(webpackConfig, port);
 

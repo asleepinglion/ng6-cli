@@ -4,7 +4,6 @@ var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 var webpack = require('webpack');
 var Command = require('../../lib/command');
-var webpackValidate = require('../../lib/webpack-validator');
 
 module.exports = Command.extend({
 
@@ -28,7 +27,7 @@ module.exports = Command.extend({
       process.exit(1);
     }
 
-    var webpackConfig = false;
+    var webpackConfig = null;
 
     var webpackRoot = path.resolve(projectRoot + '/webpack.config.js');
     var webpackProd = path.resolve(projectRoot + '/webpack.prod.config.js');
@@ -37,10 +36,6 @@ module.exports = Command.extend({
       webpackConfig = require(webpackProd);
     } else if( fs.existsSync(webpackRoot) ) {
       webpackConfig = require(webpackRoot);
-    }
-
-    if( !this.cli.isEnabled('skip-validate') ){
-      webpackValidate(webpackConfig);
     }
 
     console.log(chalk.white('Building project with webpack by running `npm run build`'));
