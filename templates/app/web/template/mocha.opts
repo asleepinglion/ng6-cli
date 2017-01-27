@@ -2,4 +2,5 @@
 --inline-diffs
 --growl
 --require test-setup.js
+--require babel-polyfill
 --require ignore-styles
