@@ -2,5 +2,6 @@ node_modules
 shared_modules
 build
 npm-debug.log
+yarn-error.log
 .idea
 .DS_Store
