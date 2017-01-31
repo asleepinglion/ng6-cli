@@ -1,11 +1,10 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
-// var webpack = require('webpack');
-// var WebpackDevServer = require('webpack-dev-server');
 var detect = require('detect-port');
 var Ora = require('ora');
 var _ = require('lodash');
+var semver = require('semver');
 var Command = require('../../lib/command');
 var clearConsole = require('../../utils/clearConsole');
 var formatWebpackMessages = require('../../utils/formatWebpackMessages');
@@ -60,31 +59,22 @@ module.exports = Command.extend({
 
   start: function(webpackConfig, port) {
     var host = process.env.HOST || 'localhost';
-    var config = this.extractConfig(webpackConfig);
-    this.setupCompiler(config);
-    this.runDevServer(config, host, port);
-  },
-
-  extractConfig: function(webpackConfig) {
-
-    if( _.isFunction(webpackConfig) ) {
-      return webpackConfig({ dev: true });
-    } else {
-      return webpackConfig;
-    }
+    this.setupCompiler(webpackConfig);
+    this.runDevServer(webpackConfig, host, port);
   },
 
   setupCompiler: function(webpackConfig) {
 
     var self = this;
 
-    var pkg = require(path.resolve(this.cli.reflect.projectRoot(), 'package.json'));
-    var webpackVersion = pkg.devDependencies.webpack;
+    var projectRoot = this.cli.reflect.projectRoot();
+
+    var webpackVersion = require(path.resolve(projectRoot, 'node_modules', 'webpack', 'package.json')).version;
 
     var webpack;
-    if( webpackVersion[0] === '1' || webpackVersion[1] === '1' ) {
+    if( semver.satisfies(webpackVersion, '1.x') ) {
       this.webpackVersion = 1;
-      webpack = require(path.resolve(this.cli.reflect.projectRoot(), 'node_modules', 'webpack'));
+      webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
     } else {
       this.webpackVersion = 2;
       webpack = require('webpack');
@@ -204,17 +194,7 @@ module.exports = Command.extend({
     });
   },
 
-  run: function() {
-
-    var self = this;
-
-    this.spinner = Ora().start(); // This initializes the spinner and attaches it to this so that other functions can use it.
-    this.spinner.stop(); // It is immediately stopped because it will be started in an async callback.
-
-    this.checkProject();
-
-    var projectRoot = this.cli.reflect.projectRoot();
-
+  getWebpackConfig: function(projectRoot) {
     var webpackConfigPath = '';
 
     var webpackDev = path.resolve(projectRoot + '/webpack.dev.config.js');
@@ -252,8 +232,29 @@ module.exports = Command.extend({
       console.log();
       process.exit(1);
     } else {
+      console.log();
       console.log(chalk.white('using webpack config found at ' + chalk.green(webpackConfigPath)));
+      console.log();
     }
+
+    var webpackConfig = require(webpackConfigPath);
+
+    if( _.isFunction(webpackConfig) ) {
+      return webpackConfig({ dev: true }); // --env.dev
+    }
+
+    return webpackConfig;
+
+  },
+
+  run: function() {
+
+    var self = this;
+
+    this.spinner = Ora().start(); // This initializes the spinner and attaches it to this so that other functions can use it.
+    this.spinner.stop(); // It is immediately stopped because it will be started in an async callback.
+
+    this.checkProject();
 
     if( this.cli.isEnabled('p') ) {
       DEFAULT_PORT = this.cli.request.getOption('p');
@@ -271,7 +272,7 @@ module.exports = Command.extend({
       process.env.PORT = port;
 
       // need to require the webpack file after setting process.env.PORT
-      var webpackConfig = require(webpackConfigPath);
+      var webpackConfig = self.getWebpackConfig(self.cli.reflect.projectRoot());
 
       self.start(webpackConfig, port);
 
