@@ -46,8 +46,8 @@
     "ora": "^1.1.0",
     "ouro-base": "0.9.0",
     "shelljs": "0.6.0",
-    "webpack": "^1.12.15",
-    "webpack-dev-server": "^1.16.2",
+    "webpack": "beta",
+    "webpack-dev-server": "beta",
     "yargs": "4.4.0"
   },
   "devDependencies": {

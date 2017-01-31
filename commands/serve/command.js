@@ -1,10 +1,11 @@
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
+// var webpack = require('webpack');
+// var WebpackDevServer = require('webpack-dev-server');
 var detect = require('detect-port');
 var Ora = require('ora');
+var _ = require('lodash');
 var Command = require('../../lib/command');
 var clearConsole = require('../../utils/clearConsole');
 var formatWebpackMessages = require('../../utils/formatWebpackMessages');
@@ -19,8 +20,6 @@ module.exports = Command.extend({
 
     this._super.apply(this, arguments);
 
-    this.ora = Ora();
-
     this.description = 'Watch, build, & serve the application in a local environment.';
     this.options = '';
     this.order = 1;
@@ -32,18 +31,18 @@ module.exports = Command.extend({
     var projectRoot = this.cli.reflect.projectRoot();
 
     if( !projectRoot || projectRoot != process.cwd() ) {
-      console.log('');
+      console.log();
       console.log(chalk.white('You must be in the project root in order to execute serve!'));
-      console.log('');
+      console.log();
       process.exit(1);
     }
 
     var nodeModulesExists = fs.existsSync(path.join(projectRoot, 'node_modules'));
 
     if( !nodeModulesExists ) {
-      console.log('');
+      console.log();
       console.log(chalk.white('All dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
-      console.log('');
+      console.log();
       process.exit(1);
     }
 
@@ -51,9 +50,9 @@ module.exports = Command.extend({
     var pkg = require(path.join(projectRoot, 'package.json'));
 
     if( nodeModules.length < (pkg.dependencies.length + pkg.devDependencies.length) ) {
-      console.log('');
+      console.log();
       console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
-      console.log('');
+      console.log();
       process.exit(1);
     }
 
@@ -61,13 +60,39 @@ module.exports = Command.extend({
 
   start: function(webpackConfig, port) {
     var host = process.env.HOST || 'localhost';
-    this.setupCompiler(webpackConfig);
-    this.runDevServer(webpackConfig, host, port);
+    var config = this.extractConfig(webpackConfig);
+    this.setupCompiler(config);
+    this.runDevServer(config, host, port);
+  },
+
+  extractConfig: function(webpackConfig) {
+
+    if( _.isFunction(webpackConfig) ) {
+      return webpackConfig({ env: true });
+    } else {
+      return webpackConfig;
+    }
   },
 
   setupCompiler: function(webpackConfig) {
 
     var self = this;
+
+    var pkg = require(path.resolve(this.cli.reflect.projectRoot(), 'package.json'));
+    var webpackVersion = pkg.devDependencies.webpack;
+
+    var webpack;
+    if( webpackVersion[0] === '1' || webpackVersion[1] === '1' ) {
+      this.webpackVersion = 1;
+      webpack = require(path.resolve(this.cli.reflect.projectRoot(), 'node_modules', 'webpack'));
+    } else {
+      this.webpackVersion = 2;
+      webpack = require('webpack');
+    }
+
+    console.log();
+    console.log(chalk.white('Your using ' + chalk.cyan('webpack') + '@' + chalk.green(webpackVersion) + ' and we think you\'re using ' + chalk.green('v' + this.webpackVersion)));
+    console.log();
 
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
@@ -78,7 +103,7 @@ module.exports = Command.extend({
     // bundle, so if you refresh, it'll wait instead of serving the old one.
     // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
     this.compiler.plugin('invalid', function() {
-      clearConsole();
+      // clearConsole();
       self.spinner.stop();
       self.spinner.start();
       self.spinner.text = chalk.cyan('Compiling...');
@@ -88,9 +113,9 @@ module.exports = Command.extend({
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
       self.spinner.stop();
-      clearConsole();
+      // clearConsole();
 
-      //todo: perhaps show the chunks compiled, at least on the first run.
+      // TODO: perhaps show the chunks compiled, at least on the first run.
 
       // We have switched off the default Webpack output in WebpackDevServer
       // options so we are going to "massage" the warnings and errors and present
@@ -138,6 +163,13 @@ module.exports = Command.extend({
 
     var self = this;
 
+    var WebpackDevServer;
+    if( this.webpackVersion === 1 ) {
+      WebpackDevServer = require(path.resolve(this.cli.reflect.projectRoot(), 'node_modules', 'webpack-dev-server'));
+    } else {
+      WebpackDevServer = require('webpack-dev-server');
+    }
+
     var devServer = new WebpackDevServer(this.compiler, {
       // Enable gzip compression of generated files.
       compress: true,
@@ -166,7 +198,7 @@ module.exports = Command.extend({
         return console.log(err);
       }
 
-      clearConsole();
+      // clearConsole();
 
       console.log();
       self.spinner.start();
@@ -179,8 +211,8 @@ module.exports = Command.extend({
 
     var self = this;
 
-    this.spinner = this.ora.start();
-    this.spinner.stop();
+    this.spinner = Ora().start();
+    this.spinner.stop(); // TODO: why is this here.
 
     this.checkProject();
 
@@ -189,12 +221,41 @@ module.exports = Command.extend({
     var webpackConfigPath = '';
 
     var webpackDev = path.resolve(projectRoot + '/webpack.dev.config.js');
+    var webpackDevBabel = path.resolve(projectRoot + '/webpack.dev.config.babel.js');
     var webpackRoot = path.resolve(projectRoot + '/webpack.config.js');
+    var webpackRootBabel = path.resolve(projectRoot + '/webpack.config.babel.js');
 
     if( fs.existsSync(webpackDev) ) {
       webpackConfigPath = webpackDev;
+    } else if( fs.existsSync(webpackDevBabel) ) {
+      webpackConfigPath = webpackDevBabel;
     } else if( fs.existsSync(webpackRoot) ) {
       webpackConfigPath = webpackRoot;
+    } else if( fs.existsSync(webpackRootBabel) ) {
+      webpackConfigPath = webpackRootBabel;
+    }
+
+    if( this.cli.isEnabled('config') ) {
+      webpackConfigPath = path.resolve(projectRoot, this.cli.request.getOption('config'));
+    }
+
+    if(!webpackConfigPath) {
+      console.log();
+
+      if( this.cli.isEnabled('config') ) {
+        console.log(chalk.white('You specified a webpack config file at ' + chalk.yellow(webpackConfigPath) + ' but I was unable to find one ther.'));
+      } else {
+        console.log(chalk.white('Cannot find webpack.config looked at '
+          + '\n\t' + chalk.yellow(webpackDev)
+          + '\n\t' + chalk.yellow(webpackDevBabel)
+          + '\n\t' + chalk.yellow(webpackRoot)
+          + '\n\t' + chalk.yellow(webpackRoot)
+        ));
+      }
+      console.log();
+      process.exit(1);
+    } else {
+      console.log(chalk.white('using webpack config found at ' + chalk.green(webpackConfigPath)));
     }
 
     if( this.cli.isEnabled('p') ) {
