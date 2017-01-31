@@ -68,7 +68,7 @@ module.exports = Command.extend({
   extractConfig: function(webpackConfig) {
 
     if( _.isFunction(webpackConfig) ) {
-      return webpackConfig({ env: true });
+      return webpackConfig({ dev: true });
     } else {
       return webpackConfig;
     }
@@ -90,10 +90,6 @@ module.exports = Command.extend({
       webpack = require('webpack');
     }
 
-    console.log();
-    console.log(chalk.white('Your using ' + chalk.cyan('webpack') + '@' + chalk.green(webpackVersion) + ' and we think you\'re using ' + chalk.green('v' + this.webpackVersion)));
-    console.log();
-
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
     this.compiler = webpack(webpackConfig);
@@ -103,8 +99,8 @@ module.exports = Command.extend({
     // bundle, so if you refresh, it'll wait instead of serving the old one.
     // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
     this.compiler.plugin('invalid', function() {
-      // clearConsole();
       self.spinner.stop();
+      clearConsole();
       self.spinner.start();
       self.spinner.text = chalk.cyan('Compiling...');
     });
@@ -113,7 +109,7 @@ module.exports = Command.extend({
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
       self.spinner.stop();
-      // clearConsole();
+      clearConsole();
 
       // TODO: perhaps show the chunks compiled, at least on the first run.
 
@@ -124,6 +120,7 @@ module.exports = Command.extend({
       if (!messages.errors.length && !messages.warnings.length) {
         console.log(chalk.green('Compiled successfully!'));
         console.log();
+        console.log(chalk.white('Your using ' + chalk.cyan('webpack') + '@' + chalk.green(webpackVersion) + ' and we think you\'re using ' + chalk.green('v' + self.webpackVersion)));
         console.log('Note that the development build is not optimized.');
         console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
         console.log();
@@ -198,7 +195,7 @@ module.exports = Command.extend({
         return console.log(err);
       }
 
-      // clearConsole();
+      clearConsole();
 
       console.log();
       self.spinner.start();
@@ -211,8 +208,8 @@ module.exports = Command.extend({
 
     var self = this;
 
-    this.spinner = Ora().start();
-    this.spinner.stop(); // TODO: why is this here.
+    this.spinner = Ora().start(); // This initializes the spinner and attaches it to this so that other functions can use it.
+    this.spinner.stop(); // It is immediately stopped because it will be started in an async callback.
 
     this.checkProject();
 
