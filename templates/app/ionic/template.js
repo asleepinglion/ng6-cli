@@ -46,12 +46,12 @@ module.exports = Template.extend({
 
   done: function(name, destination) {
 
-    if( (this.cli.request.getOption('install') || this.cli.request.getOption('i')) ) {
+    if( this.cli.request.getOption('install') || this.cli.request.getOption('i') ) {
 
-      if( !shell.which('npm') ) {
-        console.log('');
-        console.log(chalk.white('The application was created, but could not find ' + chalk.cyan('npm') + ' to install dependencies!'));
-        console.log('');
+      if( !shell.which('npm') || !shell.which('yarn') ) {
+        console.log();
+        console.log(chalk.white('The application was created, but could not find ' + chalk.cyan('npm') + ' or ' + chalk.cyan('yarn') + ' to install dependencies!'));
+        console.log();
         return;
       }
 

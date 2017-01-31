@@ -1,7 +1,7 @@
 var chalk = require('chalk');
 var Template = require('../../../lib/template');
 var shell = require('shelljs');
-var Spinner = require('cli-spinner').Spinner;
+var spawn = require('cross-spawn');
 
 module.exports = Template.extend({
 
@@ -23,49 +23,44 @@ module.exports = Template.extend({
     return config;
   },
 
+  onSuccess: function(installed, name) {
+
+    console.log();
+    console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
+
+    if( !installed ) {
+      console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + ' to install dependencies!'));
+    }
+
+    console.log(chalk.white('Then run ' + chalk.cyan(this.cli.bin + ' serve') + ' to view the project locally.'));
+    console.log();
+  },
+
   done: function(name, destination) {
 
-    var self = this;
+    if( this.cli.request.getOption('install') || this.cli.request.getOption('i') ) {
 
-    if( (self.cli.request.getOption('install') || self.cli.request.getOption('i')) ) {
-
-      if( !shell.which('npm') ) {
-        console.log('');
-        console.log(chalk.white('The application was created, but could not find ' + chalk.cyan('npm') + ' to install dependencies!'));
-        console.log('');
+      if( !shell.which('npm') || !shell.which('yarn') ) {
+        console.log();
+        console.log(chalk.white('The application was created, but could not find ' + chalk.cyan('npm') + ' or ' + chalk.cyan('yarn') + ' to install dependencies!'));
+        console.log();
         return;
       }
 
       console.log(chalk.cyan(':: installing dependencies'), chalk.gray(' (this make take a few minutes)'));
       console.log();
-      var spinner = new Spinner(chalk.cyan('%s'));
-      spinner.start();
+
+      var installCommand = shell.which('yarn') ? 'yarn' : 'npm install';
 
       shell.cd(destination);
 
-      shell.exec('npm install', function(code, output) {
+      spawn.sync(installCommand, ['install'], { stdio: 'inherit' });
 
-        spinner.stop();
-        console.log(output);
-
-        console.log('');
-        if( destination !== process.cwd() ) {
-          console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-        }
-        console.log(chalk.white('Simply run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally!'));
-        console.log('');
-
-      });
+      this.onSuccess(true, name);
 
     } else {
 
-      console.log('');
-      if( destination !== process.cwd() ) {
-        console.log(chalk.white('First ' + chalk.cyan('cd ' + name) + ' to enter the project root.'));
-      }
-      console.log(chalk.white('Make sure to run ' + chalk.cyan('npm install') + ' to install dependencies!'));
-      console.log(chalk.white('Then run ' + chalk.cyan(self.cli.bin + ' serve') + ' to view the project locally.'));
-      console.log('');
+      this.onSuccess(false, name);
 
     }
   }
