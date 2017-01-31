@@ -104,7 +104,8 @@ module.exports = Command.extend({
       }
 
       console.log(stats.toString({
-        colors: true
+        colors: true,
+        chunks: false
       }));
     });
 
