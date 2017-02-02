@@ -42,7 +42,7 @@ module.exports = Template.extend({
 
       if( !shell.which('npm') || !shell.which('yarn') ) {
         console.log();
-        console.log(chalk.white('The application was created, but could not find ' + chalk.cyan('npm') + ' or ' + chalk.cyan('yarn') + ' to install dependencies!'));
+        console.log(chalk.white('The library was created, but could not find ' + chalk.cyan('npm') + ' or ' + chalk.cyan('yarn') + ' to install dependencies!'));
         console.log();
         return;
       }
