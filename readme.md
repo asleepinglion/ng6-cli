@@ -8,10 +8,10 @@
 > **All submissions (issues, feature requests, pull requests, or otherwise) are welcome and very much appreciated!**
 
 The **`ng6-cli`** provides a set of tools to automate and simplify the development of modern large-scale angular applications. This includes tools for scaffolding new applications (web & mobile) as well as angular artifacts such as **`modules`**,
-**`components`**, **`directives`**, **`services`**, **`filters`**, and **`providers`**.
+**`components`**, **`directives`**, **`services`**, **`filters`**, **`providers`**, and even **component libraries**.
 
 
-![Getting Started](https://github.com/asleepinglion/ng6-cli/blob/master/docs/getting-started.gif?raw=true "Getting Started...")
+![Getting Started](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/getting-started.gif?raw=true "Getting Started...")
 
 
 **Disclaimer:** It's important to make sure you initialize your project with **`git`** and vet all changes made by the **`ng6-cli`** before you commit. Its critical that you understand all changes you are making to the codebase of the project you are working on.
@@ -21,10 +21,14 @@ The **`ng6-cli`** provides a set of tools to automate and simplify the developme
 
 **We highly recommend using the [Node Version Manager](https://github.com/creationix/nvm) to install Node 6+. This will not only give you the ability to switch node versions easily, but will help make sure that globally installed packages do not require using `sudo` to install.**
 
-You can use the npm to install the ng6-cli:
+You can use the `npm` or `yarn` to install the `ng6-cli`:
 
-```
-npm install -g ng6-cli
+```shell
+npm install --global ng6-cli
+
+# or
+
+yarn global add ng6-cli
 ```
 
 ## Getting Started
@@ -37,26 +41,28 @@ ng6
 
 **To get help with a specific command:**
 
-```
+```shell
 ng6 help [command]
 ```
 
 **To create a new application simply run:**
 
-```
-ng6 new app my-app
+```shell
+ng6 new app [app-name]
 ```
 
 **or to create a an app within the current directory:**
 
-```
+```shell
 ng6 new app .
 ```
 
 **or to create an app using a different application template:**
 
-```
-ng6 new app:ionic my-app
+**Note**: below `template-name` could be `ionic` or `web`
+
+```shell
+ng6 new app:[template-name] [app-name]
 ```
 
 ## Highlights
@@ -85,9 +91,9 @@ All of this is primarily achieved by using a simple inheritance model. "Classes"
 
 #### Code Analysis & Refactorizations
 
-By combining the same techniques used by modern linting tools like ESLint and JSCS with the knowledge of this particular architecture, we are able to improve the developer experience and make tools that can continue to provide use beyond initial project creation.
+By combining the same techniques used by modern linting tools like [`eslint`](http://eslint.org/) with the knowledge of this particular architecture, we are able to improve the developer experience and make tools that can continue to provide use beyond initial project creation.
 
-As mentioned, [acorn.js](https://github.com/ternjs/acorn) is used to parse the abstract syntax tree. Instead of modifying the AST and using escodegen to convert it back to JS (which causes all sorts of side effects to the code, lost formatting, etc), the **`ng6-cli`** simply uses the region information to know where to insert text. The conventions of the architecture inform the naming and location of files. This empowers the creation of a powerful set of tools to develop rapidly & focus on the actual app, not the glue the binds it all together.
+As mentioned, [`acorn.js`](https://github.com/ternjs/acorn) is used to parse the abstract syntax tree. Instead of modifying the AST and using [`escodegen`](https://github.com/estools/escodegen) to convert it back to JS (which causes all sorts of side effects to the code, lost formatting, etc), the **`ng6-cli`** simply uses the region information to know where to insert text. The conventions of the architecture inform the naming and location of files. This empowers the creation of a powerful set of tools to develop rapidly & focus on the actual app, not the glue the binds it all together.
 
 > In the very near future we will also support tools for moving and copying artifacts. Your IDE can certainly help you do a lot of these things, but the tooling has the advantage of understanding the specific architecture at play.
 
@@ -99,7 +105,7 @@ You can configure **`ng6`** options at the user or project levels. This is done 
 
 > At the moment there are no exposed options, so this feature isn't very helpful. But in the future this will allow you to enable or disable features as well as provide configuration settings for things like, publishing and consuming modules.
 
-The file used for configuration settings can be changed if you are extending the CLI itself. Check out the [Custom CLI](https://github.com/asleepinglion/ng6-cli/blob/master/docs/custom-cli.md) documentation for more information on extending the CLI.
+The file used for configuration settings can be changed if you are extending the CLI itself. Check out the [Custom CLI](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/custom-cli.md) documentation for more information on extending the CLI.
 
 ## Commands
 
@@ -119,7 +125,7 @@ ng6
 - **`ng6 move`** Move an artifact.
 - **`ng6 help`** Display help information.
 
-You can also create your own [Custom Commands](https://github.com/asleepinglion/ng6-cli/blob/master/docs/commands.md) for your project, team, or enterprise.
+You can also create your own [Custom Commands](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/commands.md) for your project, team, or enterprise.
 
 ## Templates
 
@@ -129,28 +135,26 @@ There are a number of templates provided by ng6 for scaffolding new mobile & web
 ng6 list templates
 ```
 
-You can also create custom templates when you extend the CLI or within your project. Check out the section on [Custom Templates](https://github.com/asleepinglion/ng6-cli/blob/master/docs/templates.md) for more information on creating your own templates.
+You can also create custom templates when you extend the CLI or within your project. Check out the section on [Custom Templates](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/templates.md) for more information on creating your own templates.
 
 
 ## Documentation
 
-- [Application Architecture](https://github.com/asleepinglion/ng6-cli/blob/master/docs/architecture.md)
-- [CLI Architecture](https://github.com/asleepinglion/ng6-cli/blob/master/docs/cli-architecture.md)
-- [Application Scaffolding](https://github.com/asleepinglion/ng6-cli/blob/master/docs/scaffolding.md)
-- [Local Development](https://github.com/asleepinglion/ng6-cli/blob/master/docs/local-development.md)
-- [Mobile Development](https://github.com/asleepinglion/ng6-cli/blob/master/docs/mobile-development.md)
-- [Custom CLI](https://github.com/asleepinglion/ng6-cli/blob/master/docs/custom-cli.md)
-- [Custom Commands](https://github.com/asleepinglion/ng6-cli/blob/master/docs/commands.md)
-- [Custom Templates](https://github.com/asleepinglion/ng6-cli/blob/master/docs/templates.md)
+- [Application Architecture](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/architecture.md)
+- [CLI Architecture](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/cli-architecture.md)
+- [Application Scaffolding](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/scaffolding.md)
+- [Local Development](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/local-development.md)
+- [Mobile Development](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/mobile-development.md)
+- [Custom CLI](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/custom-cli.md)
+- [Custom Commands](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/commands.md)
+- [Custom Templates](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/templates.md)
 
 ## What's Next?
 
-Please take a look at the [Development Changelog](https://github.com/asleepinglion/ng6-cli/blob/master/changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future.
+Please take a look at the [Development Changelog](https://github.com/UltimateSoftware/ng6-cli/blob/master/changelog.md) to see what we've been working on and the changes we've made. Here are a few things we are planning or thinking about for future.
 
 - Improved Documentation
 - Class & Method JSDocs
-- Linting Tools & Tests
-- Build Optimizations
 - Installed Commands & Templates
 - Publishing & Consuming Modules
 - SystemJS & TypeScript Templates
