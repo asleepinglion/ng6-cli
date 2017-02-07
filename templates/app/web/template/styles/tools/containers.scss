@@ -1,0 +1,7 @@
+@mixin containers__responsive($screen-width) {
+  @each $size, $width in $screen-limits {
+    &--#{$size}\@#{$screen-width} {
+      max-width: $width;
+    }
+  }
+}

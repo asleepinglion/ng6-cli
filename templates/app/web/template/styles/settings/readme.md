@@ -1,1 +1,1 @@
-This folder should be used for global settings and variables, like color palette's and theme variables. 
+This folder should be used for global settings and design tokens, like color palette's, fonts, spacing, animation, etc. 
