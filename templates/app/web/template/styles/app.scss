@@ -5,12 +5,14 @@
 // Imported via Webpack's Sass Resources configuration.
 
 // GENERIC
-//@import '~reset-css/reset'; //npm install reset-css
+@import '~reset-css/reset'; //npm install reset-css
 //@import '~normalize-css/normalize.css'; //npm install normalize-css
+@import "generic/box-sizing";
 
 // FONTS
 
 // ELEMENTS
+@import "elements/page";
 
 // OBJECTS
 @import "objects/containers";
