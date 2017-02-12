@@ -11,6 +11,7 @@ module.exports = Command.extend({
     this._super.apply(this, arguments);
     this.description = 'Copy an artifact to a new location.';
     this.options = '';
+    this.category = "refactor";
     this.order = 12;
 
   },
@@ -93,8 +94,8 @@ module.exports = Command.extend({
     var options = {};
 
     //setup file names to change
-    options.rename = {};
-    options.rename[oldModuleName] = moduleName;
+    options.rename = { startsWith: {}};
+    options.rename.startsWith[oldModuleName] = moduleName;
 
     //setup words to replace in source
     options.replace = [];

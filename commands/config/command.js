@@ -7,6 +7,7 @@ module.exports = Command.extend({
     this._super.apply(this, arguments);
 
     this.description = 'Configure User & Project level settings.';
+    this.category = "other";
     this.options = '';
     this.order = 15;
     this.questions = [];

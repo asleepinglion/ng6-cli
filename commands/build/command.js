@@ -13,6 +13,7 @@ module.exports = Command.extend({
     this._super.apply(this, arguments);
 
     this.description = 'Build the project with webpack.';
+    this.category = "build";
     this.options = '';
     this.order = 2;
   },
@@ -39,7 +40,7 @@ module.exports = Command.extend({
       webpackConfig = require(webpackRoot);
     }
 
-    if( !this.cli.isEnabled('skip-validate') ){
+    if( !this.cli.isEnabled('skip-validate') ) {
       webpackValidate(webpackConfig);
     }
 

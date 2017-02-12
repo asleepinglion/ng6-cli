@@ -6,6 +6,8 @@ var columnify = require('columnify');
 var Command = require('../../lib/command');
 var _ = require('lodash');
 var ejs = require('ejs');
+var categories = require('../../categories.json');
+var wrap = require('word-wrap');
 
 module.exports = Command.extend({
 
@@ -15,6 +17,7 @@ module.exports = Command.extend({
 
     this.description = 'Display this list of help, or help for a specific command.';
     this.options = '[command]';
+    this.category = "other";
     this.order = '500';
 
     //setup options for the marked-terminal renderer
@@ -54,64 +57,113 @@ module.exports = Command.extend({
   displayHelp: function() {
 
     var self = this;
-
-    console.log(chalk.white('Usage:'), chalk.cyan(this.cli.bin), chalk.gray('[options]'), chalk.gray('[command]'), chalk.gray('[args...]'));
-    console.log('');
-    console.log(chalk.white('Available Commands:'));
-
-    console.log('');
-
     var commandList = [];
+    var commandsToPrint = [];
 
+    console.log(chalk.white("Getting started is easy! Create an app with "+chalk.cyan(this.cli.bin+" new")+" or "+chalk.cyan(this.cli.bin+" clone")+" an existing project."));
+    console.log(chalk.white("If you need more help with a specific command try: ")+chalk.cyan(this.cli.bin + ' help'), chalk.gray('[command]'));
+    console.log();
+    console.log(chalk.white(chalk.bold('Usage:')), chalk.cyan(this.cli.bin), chalk.white('[command]'), chalk.gray('[args...]'), chalk.gray('[options]'));
+
+    //convert command list into array
     Object.keys(this.cli.commands.all()).map(function(commandName) {
       commandList.push(self.cli.commands.get(commandName));
     });
 
-    commandList = _.orderBy(commandList, 'order');
+    //group commands by category
+    commandList = _.groupBy(commandList, 'category');
 
-    var availableCommands = [];
+    //loop through categories
+    Object.keys(categories).map(function(category) {
 
-    commandList.map(function(command) {
+      //localize the commands in this category
+      var categoryCommands = commandList[category];
 
-      var options =  '';
+      //only list category if commands exist
+      if( categoryCommands && categoryCommands.length > 0 ) {
 
-      if(typeof command.options === 'object') {
-        options = Object.keys(command.options).map(function(option){
-          return '[' + option + ']';
+        console.log();
+
+        //sort by the order value
+        categoryCommands = _.orderBy(categoryCommands, 'order');
+
+        //display category heading
+        console.log(chalk.bold(chalk.white("» "+categories[category].name)) + chalk.gray(" - " + categories[category].shortDescription));
+        //console.log();
+        //console.log(chalk.gray(wrap(categories[category].description, {width: 70})));
+        console.log();
+
+        categoryCommands.map(function(command) {
+
+          commandsToPrint.push({
+            spacer: '',
+            command: self.commandToString(command),
+            description: chalk.white(command.description)
+          });
         });
-        options = options.join(' ');
-      } else {
-        options = command.options;
-      }
 
-      availableCommands.push({
-        spacer: '',
-        command: chalk.bold.cyan(command.name) + ' ' + chalk.gray(options),
-        description: chalk.white(command.description)
-      });
+        self.writeColumns(commandsToPrint);
+        commandsToPrint = [];
+
+      }
 
     });
 
-    console.log(columnify(availableCommands, {
+  },
+
+  writeColumns: function(columns) {
+    console.log(columnify(columns, {
       showHeaders: false,
       config: {
         spacer: {
           minWidth: 1
         },
         command: {
-          minWidth: 30,
-          paddingChr: '.'
+          minWidth: 25
         },
         description: {
           maxWidth: 75
         }
       }
     }));
+  },
 
-    console.log('');
+  commandToString: function(command) {
 
-    console.log(chalk.white('For help with a specific command:'), chalk.cyan(this.cli.bin + ' help'), chalk.gray('[command]'));
+    var commandName = command.name;
+    var commandOptions = this.optionsToString(command.options);
+    var dots = 25;
+    var dotsStr = '';
 
+    dots -= commandName.length;
+
+    var commandStr = chalk.bold.cyan(command.name);
+    if( commandOptions.length ) {
+      commandStr += ' ' + chalk.gray(commandOptions);
+      dots -= commandOptions.length+1;
+    }
+
+    for( var i = 0; i < dots; i++ ) {
+      dotsStr += '.';
+    }
+
+    commandStr  += ' ' + chalk.gray(dotsStr);
+
+    return commandStr;
+  },
+
+  optionsToString: function(options) {
+    var optionsString =  '';
+
+    if(typeof options === 'object') {
+      optionsString = Object.keys(options).map(function(option){
+        return '[' + option + ']';
+      });
+      optionsString = optionsString.join(' ');
+    } else {
+      optionsString = options;
+    }
+    return optionsString;
   }
 
 });
