@@ -1,0 +1,26 @@
+{
+  "scaffold": {
+    "name": "Scaffold",
+    "shortDescription": "Create new applications and artifacts, like components & servics.",
+    "description": "Scaffold a new application or use the list command to find other artifacts you can make, like components & services."
+  },
+  "build": {
+    "name": "Build",
+    "shortDescription": "Serve & test locally or build & deploy to production.",
+    "description": "Serve & test your application locally and when you're ready, build and deploy your application for production."
+  },
+  "collaborate": {
+    "name": "Collaborate",
+    "shortDescription": "Work with your team on your project & it's shared modules.",
+    "description": "Tools to clone or checkout branches across projects (including shared modules)."
+  },
+  "refactor": {
+    "name": "Refactor",
+    "shortDescription": "Make quick changes to your application's modules & artifacts.",
+    "description": "Tools to modify your existing application."
+  },
+  "other": {
+    "name": "Other",
+    "shortDescription": "Reflection tools, configuration, etc."
+  }
+}

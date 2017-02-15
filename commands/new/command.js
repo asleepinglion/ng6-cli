@@ -12,6 +12,7 @@ module.exports = Command.extend({
     this.templates = this.cli.templates;
 
     this.description = 'Scaffold a new app, component, service, command, or template.';
+    this.category = "scaffold";
     this.options = '[type] [name]';
     this.order = 4;
 

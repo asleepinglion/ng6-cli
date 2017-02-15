@@ -94,7 +94,8 @@ module.exports = (env) => {
                 loader: 'sass-resources-loader',
                 options: {
                   resources: [
-                    './styles/settings/_variables.scss',
+                    './styles/settings/global.scss',
+                    './styles/tools/**/*.scss',
                   ],
                 },
               },
@@ -120,7 +121,8 @@ module.exports = (env) => {
                 loader: 'sass-resources-loader',
                 options: {
                   resources: [
-                    './styles/settings/_variables.scss',
+                    './styles/settings/global.scss',
+                    './styles/tools/**/*.scss',
                   ],
                 },
               },

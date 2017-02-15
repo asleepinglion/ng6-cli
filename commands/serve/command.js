@@ -20,6 +20,7 @@ module.exports = Command.extend({
 
     this.description = 'Watch, build, & serve the application in a local environment.';
     this.options = '';
+    this.category = "build";
     this.order = 1;
   },
 
@@ -112,6 +113,8 @@ module.exports = Command.extend({
         console.log();
         console.log('Note that the development build is not optimized.');
         console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
+        console.log();
+        console.log('Starting BrowserSync...');
         console.log();
       }
 

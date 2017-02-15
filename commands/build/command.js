@@ -11,6 +11,7 @@ module.exports = Command.extend({
     this._super.apply(this, arguments);
 
     this.description = 'Build the project with webpack.';
+    this.category = 'build';
     this.options = '';
     this.order = 2;
   },

@@ -4,7 +4,7 @@ module.exports = Template.extend({
 
   init: function() {
     this._super.apply(this, arguments);
-    this.description = 'An angular.component following industry best practices.'
+    this.description = 'An Ionic directive-based view component with replace enabled.'
   },
 
   config: function() {

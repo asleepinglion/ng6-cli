@@ -47,6 +47,8 @@
   "dependencies": {
     "angular": "1.5.8",
     "angular-animate": "1.5.8",
-    "angular-ui-router": "^0.4.2"
+    "angular-ui-router": "^0.4.2",
+    "oclazyload": "1.0.9",
+    "reset-css": "^2.2.0"
   }
 }

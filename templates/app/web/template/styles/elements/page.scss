@@ -1,0 +1,9 @@
+html {
+  font-family: $text-font-family;
+  font-weight: $text-font-weight;
+  font-size: $text-font-size-base;
+  line-height: $text-line-height;
+  color: $text-color;
+  min-height: 100%;
+  overflow-y: scroll;
+}

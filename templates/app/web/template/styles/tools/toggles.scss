@@ -1,0 +1,3 @@
+@mixin toggle__track--background-color($track-color: $toggle-track-background-color) {
+  background-color: $track-color;
+}

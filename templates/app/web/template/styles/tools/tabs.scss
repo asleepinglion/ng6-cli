@@ -1,0 +1,3 @@
+@mixin tab-heading--color($active-color: $tab-heading-active-box-shadow-color) {
+  box-shadow: 0 -.2em 0 0 $active-color inset;
+}
