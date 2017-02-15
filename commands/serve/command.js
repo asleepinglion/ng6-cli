@@ -4,7 +4,6 @@ var chalk = require('chalk');
 var detect = require('detect-port');
 var Ora = require('ora');
 var _ = require('lodash');
-var semver = require('semver');
 var Command = require('../../lib/command');
 var clearConsole = require('../../utils/clearConsole');
 var formatWebpackMessages = require('../../utils/formatWebpackMessages');
@@ -40,7 +39,7 @@ module.exports = Command.extend({
 
     if( !nodeModulesExists ) {
       console.log();
-      console.log(chalk.white('All dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
+      console.log(chalk.white('All dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
       console.log();
       process.exit(1);
     }
@@ -50,7 +49,17 @@ module.exports = Command.extend({
 
     if( nodeModules.length < (pkg.dependencies.length + pkg.devDependencies.length) ) {
       console.log();
-      console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + '?'));
+      console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
+      console.log();
+      process.exit(1);
+    }
+
+    var webpackExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack'));
+    var webpackDevServerExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack-dev-server'));
+
+    if( !webpackExists || !webpackDevServerExists ) {
+      console.log();
+      console.log(chalk.white('webpack or webpack-dev-server seem to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
       console.log();
       process.exit(1);
     }
@@ -69,16 +78,7 @@ module.exports = Command.extend({
 
     var projectRoot = this.cli.reflect.projectRoot();
 
-    var webpackVersion = require(path.resolve(projectRoot, 'node_modules', 'webpack', 'package.json')).version;
-
-    var webpack;
-    if( semver.satisfies(webpackVersion, '1.x') ) {
-      this.webpackVersion = 1;
-      webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
-    } else {
-      this.webpackVersion = 2;
-      webpack = require('webpack');
-    }
+    var webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
 
     // "Compiler" is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
@@ -110,7 +110,6 @@ module.exports = Command.extend({
       if (!messages.errors.length && !messages.warnings.length) {
         console.log(chalk.green('Compiled successfully!'));
         console.log();
-        console.log(chalk.white('Your using ' + chalk.cyan('webpack') + '@' + chalk.green(webpackVersion) + ' and we think you\'re using ' + chalk.green('v' + self.webpackVersion)));
         console.log('Note that the development build is not optimized.');
         console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
         console.log();
@@ -150,12 +149,7 @@ module.exports = Command.extend({
 
     var self = this;
 
-    var WebpackDevServer;
-    if( this.webpackVersion === 1 ) {
-      WebpackDevServer = require(path.resolve(this.cli.reflect.projectRoot(), 'node_modules', 'webpack-dev-server'));
-    } else {
-      WebpackDevServer = require('webpack-dev-server');
-    }
+    var WebpackDevServer = require(path.resolve(this.cli.reflect.projectRoot(), 'node_modules', 'webpack-dev-server'));
 
     var devServer = new WebpackDevServer(this.compiler, {
       // Enable gzip compression of generated files.

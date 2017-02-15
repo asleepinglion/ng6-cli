@@ -2,7 +2,6 @@ var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
 var _ = require('lodash');
-var semver = require('semver');
 var Command = require('../../lib/command');
 
 module.exports = Command.extend({
@@ -14,6 +13,48 @@ module.exports = Command.extend({
     this.description = 'Build the project with webpack.';
     this.options = '';
     this.order = 2;
+  },
+
+  checkProject: function() {
+
+    //resolve project root
+    var projectRoot = this.cli.reflect.projectRoot();
+
+    if( !projectRoot || projectRoot != process.cwd() ) {
+      console.log();
+      console.log(chalk.white('You must be in the project root in order to execute serve!'));
+      console.log();
+      process.exit(1);
+    }
+
+    var nodeModulesExists = fs.existsSync(path.join(projectRoot, 'node_modules'));
+
+    if( !nodeModulesExists ) {
+      console.log();
+      console.log(chalk.white('All dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
+      console.log();
+      process.exit(1);
+    }
+
+    var nodeModules = fs.readdirSync(path.join(projectRoot, 'node_modules'));
+    var pkg = require(path.join(projectRoot, 'package.json'));
+
+    if( nodeModules.length < (pkg.dependencies.length + pkg.devDependencies.length) ) {
+      console.log();
+      console.log(chalk.white('Some dependencies seem to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
+      console.log();
+      process.exit(1);
+    }
+
+    var webpackExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack'));
+
+    if( !webpackExists ) {
+      console.log();
+      console.log(chalk.white('webpack seems to be missing. Have you run ' + chalk.cyan('npm install') + ' or ' + chalk.cyan('yarn') + '?'));
+      console.log();
+      process.exit(1);
+    }
+
   },
 
   getWebpackConfig: function(projectRoot) {
@@ -71,31 +112,20 @@ module.exports = Command.extend({
 
   run: function() {
 
+    this.checkProject();
+
     var projectRoot = this.cli.reflect.projectRoot();
 
     if( !projectRoot || projectRoot != process.cwd() ) {
-      console.log('');
+      console.log();
       console.log(chalk.white('You must be in the project root in order to execute build!'));
-      console.log('');
+      console.log();
       process.exit(1);
     }
 
     var webpackConfig = this.getWebpackConfig(projectRoot);
 
-    var webpackVersion = require(path.resolve(projectRoot, 'node_modules', 'webpack', 'package.json')).version;
-
-    var webpack;
-    if( semver.satisfies(webpackVersion, '1.x') ) {
-      this.webpackVersion = 1;
-      webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
-    } else {
-      this.webpackVersion = 2;
-      webpack = require('webpack');
-    }
-
-    console.log();
-    console.log(chalk.white('Your using ' + chalk.cyan('webpack') + '@' + chalk.green(webpackVersion) + ' and we think you\'re using ' + chalk.green('v' + this.webpackVersion)));
-    console.log();
+    var webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
 
     webpack(webpackConfig, function(err, stats) {
       if(err) {
