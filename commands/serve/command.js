@@ -55,8 +55,8 @@ module.exports = Command.extend({
       process.exit(1);
     }
 
-    var webpackExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack'));
-    var webpackDevServerExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack-dev-server'));
+    var webpackExists = fs.existsSync(path.join(projectRoot, 'node_modules', 'webpack'));
+    var webpackDevServerExists = fs.existsSync(path.join(projectRoot, 'node_modules', 'webpack-dev-server'));
 
     if( !webpackExists || !webpackDevServerExists ) {
       console.log();

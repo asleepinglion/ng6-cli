@@ -47,7 +47,7 @@ module.exports = Command.extend({
       process.exit(1);
     }
 
-    var webpackExists = fs.esistsSync(path.join(projectRoot, 'node_modules', 'webpack'));
+    var webpackExists = fs.existsSync(path.join(projectRoot, 'node_modules', 'webpack'));
 
     if( !webpackExists ) {
       console.log();
