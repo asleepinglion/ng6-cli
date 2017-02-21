@@ -207,6 +207,7 @@ module.exports = (env) => {
       }),
 
       // Forces webpack-dev-server program to write bundle files to the file system.
+      // Useful for ionic dev when using ionic live-reloading.
       ifDev(new WriteFilePlugin()),
 
       // Live reloading via BrowserSync
