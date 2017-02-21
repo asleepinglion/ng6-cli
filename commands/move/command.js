@@ -12,7 +12,7 @@ module.exports = Command.extend({
 
     this.description = 'Move or rename a module.';
     this.options = '';
-    this.category = "refactor";
+    this.category = 'refactor';
     this.order = 13;
 
   },

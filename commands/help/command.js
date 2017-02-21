@@ -7,7 +7,7 @@ var Command = require('../../lib/command');
 var _ = require('lodash');
 var ejs = require('ejs');
 var categories = require('../../categories.json');
-var wrap = require('word-wrap');
+// var wrap = require('word-wrap');
 
 module.exports = Command.extend({
 
@@ -17,7 +17,7 @@ module.exports = Command.extend({
 
     this.description = 'Display this list of help, or help for a specific command.';
     this.options = '[command]';
-    this.category = "other";
+    this.category = 'other';
     this.order = '500';
 
     //setup options for the marked-terminal renderer
@@ -60,8 +60,8 @@ module.exports = Command.extend({
     var commandList = [];
     var commandsToPrint = [];
 
-    console.log(chalk.white("Getting started is easy! Create an app with "+chalk.cyan(this.cli.bin+" new")+" or "+chalk.cyan(this.cli.bin+" clone")+" an existing project."));
-    console.log(chalk.white("If you need more help with a specific command try: ")+chalk.cyan(this.cli.bin + ' help'), chalk.gray('[command]'));
+    console.log(chalk.white('Getting started is easy! Create an app with ' + chalk.cyan(this.cli.bin + ' new') + ' or ' + chalk.cyan(this.cli.bin+' clone') + ' an existing project.'));
+    console.log(chalk.white('If you need more help with a specific command try: ')+chalk.cyan(this.cli.bin + ' help'), chalk.gray('[command]'));
     console.log();
     console.log(chalk.white(chalk.bold('Usage:')), chalk.cyan(this.cli.bin), chalk.white('[command]'), chalk.gray('[args...]'), chalk.gray('[options]'));
 
@@ -88,7 +88,7 @@ module.exports = Command.extend({
         categoryCommands = _.orderBy(categoryCommands, 'order');
 
         //display category heading
-        console.log(chalk.bold(chalk.white("» "+categories[category].name)) + chalk.gray(" - " + categories[category].shortDescription));
+        console.log(chalk.bold(chalk.white('» ' + categories[category].name)) + chalk.gray(' - ' + categories[category].shortDescription));
         //console.log();
         //console.log(chalk.gray(wrap(categories[category].description, {width: 70})));
         console.log();

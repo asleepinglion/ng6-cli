@@ -20,7 +20,7 @@ module.exports = Command.extend({
 
     this.description = 'Watch, build, & serve the application in a local environment.';
     this.options = '';
-    this.category = "build";
+    this.category = 'build';
     this.order = 1;
   },
 
@@ -81,14 +81,14 @@ module.exports = Command.extend({
 
     var webpack = require(path.resolve(projectRoot, 'node_modules', 'webpack'));
 
-    // "Compiler" is a low-level interface to Webpack.
+    // 'Compiler' is a low-level interface to Webpack.
     // It lets us listen to some events and provide our own custom messages.
     this.compiler = webpack(webpackConfig);
 
-    // "invalid" event fires when you have changed a file, and Webpack is
+    // 'invalid' event fires when you have changed a file, and Webpack is
     // recompiling a bundle. WebpackDevServer takes care to pause serving the
     // bundle, so if you refresh, it'll wait instead of serving the old one.
-    // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
+    // 'invalid' is short for 'bundle invalidated', it doesn't imply any errors.
     this.compiler.plugin('invalid', function() {
       self.spinner.stop();
       clearConsole();
@@ -96,7 +96,7 @@ module.exports = Command.extend({
       self.spinner.text = chalk.cyan('Compiling...');
     });
 
-    // "done" event fires when Webpack has finished recompiling the bundle.
+    // 'done' event fires when Webpack has finished recompiling the bundle.
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
       self.spinner.stop();
@@ -105,7 +105,7 @@ module.exports = Command.extend({
       // TODO: perhaps show the chunks compiled, at least on the first run.
 
       // We have switched off the default Webpack output in WebpackDevServer
-      // options so we are going to "massage" the warnings and errors and present
+      // options so we are going to 'massage' the warnings and errors and present
       // them in a readable focused way.
       var messages = formatWebpackMessages(stats.toJson({}, true));
       if (!messages.errors.length && !messages.warnings.length) {
@@ -160,7 +160,7 @@ module.exports = Command.extend({
       // Silence WebpackDevServer's own logs since they're generally not useful.
       // It will still show compile warnings and errors with this setting.
       clientLogLevel: 'none',
-      // It is important to tell WebpackDevServer to use the same "root" path
+      // It is important to tell WebpackDevServer to use the same 'root' path
       // as we specified in the config. In development, we always serve from /.
       publicPath: webpackConfig.output.publicPath,
       // WebpackDevServer is noisy by default so we emit custom message instead
