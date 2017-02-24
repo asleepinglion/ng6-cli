@@ -30,7 +30,7 @@ module.exports = (env) => {
 
     entry: {
       // Setup our main entry point for processing
-      entry: [
+      library: [
         PATHS.app,
       ],
     },
@@ -191,14 +191,9 @@ module.exports = (env) => {
         flatten: true,
       }]),
 
-
       // Forces webpack-dev-server program to write bundle files to the file system.
       // Useful for ionic dev when using ionic live-reloading.
       ifDev(new WriteFilePlugin()),
-
-      // Using OldWatchingPlugin to avoid file watching issues experienced by Windows users.
-      // ifDev(new webpack.OldWatchingPlugin()), // TODO: Not sure if this works, or is necessary?
-
 
       // PROD
       ifProd(new webpack.DefinePlugin({

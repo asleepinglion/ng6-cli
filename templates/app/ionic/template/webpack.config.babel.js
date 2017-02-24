@@ -45,7 +45,7 @@ module.exports = (env) => {
 
     entry: {
       // Setup our main entry point for processing
-      entry: removeEmpty([
+      app: removeEmpty([
         ifDev(`webpack-dev-server/client?http://localhost:${devServerPort}/`),
         PATHS.app,
       ]),
@@ -53,7 +53,7 @@ module.exports = (env) => {
 
     // setup the output path
     output: {
-      filename: 'app.bundle.[name].js',
+      filename: '[name].bundle.js',
       path: PATHS.output,
       pathinfo: ifDev(),
     },
@@ -226,9 +226,6 @@ module.exports = (env) => {
           reload: false,
         }
       )),
-
-      // Using OldWatchingPlugin to avoid file watching issues experienced by Windows users.
-      // ifDev(new webpack.OldWatchingPlugin()), // TODO: Not sure if this works, or is necessary?
 
       // PROD
       ifProd(new webpack.DefinePlugin({

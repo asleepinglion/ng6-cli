@@ -45,7 +45,7 @@ module.exports = (env) => {
 
     entry: {
       // Setup our main entry point for processing
-      entry: removeEmpty([
+      app: removeEmpty([
         ifDev(`webpack-dev-server/client?http://localhost:${devServerPort}/`),
         PATHS.app,
       ]),
@@ -53,7 +53,7 @@ module.exports = (env) => {
 
     // setup the output path
     output: {
-      filename: 'app.bundle.[name].js',
+      filename: '[name].bundle.js',
       path: PATHS.output,
       pathinfo: ifDev(),
     },
@@ -208,7 +208,7 @@ module.exports = (env) => {
 
       // Forces webpack-dev-server program to write bundle files to the file system.
       // Useful for ionic dev when using ionic live-reloading.
-      // ifDev(new WriteFilePlugin()),
+      ifDev(new WriteFilePlugin()),
 
       // Live reloading via BrowserSync
       ifDev(new BrowserSyncPlugin(
@@ -226,9 +226,6 @@ module.exports = (env) => {
           reload: false,
         }
       )),
-
-      // Using OldWatchingPlugin to avoid file watching issues experienced by Windows users.
-      // ifDev(new webpack.OldWatchingPlugin()), // TODO: Not sure if this works, or is necessary?
 
       // PROD
       ifProd(new webpack.DefinePlugin({
