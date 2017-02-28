@@ -30,7 +30,7 @@
     "case": "^1.4.2",
     "chalk": "1.1.3",
     "columnify": "1.5.4",
-    "cross-spawn": "^5.0.1",
+    "cross-spawn": "^5.1.0",
     "deepmerge": "0.2.10",
     "detect-port": "^1.0.5",
     "ejs": "2.4.2",
@@ -50,7 +50,7 @@
     "yargs": "4.4.0"
   },
   "devDependencies": {
-    "eslint": "^3.14.1",
+    "eslint": "^3.16.1",
     "eslint-plugin-import": "^2.2.0"
   }
 }

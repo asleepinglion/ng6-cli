@@ -76,8 +76,8 @@ module.exports = (env) => {
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
-            loader: 'css-loader',
+            fallback: 'style-loader',
+            use: 'css-loader',
             publicPath: '../',
           }),
         },
@@ -86,8 +86,8 @@ module.exports = (env) => {
           exclude: /\.module.scss$/,
           loader: ExtractTextPlugin.extract({
             publicPath: '../',
-            fallbackLoader: 'style-loader',
-            loader: [
+            fallback: 'style-loader',
+            use: [
               'css-loader',
               'sass-loader',
               {
@@ -106,8 +106,8 @@ module.exports = (env) => {
           test: /\.module.scss$/, // Sass files that have the .module.scss suffix will be processed with css-modules enabled (https://github.com/webpack/css-loader#css-modules)
           loader: ExtractTextPlugin.extract({
             publicPath: '../',
-            fallbackLoader: 'style-loader',
-            loader: [
+            fallback: 'style-loader',
+            use: [
               {
                 loader: 'css-loader',
                 options: {
