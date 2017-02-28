@@ -2,8 +2,8 @@
 
 Some examples of deployment solutions can be found in the following repos:
 
-* [now](https://zeit.co/now) - [ng6-now-example](https://github.com/UltimateSoftware.com/ng6-now-example)
-* [github pages](https://pages.github.com/) - [ng6-github-pages-example](https://github.com/UltimateSoftware.com/ng6-github-pages-example)
+* [now](https://zeit.co/now) - [ng6-now-example](https://github.com/UltimateSoftware/ng6-now-example)
+* [github pages](https://pages.github.com/) - [ng6-github-pages-example](https://github.com/UltimateSoftware/ng6-github-pages-example)
 
 Contributions are always welcome!
 
