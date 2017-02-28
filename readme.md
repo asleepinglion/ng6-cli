@@ -142,6 +142,7 @@ You can also create custom templates when you extend the CLI or within your proj
 - [Custom CLI](https://github.com/asleepinglion/ng6-cli/blob/master/docs/custom-cli.md)
 - [Custom Commands](https://github.com/asleepinglion/ng6-cli/blob/master/docs/commands.md)
 - [Custom Templates](https://github.com/asleepinglion/ng6-cli/blob/master/docs/templates.md)
+- [Deployments](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/deployments.md)
 
 ## What's Next?
 
