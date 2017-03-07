@@ -3,7 +3,12 @@
   "version": "0.1.0",
   "description": "<%= name %> ng6 component library",
   "main": "dist/bundle.js",
+  "module": "library.module.js",
+  "jsnext:main": "library.module.js",
   "library": true,
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "webpack --env.prod",

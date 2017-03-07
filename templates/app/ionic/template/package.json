@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "description": "0.1.0",
   "main": "webpack.config.babel.js",
+  "engines" : {
+    "node" : ">=6.0.0"
+  },
   "scripts": {
     "prebuild": "rimraf www",
     "build": "webpack --env.prod",

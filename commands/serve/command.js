@@ -5,8 +5,9 @@ var detect = require('detect-port');
 var Ora = require('ora');
 var _ = require('lodash');
 var Command = require('../../lib/command');
-var clearConsole = require('../../utils/clearConsole');
-var formatWebpackMessages = require('../../utils/formatWebpackMessages');
+var clearConsole = require('react-dev-utils/clearConsole');
+var formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+var openBrowser = require('react-dev-utils/openBrowser');
 
 process.env.NODE_ENV = 'development';
 
@@ -69,12 +70,13 @@ module.exports = Command.extend({
 
   start: function(webpackConfig, port) {
     var host = process.env.HOST || 'localhost';
-    this.setupCompiler(webpackConfig);
+    this.setupCompiler(webpackConfig, host, port);
     this.runDevServer(webpackConfig, host, port);
   },
 
-  setupCompiler: function(webpackConfig) {
+  setupCompiler: function(webpackConfig, host, port) {
 
+    var url = 'http://' + host + ':' + port + '/';
     var self = this;
 
     var projectRoot = this.cli.reflect.projectRoot();
@@ -96,13 +98,13 @@ module.exports = Command.extend({
       self.spinner.text = chalk.cyan('Compiling...');
     });
 
+    var firstRun = true;
+
     // 'done' event fires when Webpack has finished recompiling the bundle.
     // Whether or not you have warnings or errors, you will get this event.
     this.compiler.plugin('done', function(stats) {
       self.spinner.stop();
       clearConsole();
-
-      // TODO: perhaps show the chunks compiled, at least on the first run.
 
       // We have switched off the default Webpack output in WebpackDevServer
       // options so we are going to 'massage' the warnings and errors and present
@@ -111,11 +113,20 @@ module.exports = Command.extend({
       if (!messages.errors.length && !messages.warnings.length) {
         console.log(chalk.green('Compiled successfully!'));
         console.log();
-        console.log('Note that the development build is not optimized.');
-        console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
+        console.log('Serving application at ' + chalk.green(url));
         console.log();
-        console.log('Starting BrowserSync...');
-        console.log();
+
+        if (firstRun) {
+          firstRun = false;
+          console.log(chalk.white('Using webpack config found at ' + chalk.green(self.webpackConfigPath)));
+          console.log();
+          console.log('Note that the development build is not optimized.');
+          console.log('To create a production build, use ' + chalk.cyan('ng6 build') + ' or ' + chalk.cyan('npm run build') + '.');
+          console.log();
+          if(!openBrowser(url)) {
+            console.log('Failed to open the browser tab. Please open the browser to' + chalk.yellow(url));
+          }
+        }
       }
 
       // If errors exist, only show errors.
@@ -124,7 +135,6 @@ module.exports = Command.extend({
         console.log();
         messages.errors.forEach(function(message) {
           console.log(message);
-          console.log();
         });
         return;
       }
@@ -135,7 +145,6 @@ module.exports = Command.extend({
         console.log();
         messages.warnings.forEach(function(message) {
           console.log(message);
-          console.log();
         });
 
         // Teach some ESLint tricks.
@@ -228,12 +237,9 @@ module.exports = Command.extend({
       }
       console.log();
       process.exit(1);
-    } else {
-      console.log();
-      console.log(chalk.white('using webpack config found at ' + chalk.green(webpackConfigPath)));
-      console.log();
     }
 
+    this.webpackConfigPath = webpackConfigPath;
     var webpackConfig = require(webpackConfigPath);
 
     if( _.isFunction(webpackConfig) ) {

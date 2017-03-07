@@ -18,6 +18,11 @@ const PATHS = {
   app: resolve(__dirname, 'app/app.module.js'),
 };
 
+const sassResources = [
+  './styles/tools/_mixins.scss',
+  './styles/settings/_variables.scss',
+];
+
 module.exports = (env) => {
   // process.env variables
   const devServerPort = parseInt(process.env.PORT, 10) || 3000;
@@ -41,7 +46,7 @@ module.exports = (env) => {
     },
 
     // https://webpack.js.org/configuration/devtool/
-    devtool: ifProd('source-map', 'source-map'),
+    devtool: 'source-map',
 
     entry: {
       // Setup our main entry point for processing
@@ -70,7 +75,7 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.js$/,
-          include: /(app|components|directives|filters|providers|services)/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
         },
         {
@@ -88,15 +93,22 @@ module.exports = (env) => {
             publicPath: '../',
             fallback: 'style-loader',
             use: [
-              'css-loader',
-              'sass-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: [
-                    './styles/tools/_mixins.scss',
-                    './styles/settings/_variables.scss',
-                  ],
+                  resources: sassResources,
                 },
               },
             ],
@@ -112,18 +124,22 @@ module.exports = (env) => {
                 loader: 'css-loader',
                 options: {
                   modules: true,
+                  camelCase: true,
+                  sourceMap: ifDev(),
                   importLoaders: 2,
                   localIdentName: '[name]__[local]___[hash:base64:5]',
                 },
               },
-              'sass-loader',
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: [
-                    './styles/tools/_mixins.scss',
-                    './styles/settings/_variables.scss',
-                  ],
+                  resources: sassResources,
                 },
               },
             ],
@@ -208,7 +224,7 @@ module.exports = (env) => {
 
       // Forces webpack-dev-server program to write bundle files to the file system.
       // Useful for ionic dev when using ionic live-reloading.
-      ifDev(new WriteFilePlugin()),
+      ifDev(new WriteFilePlugin({ log: false })),
 
       // Live reloading via BrowserSync
       ifDev(new BrowserSyncPlugin(
@@ -216,6 +232,11 @@ module.exports = (env) => {
         {
           host: 'localhost',
           port: devServerPort + 1,
+          open: false,
+          logLevel: 'silent',
+          logConnections: false,
+          logFileChanges: false,
+          logSnippets: false,
           // proxy the Webpack Dev Server endpoint through BrowserSync
           proxy: `http://localhost:${devServerPort}/`,
         },

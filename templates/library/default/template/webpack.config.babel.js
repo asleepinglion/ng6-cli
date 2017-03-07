@@ -17,6 +17,10 @@ const PATHS = {
   app: resolve(__dirname, 'library.module.js'),
 };
 
+const sassResources = [
+  './styles/_variables.scss',
+];
+
 const outputName = 'bundle.js';
 
 module.exports = (env) => {
@@ -26,7 +30,7 @@ module.exports = (env) => {
   const webpackConfig = {
 
     // https://webpack.js.org/configuration/devtool/
-    devtool: ifProd('source-map', 'source-map'),
+    devtool: 'source-map',
 
     entry: {
       // Setup our main entry point for processing
@@ -59,7 +63,7 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.js$/,
-          exclude: /(node_modules|styles|docs)/,
+          exclude: /node_modules/,
           loader: 'babel-loader',
         },
         {
@@ -77,14 +81,22 @@ module.exports = (env) => {
             publicPath: '../',
             fallback: 'style-loader',
             use: [
-              'css-loader',
-              'sass-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: [
-                    './styles/_variables.scss',
-                  ],
+                  resources: sassResources,
                 },
               },
             ],
@@ -100,17 +112,22 @@ module.exports = (env) => {
                 loader: 'css-loader',
                 options: {
                   modules: true,
+                  camelCase: true,
+                  sourceMap: ifDev(),
                   importLoaders: 2,
                   localIdentName: '[name]__[local]___[hash:base64:5]',
                 },
               },
-              'sass-loader',
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: ifDev(),
+                },
+              },
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: [
-                    './styles/_variables.scss',
-                  ],
+                  resources: sassResources,
                 },
               },
             ],
@@ -193,7 +210,7 @@ module.exports = (env) => {
 
       // Forces webpack-dev-server program to write bundle files to the file system.
       // Useful for ionic dev when using ionic live-reloading.
-      ifDev(new WriteFilePlugin()),
+      ifDev(new WriteFilePlugin({ log: false })),
 
       // PROD
       ifProd(new webpack.DefinePlugin({
@@ -208,5 +225,5 @@ module.exports = (env) => {
     ]),
   };
 
-  return webpackConfig
+  return webpackConfig;
 };
