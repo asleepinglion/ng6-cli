@@ -15,6 +15,7 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const PATHS = {
   output: resolve(__dirname, 'dist/'),
   app: resolve(__dirname, 'library.module.js'),
+  nodeModules: resolve(__dirname, 'node_modules'),
 };
 
 const sassResources = [
@@ -51,6 +52,13 @@ module.exports = (env) => {
 
     externals: {
       'angular': 'angular',
+    },
+
+
+    resolve: {
+      modules: [
+        PATHS.nodeModules, // This is here to solve issues with npm linking projects
+      ],
     },
 
     /*

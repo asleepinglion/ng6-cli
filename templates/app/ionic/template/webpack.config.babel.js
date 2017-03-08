@@ -16,6 +16,7 @@ const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 const PATHS = {
   output: resolve(__dirname, 'www/'),
   app: resolve(__dirname, 'app/app.module.js'),
+  nodeModules: resolve(__dirname, 'node_modules'), // This is here to solve issues with npm linking projects
 };
 
 const sassResources = [
@@ -64,6 +65,12 @@ module.exports = (env) => {
     },
 
     bail: ifProd(),
+
+    resolve: {
+      modules: [
+        PATHS.nodeModules, // This is here to solve issues with npm linking projects
+      ],
+    },
 
     /*
      Each of the following loaders objects describe the process to run specific file types through.
