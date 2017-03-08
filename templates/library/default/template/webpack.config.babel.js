@@ -1,4 +1,5 @@
 /* eslint comma-dangle: ["warn", "always-multiline"] */
+// https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
 
 const { resolve } = require('path');
 const webpack = require('webpack');
