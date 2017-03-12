@@ -11,7 +11,7 @@ module.exports = Command.extend({
     this._super.apply(this, arguments);
     this.description = 'Copy an artifact to a new location.';
     this.options = '';
-    this.category = "refactor";
+    this.category = 'refactor';
     this.order = 12;
 
   },
@@ -124,7 +124,7 @@ module.exports = Command.extend({
         });
 
         console.log(chalk.yellow('\nPlease carefully examine all changes before you commit!\n'));
-        
+
       });
 
   }

@@ -2,13 +2,13 @@
 
 ### Developed to be easy to maintain, refactor, & extend.
 
-In order to make the code easy to maintain, refactor, and extend we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize.
+In order to make the code easy to maintain, refactor, and extend, we used an object-oriented approach, striving to keep things singularly responsible and declarative. We also made sure that commands, templates, and even the CLI itself are easy to extend and customize.
 
 The CLI uses the [Simple Inheritance Model](#simple-inheritance-model) for ES5. We chose ES5 because we wanted to maximize our support for different versions of Node and (more importantly) because we wanted to maximize our ability to load commands & templates at run-time.
 
 ## Application Structure
 
-The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a resusable, declarative form.
+The application is composed of templates, commands, and a number of single purpose class libraries that provide most of the functionality in a reusable, declarative form.
 
 ```bash
 bin/
@@ -52,13 +52,13 @@ The ng6-cli class is an extension of the the base CLI class (`lib/ng6-cli.js`) w
 
 When the base CLI class is instantiated it in turn instantiates and stores references to the other libraries used by the system: `config`, `request`, `commands`, `templates`,  `reflect`, `generate`, and `refactor`.
 
-> The CLI can be customized and extended simply by extending `lib/cli.js` and instantiating the sub class in a new bin script. For more information on creating your own custom CLI checkout the [Custom CLI](https://github.com/asleepinglion/ng6-cli/blob/master/docs/custom-cli.md) documentation.
+> The CLI can be customized and extended simply by extending `lib/cli.js` and instantiating the sub class in a new bin script. For more information on creating your own custom CLI checkout the [Custom CLI](https://github.com/UltimateSoftware/ng6-cli/blob/master/docs/custom-cli.md) documentation.
 
 > **Helpful Tip:** To see a list of all the folders and files loaded during the boot process you can use `--debug` option when executing any command.
 
 After instantiating the necessary libraries, the CLI class proceeds to load any templates or commands it can find within the current directory, the project root, and finally within the ng6-cli package itself. Extended CLIs can override the `load` method to tell the system to search additional paths, but the current directory and project root will always be checked first. Subsequent commands or templates with the same name as a template or command already loaded will be ignored. Extension is possible by having your new command or template `extend` the original command or template.
 
-Once commands & templates have been loaded the `run` method is exected where the CLI checks whether the request command exists and either executes the command or defaults to the help command.
+Once commands & templates have been loaded the `run` method is executed where the CLI checks whether the request command exists and either executes the command or defaults to the help command.
 
 ### Commands & Templates
 
@@ -78,9 +78,9 @@ Likely the most useful features of the CLI are contained within these three decl
 
 When the `new` command is executed, it determines the template type, name & destination and calls the appropriate create method on the generation class (`lib/generate.js`). There are currently five creation methods: `createApp`, `createModule`, `createArtifact`, `createTemplate`, `createCommand`.
 
-- `createApp` is specifically used for creating new applications, it expects a `template` name, application `name`, and a `destination.
+- `createApp` is specifically used for creating new applications, it expects a `template` name, application `name`, and a `destination`.
 
-- `createLibrary` is specifically used for creating new libraries, it expects a `template` name, application `name`, and a `destination.
+- `createLibrary` is specifically used for creating new libraries, it expects a `template` name, application `name`, and a `destination`.
 
 - `createModule` is specifically used for creating new modules it expects a `name`, `destination`, and an optional `callback`. The callback is used by other artifact which may call `createModule` if a module file doesn't exist for the type of artifact they creating.
 
@@ -94,7 +94,7 @@ When the `new` command is executed, it determines the template type, name & dest
 
 When creating new modules and artifacts the `createModule` and `createArtifact` methods which use the reflection library (`lib/reflect.js`) to determine information about the current project.
 
-Using static analysis (using the same library that powers ESLint and JSCS) we are able to parse the Abstract Syntax Tree of the code and do things like, find the final character position of the last import statement. Using this information, combined with information known about the expected architecture of the application, the system is able to tell the refactorization library what and where to modifications.
+Using static analysis (using the same library that powers [ESLint](http://eslint.org/)) we are able to parse the Abstract Syntax Tree of the code and do things like, find the final character position of the last import statement. Using this information, combined with information known about the expected architecture of the application, the system is able to tell the refactorization library what and where to modifications.
 
 There are number of methods that make for a really declarative interface for template generation and refactoriztion, for example: `getNewArtifactPath` which determines the path for a new artifact based on the type, template name, and desired artifact name. Or `findParentModule` which will find the parent module file for a given file within the project.
 

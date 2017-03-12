@@ -9,7 +9,7 @@ module.exports = Command.extend({
     this.description = 'Migrate to new versions of app & artifact templates.';
     this.options = '';
     this.order = 14;
-    this.category = "refactor";
+    this.category = 'refactor';
 
   },
 

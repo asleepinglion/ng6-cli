@@ -1,6 +1,6 @@
 --recursive
 --inline-diffs
 --growl
---compilers js:babel-register
+--require test-setup.js
 --require babel-polyfill
 --require ignore-styles
