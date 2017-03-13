@@ -7,8 +7,8 @@
 export default class {
 
   constructor() {
-    'ngInject';
-    <% if( cli.options.cssModules ) { %>
+    'ngInject';<% if( cli.options.cssModules ) { %>
+
     // css-modules (https://github.com/webpack/css-loader#css-modules)
     this.styles = styles;<% } %>
   }

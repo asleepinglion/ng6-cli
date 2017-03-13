@@ -1,7 +1,7 @@
 import template from './<%= name %>.html';
 import controller from './<%= name %>.controller';
 
-export default function() {
+export default function () {
   return {
     template,
     controller,
@@ -9,4 +9,4 @@ export default function() {
     controllerAs: '$ctrl',
     replace: true,
   };
-};
+}
