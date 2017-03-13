@@ -6,7 +6,7 @@ import animate from 'angular-animate';
 import AppStyles from '../styles/app.scss';
 import AppComponent from './app.component';
 
-//create our app module and setup core dependencies
+// create our app module and setup core dependencies
 angular.module('app', [
 
   uiRouter,
@@ -14,18 +14,18 @@ angular.module('app', [
 
 ])
 
-.config(function($urlRouterProvider, $locationProvider) {
+.config(($urlRouterProvider) => {
   'ngInject';
 
   // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
   // #how-to-configure-your-server-to-work-with-html5mode
-  //$locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 
-  //setup default route
+  // setup default route
   $urlRouterProvider.otherwise('/');
 
 })
 
-//setup root component
+// setup root component
 .component('app', AppComponent);
 

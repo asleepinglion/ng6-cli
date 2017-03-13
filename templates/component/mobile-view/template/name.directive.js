@@ -8,6 +8,5 @@ export default function() {
     restrict: 'E',
     controllerAs: '$ctrl',
     replace: true,
-
   };
 };

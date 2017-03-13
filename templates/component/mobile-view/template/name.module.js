@@ -4,8 +4,8 @@ const module = angular.module('<%= moduleName %>', []);
 
 module.directive('<%= name_camel %>', <%=name_camel%>Component);
 
-//configure component states
-module.config(function($stateProvider) {
+// configure component states
+module.config(($stateProvider) => {
   'ngInject';
 
   $stateProvider

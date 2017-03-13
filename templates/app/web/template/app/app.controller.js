@@ -10,8 +10,8 @@ export default class {
     'ngInject';
     <% if( cli.options.cssModules ) { %>
 
-    //css-modules (https://github.com/webpack/css-loader#css-modules)
-    this.styles = styles;<% } %>
+    // css-modules (https://github.com/webpack/css-loader#css-modules)
+    this.styles = styles;
   }
 
   $onInit() {

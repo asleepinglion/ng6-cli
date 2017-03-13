@@ -7,7 +7,7 @@ import 'ionic-angular/release/js/ionic.bundle';
 import AppStyles from '../styles/app.scss';
 import AppComponent from './app.component';
 
-//create our app module and setup core dependencies
+// create our app module and setup core dependencies
 angular.module('app', [
 
   uiRouter,
@@ -16,12 +16,11 @@ angular.module('app', [
 
 ])
 
-.config(function($urlRouterProvider) {
+.config(($urlRouterProvider) => {
   'ngInject';
 
-  //setup default route
+  // setup default route
   $urlRouterProvider.otherwise('/');
-
 })
 
 .run(($ionicPlatform) => {
@@ -40,8 +39,7 @@ angular.module('app', [
       window.StatusBar.styleDefault();
     }
   });
-
 })
 
-//setup root component
+// setup root component
 .component('app', AppComponent);
