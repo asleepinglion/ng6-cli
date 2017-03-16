@@ -109,12 +109,19 @@ module.exports = Command.extend({
         //otherwise just create the artifact.
         if( !fs.existsSync(path.resolve(destination + '/../')) ) {
 
+          var moduleName = type;
+
+          if( this.cli.getOption('v') && type === 'component' ) {
+            moduleName = 'view';
+          }
+
           //the submodule name is based on the parent module's name
-          var moduleName = this.cli.reflect.getSubModuleName(type, destination);
+          moduleName = this.cli.reflect.getSubModuleName(moduleName, destination);
 
           this.cli.generate.createModule(moduleName, path.resolve(destination + '/../'), function() {
             self.cli.generate.createArtifact(type, template, name, destination);
           });
+
 
         } else {
           this.cli.generate.createArtifact(type, template, name, destination);
