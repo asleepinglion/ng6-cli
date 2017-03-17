@@ -111,12 +111,22 @@ module.exports = Command.extend({
 
           var moduleName = type;
 
-          if( this.cli.getOption('v') && type === 'component' ) {
+          //views are the same as components under the hood, but its cleaner to separate them in the structure
+          if( this.cli.getOption('viewSeparation') && this.cli.getOption('v') && type === 'component' ) {
             moduleName = 'view';
           }
 
-          //the submodule name is based on the parent module's name
+          //the submodule name is based on the type & parent module name
           moduleName = this.cli.reflect.getSubModuleName(moduleName, destination);
+
+          //nested artifacts can make projects messy
+          if( !this.cli.getOption('nestedArtifacts') && new RegExp(["components/", "views/", "directives/", "filters/", "providers/", "services/"].join("|"), 'gi').test(process.cwd()) ) {
+            console.log(chalk.white('In order to keep your code flat and easy to maintain, nested artifacts are disabled.'));
+            console.log(chalk.white('Instead we recommend you create a ' + chalk.cyan('module') + ' at a higher level to organize your projects & libraries.'));
+            console.log('');
+            console.log(chalk.white('You can override this behavior by setting the ') + chalk.cyan('nestedArtifacts') + chalk.white(' configuration option to ') + chalk.cyan("true") + chalk.white("."));
+            process.exit(1);
+          }
 
           this.cli.generate.createModule(moduleName, path.resolve(destination + '/../'), function() {
             self.cli.generate.createArtifact(type, template, name, destination);

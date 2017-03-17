@@ -7,7 +7,9 @@
   },
 
   "options": {
-    "cssModules": true
+    "cssModules": true,
+    "viewSeparation": false,
+    "nestedArtifacts": true
   },
 
   "templates": {
