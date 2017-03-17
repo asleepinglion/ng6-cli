@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "0.1.0",
-  "main": "webpack.config.babel.js",
+  "main": "webpack.config.js",
   "engines" : {
     "node" : ">=6.0.0"
   },
