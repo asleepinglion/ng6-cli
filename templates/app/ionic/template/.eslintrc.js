@@ -1,4 +1,4 @@
-{
+module.exports = {
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
@@ -10,7 +10,8 @@
   },
   "env": {
     "node": true,
-    "mocha": true
+    "mocha": true,
+    "browser": true
   },
   "plugins": [
     "import"
@@ -26,4 +27,4 @@
       }
     ]
   }
-}
+};
