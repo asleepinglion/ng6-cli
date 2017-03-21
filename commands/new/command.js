@@ -112,8 +112,10 @@ module.exports = Command.extend({
           var moduleName = type;
 
           //views are the same as components under the hood, but its cleaner to separate them in the structure
-          if( this.cli.getOption('viewSeparation') && this.cli.getOption('v') && type === 'component' ) {
-            moduleName = 'view';
+          if( type === 'component' &&
+            this.cli.getOption('viewSeparation') && 
+            (this.cli.getOption('v') || this.cli.getOption('view')) ) {
+              moduleName = 'view';
           }
 
           //the submodule name is based on the type & parent module name
