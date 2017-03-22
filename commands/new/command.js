@@ -38,6 +38,48 @@ module.exports = Command.extend({
     }
   },
 
+  getNestedArtifactsCount(destination) {
+    var nestedCount = 0;
+    
+    //path constructs for each artifact type
+    var nestedArtifacts = ["components", "views", "directives", "filters", "providers", "services"];
+    
+    //split the path by its parts
+    destination = destination.split(path.sep);
+
+    destination.forEach(function(part) {
+      nestedArtifacts.forEach(function(artifact) {           
+        if( part === artifact) {
+          nestedCount++;           
+        }
+      });        
+    });
+
+    return nestedCount;
+  },
+
+  checkNestedArtifacts: function(destination) {
+    //nested artifacts can make projects messy
+    if( !this.cli.getOption('nestedArtifacts') ) {
+      
+      var nestedCount = this.getNestedArtifactsCount(destination);
+                  
+      //check whether the current working directory is inside another artifact
+      if( nestedCount >= 2 ) {
+        console.log(chalk.yellow('Files not generated.'));
+        console.log('');
+        console.log(chalk.white('In order to keep code structure flat and easy to maintain, nested artifacts'));
+        console.log(chalk.white('have been disabled. Instead, we recommend you use ' + chalk.cyan('modules') + ' to organize'));
+        console.log(chalk.white('projects & libraries into logical groupings (e.g. by domain or feature).'));
+        //console.log();
+        //console.log(chalk.white('example > '+path.basename(this.cli.reflect.projectRoot())+'/modules/domain/modules/business-unit/views'));    
+        console.log('');
+        console.log(chalk.white('You can override this behavior by setting ') + chalk.cyan('nestedArtifacts') + chalk.white(' to ') + chalk.cyan("true") + chalk.white("."));
+        process.exit(1);
+      }
+    }
+  },
+
   run: function(type, name, destination) {
 
     var self = this;
@@ -86,6 +128,21 @@ module.exports = Command.extend({
 
         destination = this.cli.reflect.getNewModulePath(type, name, destination);
         this.checkExists(type, destination);
+
+        if( this.cli.getOption('moduleSeparation') && !this.cli.getOption('nestedArtifacts') ) {
+          if( this.getNestedArtifactsCount(destination) >= 1 ) {
+            console.log(chalk.yellow('Files not generated.'));
+            console.log('');
+            console.log(chalk.white('In order to keep code structure flat and easy to maintain, modules can'));
+            console.log(chalk.white('only be created inside other modules.'));
+            //console.log();
+            //console.log(chalk.white('example > '+path.basename(this.cli.reflect.projectRoot())+'/modules/domain/modules/business-unit/views'));    
+            console.log('');
+            console.log(chalk.white('You can override this behavior by setting ') + chalk.cyan('nestedArtifacts') + chalk.white(' to ') + chalk.cyan("true") + chalk.white("."));
+            process.exit(1);
+          }
+        }        
+
         this.cli.generate.createModule(name, destination);
 
       } else if( type === 'template' ) {
@@ -104,6 +161,8 @@ module.exports = Command.extend({
 
         this.checkExists(type, destination);
 
+        this.checkNestedArtifacts(destination);
+
         //if this is the first artifact of this type at the destination path
         //then create a new module and link the module to it's parent.
         //otherwise just create the artifact.
@@ -120,15 +179,6 @@ module.exports = Command.extend({
 
           //the submodule name is based on the type & parent module name
           moduleName = this.cli.reflect.getSubModuleName(moduleName, destination);
-
-          //nested artifacts can make projects messy
-          if( !this.cli.getOption('nestedArtifacts') && new RegExp(["components/", "views/", "directives/", "filters/", "providers/", "services/"].join("|"), 'gi').test(process.cwd()) ) {
-            console.log(chalk.white('In order to keep your code flat and easy to maintain, nested artifacts are disabled.'));
-            console.log(chalk.white('Instead we recommend you create a ' + chalk.cyan('module') + ' at a higher level to organize your projects & libraries.'));
-            console.log('');
-            console.log(chalk.white('You can override this behavior by setting the ') + chalk.cyan('nestedArtifacts') + chalk.white(' configuration option to ') + chalk.cyan("true") + chalk.white("."));
-            process.exit(1);
-          }
 
           this.cli.generate.createModule(moduleName, path.resolve(destination + '/../'), function() {
             self.cli.generate.createArtifact(type, template, name, destination);

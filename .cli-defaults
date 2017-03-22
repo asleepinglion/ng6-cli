@@ -9,6 +9,7 @@
   "options": {
     "cssModules": true,
     "viewSeparation": false,
+    "moduleSeparation": false,
     "nestedArtifacts": true
   },
 
