@@ -1,5 +1,4 @@
 var fs = require('fs');
-var path = require('path');
 var chalk = require('chalk');
 var axios = require('axios');
 var Command = require('../../lib/command');
@@ -19,9 +18,7 @@ module.exports = Command.extend({
 
   run: function() {
 
-    var projectRoot = this.cli.reflect.projectRoot();
-    var pkg = require(path.resolve(projectRoot, 'package.json'));
-    this.projectName = pkg.name;
+    this.projectName = this.cli.reflect.projectName();
 
     console.log(chalk.cyan(':: cataloging project:'), chalk.white(this.projectName));
 
