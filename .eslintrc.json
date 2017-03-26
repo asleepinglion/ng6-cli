@@ -12,6 +12,9 @@
     "node": true,
     "mocha": true
   },
+  "globals": {
+    "Promise": true
+  },
   "plugins": [
     "import"
   ],
