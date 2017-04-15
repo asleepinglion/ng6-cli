@@ -3,7 +3,7 @@
     "config": false,
     "migrate": false,
     "move": false,
-    "copy": false
+    "copy": true
   },
 
   "options": {
