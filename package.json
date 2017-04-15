@@ -46,7 +46,9 @@
     "ora": "^1.1.0",
     "ouro-base": "0.9.0",
     "react-dev-utils": "^0.5.2",
+    "recast": "^0.12.3",
     "shelljs": "0.6.0",
+    "trash": "^4.0.1",
     "word-wrap": "^1.1.0",
     "yargs": "4.4.0"
   },
