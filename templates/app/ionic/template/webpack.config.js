@@ -158,7 +158,7 @@ module.exports = (env) => {
           loader: 'url-loader',
           options: {
             limit: 1024,
-            name: 'images/[name].[ext]',
+            name: 'images/[name].[hash].[ext]',
           },
         },
         {
