@@ -8,4 +8,4 @@ Options:
 
   *-p,--port*   *....* Specify which port to use.
 
-  *--config*    *....* Specify the name of the webpack config file
+  *--config*    *....* Specify the name of the webpack config file.
