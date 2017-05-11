@@ -18,7 +18,7 @@ module.exports = Command.extend({
     this.description = 'Display this list of help, or help for a specific command.';
     this.options = '[command]';
     this.category = 'other';
-    this.order = '500';
+    this.order = 500;
 
     //setup options for the marked-terminal renderer
     marked.setOptions({
